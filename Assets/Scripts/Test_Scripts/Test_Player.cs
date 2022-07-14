@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Test_Player : MonoBehaviour
 {
     public float speed = 10.0f;
 
@@ -19,27 +20,29 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Keyboard k = Keyboard.current;
+        
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (k.wKey.isPressed )
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);
                
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (k.aKey.isPressed )
             {
                 transform.Rotate(Vector3.down * 100.0f * Time.deltaTime);
                
             }
 
-            if (Input.GetKey(KeyCode.D))
+            if (k.dKey.isPressed)
             {
                 transform.Rotate(Vector3.up * 100.0f * Time.deltaTime);
                 
             }
 
-            if (Input.GetKey(KeyCode.S))
+            if (k.sKey.isPressed)
             {
                 transform.Translate(Vector3.back * speed * Time.deltaTime);
                 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.LeftShift))
+
+        Keyboard k = Keyboard.current;
+
+        if(k.leftShiftKey.isPressed)
         {
             Now++;
 

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Mouse : MonoBehaviour
+public class Mouse_Control : MonoBehaviour
 {
     Vector3 mousePos;
     Vector3 transPos;
@@ -31,7 +32,9 @@ public class Mouse : MonoBehaviour
 
     void Update()
     {
-        mousePos = Input.mousePosition;
+        
+        //mousePos = UnityEngine.Input.mousePosition;
+        mousePos = Mouse.current.position.ReadValue();
         //transPos = Camera.main.ScreenToWorldPoint(mousePos)
         //transform.position = new Vector3(transPos.x, 3.0f, transPos.z);
         mousePos.z = Camera.main.farClipPlane;
@@ -40,8 +43,9 @@ public class Mouse : MonoBehaviour
         //transform.position = new Vector3(transPos.x, 3.0f, transPos.y);
         transform.position= transPos;
         //TowerPositon.transform.position = new Vector3(transform.position.x, 3.0f, transform.position.z);
+        Keyboard k = Keyboard.current;
 
-        if (Input.GetKeyDown(KeyCode.A) && WallState && !TowerZone)
+        if (k.aKey.isPressed && WallState && !TowerZone)
         {
             if (TowerNumber == 0)
             {
