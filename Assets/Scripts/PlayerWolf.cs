@@ -97,6 +97,12 @@ public class PlayerWolf : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        anim.SetBool("isAttack", true);
+        if (context.performed)
+        {
+            anim.SetBool("isAttack", true);
+        }else if(context.canceled)
+        {
+            anim.SetBool("isAttack", false);
+        }
     }
 }
