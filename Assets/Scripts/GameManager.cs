@@ -13,7 +13,15 @@ public class GameManager : MonoBehaviour
     public GameObject TS = null;
     public GameObject ButtonGroup;
 
-    GameObject Mouse;
+    GameObject Mouse_Cotrol;
+
+    private GameObject Player;
+    private GameObject Player_Hp;
+
+    public GameObject PLAYER
+    {
+        get { return Player; }
+    }
     public bool CAMERASWAP
     {
         get { return CameraSwap; }
@@ -26,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject MOUSE
     {
-        get { return Mouse; }
+        get { return Mouse_Cotrol; }
     }
 
     private void Awake()
@@ -55,7 +63,9 @@ public class GameManager : MonoBehaviour
     
     private void Initialize()
     {
-        Mouse = GameObject.FindGameObjectWithTag("Mouse");
+        Mouse_Cotrol = GameObject.FindGameObjectWithTag("Mouse_Control");
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Player_Hp = GameObject.FindGameObjectWithTag("Player_Hp");
     }
 
     public void TowerSwap()
@@ -63,5 +73,7 @@ public class GameManager : MonoBehaviour
         CameraSwap = !CameraSwap;
         TS.SetActive(CameraSwap);
         ButtonGroup.SetActive(CameraSwap);
+        Player_Hp.SetActive(!CameraSwap);
     }
+
 }

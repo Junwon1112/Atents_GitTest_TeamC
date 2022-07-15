@@ -45,7 +45,7 @@ public class Mouse_Control : MonoBehaviour
         //TowerPositon.transform.position = new Vector3(transform.position.x, 3.0f, transform.position.z);
         Keyboard k = Keyboard.current;
 
-        if (k.aKey.isPressed && WallState && !TowerZone)
+        if (k.aKey.wasPressedThisFrame && WallState && !TowerZone)
         {
             if (TowerNumber == 0)
             {

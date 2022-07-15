@@ -10,7 +10,8 @@ TagManager:
   - TowerSpawnerZone
   - Tower
   - TowerSpawnRange
-  - Mouse
+  - Mouse_Control
+  - Player_Hp
   layers:
   - Default
   - TransparentFX

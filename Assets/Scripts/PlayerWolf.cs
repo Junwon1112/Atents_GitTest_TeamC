@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerWolf : MonoBehaviour
+public class PlayerWolf : MonoBehaviour , IHealth
 {
     Rigidbody rigid = null;
     Vector3 inputDir = Vector3.zero;
@@ -14,6 +15,10 @@ public class PlayerWolf : MonoBehaviour
     Quaternion targetRotation = Quaternion.identity;
 
     Animator anim = null;
+
+    float Player_Hp = 100.0f;
+    float Player_MaxHp = 100.0f;
+
     //float inputRotY;
     //float inputRotX;
 
@@ -105,13 +110,54 @@ public class PlayerWolf : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            anim.SetBool("isAttack", true);
+            if (context.performed)
+            {
+                anim.SetBool("isAttack", true);
+            }
+            else if (context.canceled)
+            {
+                anim.SetBool("isAttack", false);
+            }
         }
-        else if (context.canceled)
+    }
+
+   
+
+    // HP�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�
+    public float HP
+    {
+        get
         {
-            anim.SetBool("isAttack", false);
+            return Player_Hp;
         }
+        set
+        {
+            Player_Hp = Mathf.Clamp(value, 0, Player_MaxHp);
+            onHealthChange?.Invoke();
+            //Debug.Log(Player_Hp);
+        }
+
+    }
+
+    public float MAXHP
+    {
+        get
+        {
+            return Player_MaxHp;
+        }
+    }
+
+    public Action onHealthChange { get; set; }
+
+    public void TakeDamage(float damage)
+    {
+        float finalDamage = damage;
+        if(finalDamage<1.0f)
+        {
+            finalDamage = 1.0f;
+        }
+        HP -= finalDamage;
     }
 }

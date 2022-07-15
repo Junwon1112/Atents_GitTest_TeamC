@@ -15,7 +15,7 @@ public class PlayerCamera : MonoBehaviour
 
         Keyboard k = Keyboard.current;
 
-        if(k.leftShiftKey.isPressed)
+        if(k.leftShiftKey.wasPressedThisFrame)
         {
             Now++;
 
