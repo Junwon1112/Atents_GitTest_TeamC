@@ -4,23 +4,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerWolf : MonoBehaviour
 {
     Rigidbody rigid = null;
     Vector3 inputDir = Vector3.zero;
-    public float turnSpeed = 10.0f;
+    public float turnSpeed = 3.0f;
+    public float forwardJumpPower = 3.0f;
+    public float upJumpPower = 10.0f;
+    public int jumpTime = 2;
+    public float skillContinueTime = 10.0f;
+    int tempJumpTime;
     
+
     public float moveSpeed = 3.0f;
     Quaternion targetRotation = Quaternion.identity;
 
     Animator anim = null;
+    ParticleSystem SkillAura;
+
     //float inputRotY;
     //float inputRotX;
 
     private void Awake()
     {
+        SkillAura = GetComponentInChildren<ParticleSystem>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+    }
+    private void Start()
+    {
+        tempJumpTime = jumpTime;
+        //SkillAura.Stop();
     }
 
     private void FixedUpdate()
@@ -95,14 +110,56 @@ public class PlayerWolf : MonoBehaviour
 
     }
 
-    public void OnAttackInput(InputAction.CallbackContext context)
+    public void OnAttackInput(InputAction.CallbackContext _)
     {
+        anim.SetFloat("ComboState", Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime, 1.0f));
+        anim.ResetTrigger("isAttack");
+        anim.SetTrigger("isAttack");
+        anim.SetBool("isAttackM", true);
+    }
+
+    public void OnJumpInput(InputAction.CallbackContext context)
+    {
+<<<<<<< Updated upstream
         if (context.performed)
         {
             anim.SetBool("isAttack", true);
         }else if(context.canceled)
         {
             anim.SetBool("isAttack", false);
+=======
+        if(jumpTime > 0 && context.started)
+        {
+            anim.ResetTrigger("isJump");
+            anim.SetTrigger("isJump");
+
+            rigid.AddForce(transform.up * upJumpPower + transform.forward * forwardJumpPower, ForceMode.Impulse);
+            jumpTime--;
+        }
+       
+    }
+
+    public void OnSkillInput(InputAction.CallbackContext context)
+    {
+        StartCoroutine(SkillAuraOnOff());
+        anim.SetBool("isSkill", true);
+        
+    }
+
+    IEnumerator SkillAuraOnOff()
+    {
+        //gameObject.GetComponentInChildren<ParticleSystem>().
+        SkillAura.Play();
+        yield return new WaitForSeconds(skillContinueTime);
+        SkillAura.Stop();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            jumpTime = tempJumpTime;
+>>>>>>> Stashed changes
         }
     }
 }
