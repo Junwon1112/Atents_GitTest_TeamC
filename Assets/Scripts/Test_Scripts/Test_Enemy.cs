@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Test_Enemy : MonoBehaviour
 {
     public Transform target;
-
+    GameObject player;
 
     NavMeshAgent nav=null;
 
@@ -16,6 +16,7 @@ public class Test_Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        player= GameObject.FindGameObjectWithTag("Player");
         rigid = GetComponent<Rigidbody>();
     }
 
@@ -29,8 +30,8 @@ public class Test_Enemy : MonoBehaviour
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            GameObject P = GameObject.FindGameObjectWithTag("Player");
-            target = P.transform;
+           
+            target = player.transform;
             nav.SetDestination(target.position);
         }
     }

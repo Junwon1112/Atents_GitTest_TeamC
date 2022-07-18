@@ -26,6 +26,7 @@ public class PlayerWolf : MonoBehaviour , IHealth
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+ 
     }
 
     private void FixedUpdate()
@@ -160,4 +161,5 @@ public class PlayerWolf : MonoBehaviour , IHealth
         }
         HP -= finalDamage;
     }
+
 }
