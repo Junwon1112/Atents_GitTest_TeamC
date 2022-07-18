@@ -120,14 +120,7 @@ public class PlayerWolf : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-<<<<<<< Updated upstream
-        if (context.performed)
-        {
-            anim.SetBool("isAttack", true);
-        }else if(context.canceled)
-        {
-            anim.SetBool("isAttack", false);
-=======
+
         if(jumpTime > 0 && context.started)
         {
             anim.ResetTrigger("isJump");
@@ -139,7 +132,7 @@ public class PlayerWolf : MonoBehaviour
        
     }
 
-    public void OnSkillInput(InputAction.CallbackContext context)
+    void OnSkillInput(InputAction.CallbackContext context)
     {
         StartCoroutine(SkillAuraOnOff());
         anim.SetBool("isSkill", true);
@@ -159,7 +152,6 @@ public class PlayerWolf : MonoBehaviour
         if(collision.gameObject.CompareTag("Ground"))
         {
             jumpTime = tempJumpTime;
->>>>>>> Stashed changes
         }
     }
 }
