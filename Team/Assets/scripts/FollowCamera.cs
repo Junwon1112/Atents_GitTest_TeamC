@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class FollowCamera : MonoBehaviour
 {  
@@ -22,6 +21,5 @@ public class FollowCamera : MonoBehaviour
     private void LateUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, target.position + offset, speed * Time.deltaTime);
-    }
-    //1
+    }    
 }

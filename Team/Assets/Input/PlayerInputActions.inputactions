@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "CameraMove",
+                    "name": "Look",
                     "type": "Value",
                     "id": "2b6caa9e-6400-4ee6-9d01-e20219f63b59",
                     "expectedControlType": "Vector2",
@@ -81,24 +81,13 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "One Modifier",
-                    "id": "c36a0f46-596b-48c2-b255-46e2e5eac9f2",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMove",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "",
                     "id": "ad2f3089-c8c0-4824-bb69-18bac712bf89",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "CameraMove",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

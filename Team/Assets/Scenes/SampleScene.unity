@@ -142,6 +142,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   turnSpeed: 1
+  camerA: {fileID: 1511121549}
+--- !u!4 &34804888 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2223597784923432012, guid: 836308e771ee17a4d8c5cb78f43bb8d1, type: 3}
+  m_PrefabInstance: {fileID: 5398167154339201260}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &529104805
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84559c46e1f19c4a8e784ad52d0ac46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 34804888}
   speed: 3
 --- !u!1001 &5398167154339201260
 PrefabInstance:
@@ -444,8 +450,16 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2223597784923432010, guid: 836308e771ee17a4d8c5cb78f43bb8d1, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223597784923432010, guid: 836308e771ee17a4d8c5cb78f43bb8d1, type: 3}
       propertyPath: m_Constraints
-      value: 112
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223597784923432010, guid: 836308e771ee17a4d8c5cb78f43bb8d1, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2223597784923432011, guid: 836308e771ee17a4d8c5cb78f43bb8d1, type: 3}
       propertyPath: Camera
