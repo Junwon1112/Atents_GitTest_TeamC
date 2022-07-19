@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Ground
+  - Wall
+  - TowerSpawnerZone
+  - Tower
+  - TowerSpawnRange
+  - Mouse_Control
+  - Player_Hp
   layers:
   - Default
   - TransparentFX
