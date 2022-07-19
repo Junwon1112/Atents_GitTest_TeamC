@@ -740,6 +740,7 @@ Transform:
   - {fileID: 9042279109062773597}
   - {fileID: 9042279109062773519}
   - {fileID: 1072727087806732938}
+  - {fileID: 1072727087293022068}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -753,7 +754,7 @@ Animator:
   m_GameObject: {fileID: 9042279109062350639}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f305828c7a3b44d4185613d5de6aa903, type: 3}
-  m_Controller: {fileID: 9100000, guid: fbf18e78d1eec3344a9a0fee7ade6dbc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 894fe4ac6485e2d40866322858a758a1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -806,6 +807,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 10
+  forwardJumpPower: 3
+  upJumpPower: 10
+  jumpTime: 2
+  skillContinueTime: 10
   moveSpeed: 3
 --- !u!114 &9042279109062773514
 MonoBehaviour:
@@ -819,7 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 24305f54a87bba041b1e41f825313b13, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: b5b6f0b6e4babf1469856beb0914e1f8, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -904,6 +909,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 89997fa2-eda9-4ed6-9ef5-cce04b87cb22
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9042279109062773509}
+        m_TargetAssemblyTypeName: PlayerWolf, Assembly-CSharp
+        m_MethodName: OnJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a1179d42-9a42-4c8f-aff3-78e5cf788c84
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9042279109062773509}
+        m_TargetAssemblyTypeName: PlayerWolf, Assembly-CSharp
+        m_MethodName: OnSkillInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 76db8507-d277-44b6-83c5-9e91c078dd16
+    m_ActionName: Player/Skill[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1680,3 +1717,81 @@ Transform:
   m_Father: {fileID: 9042279109062773625}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1072727087293146612
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9042279109062773513}
+    m_Modifications:
+    - target: {fileID: 100000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_Name
+      value: SkillAura
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63729df9e952c1f4b8fe34b9cd435a79, type: 2}
+    - target: {fileID: 19900002, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900004, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+--- !u!4 &1072727087293022068 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
+  m_PrefabInstance: {fileID: 1072727087293146612}
+  m_PrefabAsset: {fileID: 0}
