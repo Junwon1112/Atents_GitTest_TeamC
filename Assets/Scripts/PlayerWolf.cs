@@ -23,18 +23,31 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
     Animator anim = null;
     ParticleSystem SkillAura;
+    PlayerPotion playerPotion = new PlayerPotion();
+    
 
-    float Player_Hp = 100.0f;
+    public float Player_Hp = 100.0f;
     float Player_MaxHp = 100.0f;
 
     //float inputRotY;
     //float inputRotX;
+
+    // 포션----------------
+    public bool isDelay;
+    public float delayTime = 5.0f;
+
+    public float PlayerHp
+    {
+        get => Player_Hp;
+        set => Player_Hp = value;
+    }
 
     private void Awake()
     {
         SkillAura = GetComponentInChildren<ParticleSystem>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        
  
     }
 
@@ -68,9 +81,16 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
 
         }
-
-
-
+        
+        
+    }
+    private void Update()
+    {
+        Keyboard b = Keyboard.current;
+        if (b.digit2Key.wasPressedThisFrame)
+        {
+            OnDrinkPotion();
+        }
     }
 
     public void OnmoveInput(InputAction.CallbackContext context)
@@ -172,6 +192,31 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
     }
 
+    public void OnDrinkPotion(/*InputAction.CallbackContext context*/)
+    {
+        if (isDelay == false)
+        {
+            isDelay = true;
+            // 포션 사용
+            StartCoroutine(DrinkPotionDelay());
+            playerPotion.Healing();
+
+            //potionNum--;
+        }
+        else
+        {
+            Debug.Log("아직 쿨타임이 남았습니다");
+
+            // 포션 사용 불가
+        }
+    }
+    IEnumerator DrinkPotionDelay()
+    {
+        yield return new WaitForSeconds(delayTime);
+        isDelay = false;
+    }
+
+
     IEnumerator SkillAuraOnOff()
     {
         //gameObject.GetComponentInChildren<ParticleSystem>().
@@ -234,6 +279,15 @@ public class PlayerWolf : MonoBehaviour , IHealth
             Hit();
         }
         
+    }
+
+    public void TakeHeal(float heal)
+    {
+        HP += heal;
+        if (HP > 100.0f)
+        {
+            HP = 100.0f;
+        }
     }
 
     public void Hit()

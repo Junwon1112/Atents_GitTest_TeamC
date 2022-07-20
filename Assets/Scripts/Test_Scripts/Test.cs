@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Test : MonoBehaviour
 {
+
     
     // Update is called once per frame
     void Update()
@@ -14,5 +15,11 @@ public class Test : MonoBehaviour
         {
             GameManager.INSTANCE.PLAYER.GetComponent<IHealth>().TakeDamage(10);
         }
+
+        //Keyboard b = Keyboard.current;
+        //if (k.digit2Key.wasPressedThisFrame)
+        //{
+        //    GameManager.INSTANCE.PLAYER.GetComponent<IHealth>().TakeHeal(10);
+        //}
     }
 }

@@ -8,6 +8,7 @@ public interface IHealth
     float MAXHP { get; }
 
     void TakeDamage(float damage);
+    void TakeHeal(float heal);
 
     System.Action onHealthChange { get; set; }
 }
