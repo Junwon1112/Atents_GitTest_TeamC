@@ -6,27 +6,54 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    PlayerWolf playerWolf;
+    private static GameManager instance;
 
-    public PlayerWolf MainPlayer
+    private bool CameraSwap = true;
+
+    public GameObject TS = null;
+    public GameObject ButtonGroup;
+
+    GameObject Mouse_Cotrol;
+
+    private GameObject Player;
+    private GameObject Player_Hp;
+
+    public GameObject PLAYER
     {
-        get => playerWolf;
+        get { return Player; }
+    }
+    public bool CAMERASWAP
+    {
+        get { return CameraSwap; }
+        set { CameraSwap = value; }
+    }
+    public static GameManager INSTANCE
+    {
+        get { return instance; }
     }
 
-    static GameManager instance = null;
-
-    public static GameManager Inst
+    public GameObject MOUSE
     {
-        get => instance;
+        get { return Mouse_Cotrol; }
+
     }
 
     private void Awake()
     {
-        if(instance == null)
+        if(instance==null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+
+            DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
+            
+            
+        }else
+        {
+            if(instance!=this)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -34,9 +61,19 @@ public class GameManager : MonoBehaviour
     {
         Initialize();
     }
-
+    
     private void Initialize()
     {
-        playerWolf = FindObjectOfType<PlayerWolf>();
+        Mouse_Cotrol = GameObject.FindGameObjectWithTag("Mouse_Control");
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Player_Hp = GameObject.FindGameObjectWithTag("Player_Hp");
+    }
+
+    public void TowerSwap()
+    {
+        CameraSwap = !CameraSwap;
+        TS.SetActive(CameraSwap);
+        ButtonGroup.SetActive(CameraSwap);
+        Player_Hp.SetActive(!CameraSwap);
     }
 }
