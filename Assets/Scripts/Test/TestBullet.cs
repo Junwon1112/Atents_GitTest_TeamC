@@ -43,7 +43,8 @@ public class TestBullet : MonoBehaviour, IBattle, IHealth
     {
         if (other.CompareTag("Enemy"))
         {
-            //Debug.Log("Enemy Hit!!!");
+            other.GetComponent<IBattle>().TakeDamage(attackPower);
+            //Debug.Log($"Hit!");
             //Destroy(this.gameObject);
         }
     }

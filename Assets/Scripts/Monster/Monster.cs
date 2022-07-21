@@ -5,8 +5,12 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour, IBattle, IHealth
 {
+    GameObject weapon;
+
     NavMeshAgent nav;
     Animator anim;
+
+    
 
     public Transform target;
 
@@ -42,7 +46,6 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     public float defencePower = 5.0f;
 
     public float AttackPower { get => attackPower; }
-
     public float DefencePower { get => defencePower; }
 
     // 사망
@@ -50,14 +53,22 @@ public class Monster : MonoBehaviour, IBattle, IHealth
 
     private void Awake()
     {
+        weapon = GetComponentInChildren<FindWeapon>().gameObject;
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
     }
 
+    // 스폰 후 타겟 플레이어로 변환
+    GameObject Player;
+    private void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        target = Player.transform;
+    }
+
     private void Update()
     {
-
-        switch(state)
+        switch (state)
         {
             case MonsterState.Chase:
                 ChaseUpdate();
@@ -92,21 +103,14 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6)    // 타워의 공격
+        if (other.gameObject.layer == 6)    // 테스트불릿의 공격
         {
-            TestBullet bullet = other.GetComponent<TestBullet>();
-            hp -= bullet.attackPower;
-
-            if (hp <= 0)
-            {
-                ChangeState(MonsterState.Dead);
-            }
             anim.SetTrigger("TakeDamage");
             return;
         }
-        if (other.gameObject.CompareTag("Player"))  // 플레이어의 공격
+        if (other.gameObject.CompareTag("Player"))  // 몬스터가 플레이어를 공격하기
         {
-            attackTarget = other.GetComponent<IBattle>();
+            //attackTarget = other.GetComponent<IBattle>();     // 콜라이더에 닿으면 바로 공격발동
             ChangeState(MonsterState.Attack);
             return;
         }
@@ -202,6 +206,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         {
             Die();
         }
+        Debug.Log($"MonsterHP : {hp}");
     }
 
     private void Die()

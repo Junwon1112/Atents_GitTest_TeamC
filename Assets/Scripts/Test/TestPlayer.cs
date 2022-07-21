@@ -58,14 +58,14 @@ public class TestPlayer : MonoBehaviour, IHealth, IBattle
         {
             Destroy(this.gameObject);
         }
-        Debug.Log($"HP : {hp}");
+        Debug.Log($"TestPlayerHP : {hp}");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Enemy"))
         {
-
+            IBattle battle = other.GetComponent<IBattle>();
         }
     }
 

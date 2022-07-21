@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MonsterHPBar : MonoBehaviour
 {
@@ -24,7 +23,6 @@ public class MonsterHPBar : MonoBehaviour
         }
     }
 
-    // 빌보드 -> 항상 카메라를 정면으로 마주보는 오브젝트    
     private void LateUpdate()
     {
         transform.forward = -Camera.main.transform.forward;

@@ -8,6 +8,7 @@ public class MonsterSpawner : MonoBehaviour
     public int xPos;
     public int zPos;
     public int monsterCount;
+    public int maxMonsterCount = 20;
     public int spawnerSigt;
     public float spawnInterval = 0.1f;
 
@@ -20,7 +21,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         spawnerSigt = Random.Range(0, 4);
 
-        while ( monsterCount < 20)
+        while ( monsterCount < maxMonsterCount)
         {
             if (spawnerSigt == 0)
             {

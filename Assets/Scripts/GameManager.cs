@@ -5,23 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-
-    private bool CameraSwap = true;
-
-    public GameObject TS = null;
-
-    public bool CAMERASWAP
-    {
-        get { return CameraSwap; }
-        set { CameraSwap = value; }
-    }
-    public static GameManager INSTANCE
-    {
-        get { return instance; }
-    }
+    public TestPlayer player;
 
     private void Awake()
     {
+        player = GetComponent<TestPlayer>();
+
         if(instance==null)
         {
             instance = this;
@@ -34,11 +23,5 @@ public class GameManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
-
-    public void TowerSwap()
-    {
-        CameraSwap = !CameraSwap;
-        TS.SetActive(CameraSwap);
     }
 }
