@@ -58,7 +58,7 @@ public class PlayerWolf : MonoBehaviour , IHealth
         {
             Keyboard k = Keyboard.current;
             //anim.SetBool("isMove", true);
-            rigid.MovePosition(rigid.position + moveSpeed * Time.fixedDeltaTime * inputDir);
+            transform.Translate(moveSpeed * Time.fixedDeltaTime * inputDir, Space.Self);
             //rigid.MoveRotation(Quaternion.Lerp(rigid.rotation, Quaternion.Euler(0, inputRot ,0), 0.5f));
             //rigid.MovePosition(rigid.position + moveSpeed * Time.deltaTime * inputDir);
             //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
