@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     PlayerInputActions actions;
     Rigidbody rigid;
     Animator anim = null;
-
+        
     public float moveSpeed = 5.0f;
     public float turnSpeed = 10.0f;    
 
@@ -17,43 +17,33 @@ public class Player : MonoBehaviour
 
     Quaternion targetRotation = Quaternion.identity;
 
-    public Transform maincamera;
+    private bool state;
+    public GameObject TopView;
+
     private void Awake()
     {
         actions = new();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        state = true;
     }
+   
     private void OnEnable()
     {
         actions.Player.Enable();
         actions.Player.Move.performed += OnMove;
         actions.Player.Move.canceled += OnMove;
-        actions.Player.Look.performed += OnLook;
+        actions.Player.ViewChange.performed += OnView;        
     }    
 
     private void OnDisable()
-    {
-        //actions.Player.Look.performed -= OnLook;
+    {       
+        actions.Player.ViewChange.performed -= OnView;
         actions.Player.Move.canceled -= OnMove;
         actions.Player.Move.performed -= OnMove;
         actions.Player.Disable();
-    }
-    private void FixedUpdate()
-    {
-        move();
-    }
-    private void move()
-    {
-        if (inputDir.sqrMagnitude > 0.0f)
-        {
-            rigid.MovePosition(rigid.position
-            + moveSpeed * Time.fixedDeltaTime * (inputDir.y * transform.forward));
-                        
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-        }
     }    
-    
+
     private void OnMove(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
@@ -61,19 +51,30 @@ public class Player : MonoBehaviour
         inputDir.x = input.x;
         inputDir.y = 0.0f;
         inputDir.z = input.y;
-
-        if (inputDir.sqrMagnitude > 0.0f)
-        {            
-            inputDir = Quaternion.Euler(0, maincamera.transform.rotation.eulerAngles.y, 0) * inputDir;
-            
-            targetRotation = Quaternion.LookRotation(inputDir);
-            
-            inputDir.y = -2f;
-        }
+      
+        inputDir = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0) * inputDir;
+        targetRotation = Quaternion.LookRotation(inputDir);        
+       
         //Debug.Log(input);
     }
-    private void OnLook(InputAction.CallbackContext context)
-    {
-        inputDir = context.ReadValue<Vector2>();        
+
+    private void Update()
+    {      
+        rigid.MovePosition(moveSpeed * Time.deltaTime * inputDir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);        
+    }
+
+    private void OnView(InputAction.CallbackContext _)
+    {        
+            if(state == true)
+            {
+                TopView.SetActive(false);
+                state = false;
+            }
+            else
+            {
+                TopView.SetActive(true);
+                state = true;
+            }              
     }
 }
