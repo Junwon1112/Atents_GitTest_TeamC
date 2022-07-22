@@ -24,6 +24,7 @@ public class PlayerWolf : MonoBehaviour , IHealth
     Animator anim = null;
     ParticleSystem SkillAura;
     PlayerPotion playerPotion = new PlayerPotion();
+    HealArtifact healartifact = new HealArtifact();
     
 
     public float Player_Hp = 100.0f;
@@ -91,7 +92,10 @@ public class PlayerWolf : MonoBehaviour , IHealth
         {
             OnDrinkPotion();
         }
+
+        healartifact.ArtifactHealing();
     }
+
 
     public void OnmoveInput(InputAction.CallbackContext context)
     {

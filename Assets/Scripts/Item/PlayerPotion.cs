@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPotion : MonoBehaviour
+public class PlayerPotion
 {
-    IHealth target;
 
     public bool isDelay;
     public float delayTime = 5.0f;
