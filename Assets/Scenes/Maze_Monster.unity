@@ -574,6 +574,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 450855997, guid: a37bdfe363c9b9847a8434f49a37cdb1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 998420594195298038, guid: a37bdfe363c9b9847a8434f49a37cdb1, type: 3}
       propertyPath: m_Name
       value: Goblin

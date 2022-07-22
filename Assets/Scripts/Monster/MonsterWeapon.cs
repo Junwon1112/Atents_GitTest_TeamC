@@ -9,7 +9,6 @@ public class MonsterWeapon : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             IBattle battle = other.GetComponent<IBattle>();
-            Debug.Log("OnTriggerPlayer" + other.name);
             if (battle != null)
             {
                 battle.TakeDamage(10.0f);
