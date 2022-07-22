@@ -6595,7 +6595,7 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_Enabled
     path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Weapon_Knife
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Weapon/Weapon_Knife
     classID: 136
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -6642,7 +6642,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4125612979
+      path: 2310826532
       attribute: 3305885265
       script: {fileID: 0}
       typeID: 136
@@ -30685,7 +30685,7 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_Enabled
     path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Weapon_Knife
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Weapon/Weapon_Knife
     classID: 136
     script: {fileID: 0}
   m_EulerEditorCurves:
