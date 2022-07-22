@@ -57,12 +57,13 @@ public class PlayerWolf : MonoBehaviour , IHealth
         {
             Keyboard k = Keyboard.current;
             //anim.SetBool("isMove", true);
-            rigid.MovePosition(rigid.position + moveSpeed * Time.fixedDeltaTime * inputDir);
+            transform.Translate(moveSpeed * Time.fixedDeltaTime * inputDir, Space.Self);
+            //rigid.MovePosition(rigid.position + moveSpeed * Time.fixedDeltaTime * inputDir);
             //rigid.MoveRotation(Quaternion.Lerp(rigid.rotation, Quaternion.Euler(0, inputRot ,0), 0.5f));
             //rigid.MovePosition(rigid.position + moveSpeed * Time.deltaTime * inputDir);
             //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
             //transform.LookAt(inputDir);
-           
+
 
             if (inputDir.x != 0 || inputDir.z != 0)
             {
@@ -73,15 +74,23 @@ public class PlayerWolf : MonoBehaviour , IHealth
                 anim.SetBool("isMove", false);
             }
             Vector3 mousePos = Mouse.current.position.ReadValue();
+            //Debug.Log($"{mousePos}"); //마우스 좌표 : x,y값 받아옴, z는 0 : 고정된 값
             Ray cameraRay = PlayerCamera.ScreenPointToRay(mousePos);
-            Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
+
+            //Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
+            Plane GroupPlane = new Plane(transform.forward, -10000);
+
+
             float rayLength;
             if(GroupPlane.Raycast(cameraRay,out rayLength))
             {
                 Vector3 pointTolook = cameraRay.GetPoint(rayLength);
-                Vector3 LookDir=(pointTolook- transform.position).normalized;
+                //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
+
+                Vector3 LookDir =(pointTolook- transform.position).normalized;
+
                 LookDir.y = 0.0f;
-                LookDir.x = Mathf.Clamp(LookDir.x, -80.0f, 80.0f);
+                //LookDir.x = Mathf.Clamp(LookDir.x, -80.0f, 80.0f);
                 
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime*testSpeed);
                 

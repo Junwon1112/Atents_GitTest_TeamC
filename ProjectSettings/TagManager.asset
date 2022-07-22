@@ -12,6 +12,8 @@ TagManager:
   - TowerSpawnRange
   - Mouse_Control
   - Player_Hp
+  - FxTemporaire
+  - TopViewCamera
   layers:
   - Default
   - TransparentFX
