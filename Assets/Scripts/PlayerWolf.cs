@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerWolf : MonoBehaviour , IHealth
 {
+    Player_Wolf actions;
+
     Rigidbody rigid = null;
     Vector3 inputDir = Vector3.zero;
     public float turnSpeed = 10.0f;
@@ -38,11 +40,35 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
     private void Awake()
     {
+        actions = new();
         SkillAura = GetComponentInChildren<ParticleSystem>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
  
     }
+
+    private void OnEnable()
+    {
+        actions.Player.Enable();
+        actions.Player.Move.performed += OnmoveInput;
+        actions.Player.Move.canceled += OnmoveInput;
+        actions.Player.Attack.performed += OnAttackInput;
+        actions.Player.Jump.performed += OnJumpInput;
+        actions.Player.Skill.performed += OnSkillInput;
+        actions.Player.UseScroll.performed += OnUseScroll;
+    }
+
+    private void OnDisable()
+    {
+        actions.Player.UseScroll.performed -= OnUseScroll;
+        actions.Player.Skill.performed -= OnSkillInput;
+        actions.Player.Jump.performed -= OnJumpInput;
+        actions.Player.Attack.performed -= OnAttackInput;
+        actions.Player.Move.canceled -= OnmoveInput;
+        actions.Player.Move.performed -= OnmoveInput;
+        actions.Player.Disable();
+    }
+
 
     private void Start()
     {
@@ -87,11 +113,8 @@ public class PlayerWolf : MonoBehaviour , IHealth
                 Vector3 LookDir=(pointTolook- transform.position).normalized;
                 
                
-                //LookDir.x = Mathf.Clamp(LookDir.x, -80.0f, 80.0f);
-                //LookDir.z = LookDir.y;
-                //LookDir.y = 0.0f;
-
-                Debug.Log($"{LookDir}");
+                LookDir.x = Mathf.Clamp(LookDir.x, -80.0f, 80.0f);
+                LookDir.y = 0.0f;
 
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime*testSpeed);
                 
@@ -184,7 +207,7 @@ public class PlayerWolf : MonoBehaviour , IHealth
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            if (jumpTime > 0 && context.started)
+            if (jumpTime > 0 && context.performed)
             {
                 anim.ResetTrigger("isJump");
                 anim.SetTrigger("isJump");
@@ -204,6 +227,11 @@ public class PlayerWolf : MonoBehaviour , IHealth
             anim.SetBool("isSkill", true);
         }
 
+    }
+
+    private void OnUseScroll(InputAction.CallbackContext obj)
+    {
+        Debug.Log("스크롤 사용");
     }
 
     IEnumerator SkillAuraOnOff()
