@@ -12,9 +12,12 @@ public class MonsterSpawner : MonoBehaviour
     public int spawnerSigt;
     public float spawnInterval = 0.1f;
 
-    private void Start()
+    public void StartSpawn(bool Swap)
     {
-        StartCoroutine(MonsterSpawn());
+        if (Swap)
+        {
+            StartCoroutine(MonsterSpawn());
+        }
     }
 
     IEnumerator MonsterSpawn()

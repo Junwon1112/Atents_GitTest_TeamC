@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     private GameObject TopViewCamera;
 
+    private GameObject MonsterSpawner;
+
     public GameObject PLAYER
     {
         get { return Player; }
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         Player_Hp = GameObject.FindGameObjectWithTag("Player_Hp");
         TopViewCamera = GameObject.FindGameObjectWithTag("TopViewCamera");
+        MonsterSpawner = GameObject.FindGameObjectWithTag("MonsterSpawner");
     }
 
     public void TowerSwap()
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
         ButtonGroup.SetActive(CameraSwap);
         Player_Hp.SetActive(!CameraSwap);
         TopViewCamera.SetActive(CameraSwap);
+        MonsterSpawner.GetComponent<MonsterSpawner>().StartSpawn(!CameraSwap);
     }
 
 }
