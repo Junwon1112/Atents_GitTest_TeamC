@@ -16,13 +16,14 @@ public class Test_Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        player= GameObject.FindGameObjectWithTag("Player");
+        
         rigid = GetComponent<Rigidbody>();
     }
 
     void Start()
     {
-        nav=GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        nav =GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame

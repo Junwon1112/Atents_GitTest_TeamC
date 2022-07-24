@@ -7,8 +7,8 @@ public class PlayerCamera : MonoBehaviour
 {
     public Camera[] arrCam;
 
-    int Count = 2;
-    int Now = 0;
+    //int Count = 2;
+    //int Now = 0;
 
     private void Update()
     {

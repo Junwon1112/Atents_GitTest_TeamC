@@ -5,8 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerWolf : MonoBehaviour , IHealth
+public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 {
+    Player_Wolf actions;
+
+
     Rigidbody rigid = null;
     Vector3 inputDir = Vector3.zero;
     public float turnSpeed = 10.0f;
@@ -23,25 +26,56 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
     Animator anim = null;
     ParticleSystem SkillAura;
+    public float TurnSpeed = 0.1f;
 
-    float Player_Hp = 100.0f;
-    float Player_MaxHp = 100.0f;
 
     //float inputRotY;
     //float inputRotX;
 
-    public float testSpeed = 0.1f;
+    //public Camera PlayerCamera;
 
+    //IHealthㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-    public Camera PlayerCamera;
+    float Player_Hp = 100.0f;
+    float Player_MaxHp = 100.0f;
+
+    //IBattleㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+    float attackPower = 10.0f;
+    float defencePower = 1.0f;
+
 
     private void Awake()
     {
+        actions = new();
         SkillAura = GetComponentInChildren<ParticleSystem>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
  
     }
+
+    private void OnEnable()
+    {
+        actions.Player.Enable();
+        actions.Player.Move.performed += OnmoveInput;
+        actions.Player.Move.canceled += OnmoveInput;
+        actions.Player.Attack.performed += OnAttackInput;
+        actions.Player.Jump.performed += OnJumpInput;
+        actions.Player.Skill.performed += OnSkillInput;
+        actions.Player.UseScroll.performed += OnUseScroll;
+    }
+
+    private void OnDisable()
+    {
+        actions.Player.UseScroll.performed -= OnUseScroll;
+        actions.Player.Skill.performed -= OnSkillInput;
+        actions.Player.Jump.performed -= OnJumpInput;
+        actions.Player.Attack.performed -= OnAttackInput;
+        actions.Player.Move.canceled -= OnmoveInput;
+        actions.Player.Move.performed -= OnmoveInput;
+        actions.Player.Disable();
+    }
+
 
     private void Start()
     {
@@ -75,7 +109,8 @@ public class PlayerWolf : MonoBehaviour , IHealth
             }
             Vector3 mousePos = Mouse.current.position.ReadValue();
             //Debug.Log($"{mousePos}"); //마우스 좌표 : x,y값 받아옴, z는 0 : 고정된 값
-            Ray cameraRay = PlayerCamera.ScreenPointToRay(mousePos);
+            //Ray cameraRay = PlayerCamera.ScreenPointToRay(mousePos);
+            Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
 
             //Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
             Plane GroupPlane = new Plane(transform.forward, -10000);
@@ -92,7 +127,7 @@ public class PlayerWolf : MonoBehaviour , IHealth
                 LookDir.y = 0.0f;
                 //LookDir.x = Mathf.Clamp(LookDir.x, -80.0f, 80.0f);
                 
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime*testSpeed);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime*TurnSpeed);
                 
                 //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
                 
@@ -221,6 +256,11 @@ public class PlayerWolf : MonoBehaviour , IHealth
         }
     }
 
+    private void OnUseScroll(InputAction.CallbackContext obj)
+    {
+        Debug.Log("스크롤 사용");
+    }
+
     // HPㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     public float HP
     {
@@ -241,7 +281,7 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
     }
 
-    public float MAXHP
+    public float MaxHP
     {
         get
         {
@@ -250,6 +290,16 @@ public class PlayerWolf : MonoBehaviour , IHealth
     }
 
     public Action onHealthChange { get; set; }
+
+    public float AttackPower
+    {
+        get => attackPower;
+    }
+
+    public float DefencePower
+    {
+        get => defencePower;
+    }
 
     public void TakeDamage(float damage)
     {
@@ -276,5 +326,10 @@ public class PlayerWolf : MonoBehaviour , IHealth
     void Die()
     {
         anim.SetTrigger("Die");
+    }
+
+    public void Attack(IBattle target)
+    {
+        
     }
 }

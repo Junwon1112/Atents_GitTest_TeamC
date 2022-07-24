@@ -12,7 +12,7 @@ public class Test : MonoBehaviour
         Keyboard k = Keyboard.current;
         if(k.digit1Key.wasPressedThisFrame)
         {
-            GameManager.INSTANCE.PLAYER.GetComponent<IHealth>().TakeDamage(10);
+            GameManager.INSTANCE.PLAYER.GetComponent<IBattle>().TakeDamage(10);
         }
     }
 }

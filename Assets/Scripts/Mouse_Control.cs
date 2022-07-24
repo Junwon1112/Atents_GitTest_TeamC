@@ -58,7 +58,7 @@ public class Mouse_Control : MonoBehaviour
         if (GroupPlane.Raycast(cameraRay, out rayLength))
         {
             Vector3 pointTolook = cameraRay.GetPoint(rayLength);   
-            pointTolook.y = 3.0f;
+            pointTolook.y = 5.5f;
             transform.position = pointTolook;
 
         }
@@ -68,12 +68,12 @@ public class Mouse_Control : MonoBehaviour
             if (TowerNumber == 0)
             {
                 GameObject T = Instantiate(Tower);
-                T.transform.position = new Vector3(transform.position.x, 3.0f, transform.position.z);
+                T.transform.position = new Vector3(transform.position.x, 8.5f, transform.position.z);
             }
             else if (TowerNumber == 1)
             {
                 GameObject T = Instantiate(Tower2);
-                T.transform.position = new Vector3(transform.position.x, 3.0f, transform.position.z);
+                T.transform.position = new Vector3(transform.position.x, 8.5f, transform.position.z);
             }
         }
 

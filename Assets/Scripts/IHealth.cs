@@ -5,9 +5,7 @@ using UnityEngine;
 public interface IHealth 
 {
     float HP { get; }
-    float MAXHP { get; }
-
-    void TakeDamage(float damage);
+    float MaxHP { get; }
 
     System.Action onHealthChange { get; set; }
 }

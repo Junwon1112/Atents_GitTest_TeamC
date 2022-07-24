@@ -5,6 +5,7 @@ using UnityEngine;
 public class Test_Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
+    float attackPower = 20.0f;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class Test_Bullet : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
+            other.GetComponent<IBattle>().TakeDamage(attackPower);
             //Debug.Log("Enemy Hit!!!");
             Destroy(this.gameObject);
         }
