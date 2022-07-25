@@ -23,8 +23,6 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
     Animator anim = null;
     ParticleSystem SkillAura;
-    PlayerPotion playerPotion = new PlayerPotion();
-    HealArtifact healartifact = new HealArtifact();
     
 
     public float Player_Hp = 100.0f;
@@ -84,16 +82,6 @@ public class PlayerWolf : MonoBehaviour , IHealth
         }
         
         
-    }
-    private void Update()
-    {
-        Keyboard b = Keyboard.current;
-        if (b.digit2Key.wasPressedThisFrame)
-        {
-            OnDrinkPotion();
-        }
-
-        healartifact.ArtifactHealing();
     }
 
 
@@ -196,29 +184,6 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
     }
 
-    public void OnDrinkPotion(/*InputAction.CallbackContext context*/)
-    {
-        if (isDelay == false)
-        {
-            isDelay = true;
-            // 포션 사용
-            StartCoroutine(DrinkPotionDelay());
-            playerPotion.Healing();
-
-            //potionNum--;
-        }
-        else
-        {
-            Debug.Log("아직 쿨타임이 남았습니다");
-
-            // 포션 사용 불가
-        }
-    }
-    IEnumerator DrinkPotionDelay()
-    {
-        yield return new WaitForSeconds(delayTime);
-        isDelay = false;
-    }
 
 
     IEnumerator SkillAuraOnOff()

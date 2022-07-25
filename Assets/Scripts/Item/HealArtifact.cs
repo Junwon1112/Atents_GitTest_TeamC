@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealArtifact
+public class HealArtifact : MonoBehaviour
 {
     float healPerSeconds = 1.0f;
     //float delayTime = 1.0f;
@@ -17,5 +17,10 @@ public class HealArtifact
             nextTime = Time.time + timeLeft;
             GameManager.INSTANCE.PLAYER.GetComponent<IHealth>().TakeHeal(healPerSeconds);
         }
+    }
+
+    private void Update()
+    {
+        ArtifactHealing();
     }
 }
