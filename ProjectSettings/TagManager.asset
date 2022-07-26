@@ -12,6 +12,9 @@ TagManager:
   - TowerSpawnRange
   - Mouse_Control
   - Player_Hp
+  - FxTemporaire
+  - TopViewCamera
+  - MonsterSpawner
   layers:
   - Default
   - TransparentFX

@@ -20,6 +20,7 @@ public class Test_TowerAttack : MonoBehaviour
 
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
+
             if (BulletDelay < BulletDelayMax)
             {
                 BulletDelay += Time.fixedDeltaTime;
@@ -41,10 +42,8 @@ public class Test_TowerAttack : MonoBehaviour
                 BulletDelay = 0.0f;
             }*/
 
-            if (EnemyList.Count > 0 && BulletDelay > BulletDelayMax)
+            if (EnemyList.Count > 0 && BulletDelay > BulletDelayMax && EnemyList[0].activeSelf)
             {
-
-
                 GameObject b = Instantiate(bullet);
                 b.transform.position = BulletPoint.transform.position;
                 Vector3 dir = (EnemyList[0].transform.position - BulletPoint.transform.position).normalized;

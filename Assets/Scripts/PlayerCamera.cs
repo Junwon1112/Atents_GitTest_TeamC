@@ -7,8 +7,8 @@ public class PlayerCamera : MonoBehaviour
 {
     public Camera[] arrCam;
 
-    int Count = 2;
-    int Now = 0;
+    //int Count = 2;
+    //int Now = 0;
 
     private void Update()
     {
@@ -17,7 +17,7 @@ public class PlayerCamera : MonoBehaviour
 
         if(k.leftShiftKey.wasPressedThisFrame)
         {
-            Now++;
+            /*Now++;
 
             if(Now>=Count)
             {
@@ -27,7 +27,7 @@ public class PlayerCamera : MonoBehaviour
             for(int i=0; i<arrCam.Length; i++)
             {
                 arrCam[i].enabled = (i == Now);
-            }
+            }*/
             GameManager.INSTANCE.TowerSwap();
         }
     }

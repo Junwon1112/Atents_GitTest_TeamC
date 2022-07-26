@@ -19,7 +19,7 @@ public class Player_HpBar : MonoBehaviour
     {
         if(target!=null)
         {
-            float ratio = target.HP / target.MAXHP;
+            float ratio = target.HP / target.MaxHP;
             hp.fillAmount = ratio;
         }
     }    

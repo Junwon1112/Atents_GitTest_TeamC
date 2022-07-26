@@ -21,9 +21,14 @@ public class Mouse_Control : MonoBehaviour
 
     int TowerNumber = 0;
 
+    public Camera MainCamera;
+
+    Collider Mycollider;
+    
     private void Awake()
     {
         ChildObejct = new GameObject[transform.childCount];
+        Mycollider = GetComponent<Collider>();
         for(int i = 0; i < ChildObejct.Length; i++)
         {
             ChildObejct[i] = transform.GetChild(i).gameObject;
@@ -39,24 +44,39 @@ public class Mouse_Control : MonoBehaviour
         //transform.position = new Vector3(transPos.x, 3.0f, transPos.z);
         mousePos.z = Camera.main.farClipPlane;
         //mousePos.y = 3.0f;
-        transPos = Camera.main.ScreenToWorldPoint(mousePos);
+       
         //transform.position = new Vector3(transPos.x, 3.0f, transPos.y);
-        transform.position= transPos;
+      
         //TowerPositon.transform.position = new Vector3(transform.position.x, 3.0f, transform.position.z);
         Keyboard k = Keyboard.current;
+
+        
+
+        Ray cameraRay = MainCamera.ScreenPointToRay(mousePos);
+        Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
+        if (GroupPlane.Raycast(cameraRay, out rayLength))
+        {
+            Vector3 pointTolook = cameraRay.GetPoint(rayLength);   
+            pointTolook.y = 5.5f;
+            transform.position = pointTolook;
+
+        }
 
         if (k.aKey.wasPressedThisFrame && WallState && !TowerZone)
         {
             if (TowerNumber == 0)
             {
                 GameObject T = Instantiate(Tower);
-                T.transform.position = new Vector3(transform.position.x, 3.0f, transform.position.z);
-            }else if(TowerNumber==1)
+                T.transform.position = new Vector3(transform.position.x, 8.5f, transform.position.z);
+            }
+            else if (TowerNumber == 1)
             {
                 GameObject T = Instantiate(Tower2);
-                T.transform.position = new Vector3(transform.position.x, 3.0f, transform.position.z);
+                T.transform.position = new Vector3(transform.position.x, 8.5f, transform.position.z);
             }
         }
+
     }
 
     private void OnTriggerStay(Collider other)
