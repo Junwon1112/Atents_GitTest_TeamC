@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "UsePotion",
+                    "type": "Button",
+                    "id": "000129b6-2355-463d-9eaf-76b5f61f9bbf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -143,11 +152,22 @@
                 {
                     "name": "",
                     "id": "f096ae45-f5cb-42d1-9019-7efb1e872d5c",
-                    "path": "<Keyboard>/b",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "UseScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "301b7e7e-1b92-482c-9a3e-daa4bd0c87ab",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "UsePotion",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

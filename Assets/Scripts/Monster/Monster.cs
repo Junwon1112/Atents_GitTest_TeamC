@@ -230,4 +230,8 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         //Destroy(this.gameObject, 1.0f);
     }
 
+    public void TakeHeal(float heal)
+    {
+        Debug.Log("몬스터 힐링");
+    }
 }

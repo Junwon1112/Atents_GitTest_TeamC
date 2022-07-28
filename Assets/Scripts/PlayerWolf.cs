@@ -44,6 +44,9 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     float attackPower = 10.0f;
     float defencePower = 1.0f;
 
+    //임시로 쓰는것 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    PlayerPotion PP; //플레이어 포션 찾아두기
+
 
     private void Awake()
     {
@@ -51,6 +54,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         SkillAura = GetComponentInChildren<ParticleSystem>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        PP=FindObjectOfType<PlayerPotion>();
  
     }
 
@@ -63,10 +67,12 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         actions.Player.Jump.performed += OnJumpInput;
         actions.Player.Skill.performed += OnSkillInput;
         actions.Player.UseScroll.performed += OnUseScroll;
+        actions.Player.UsePotion.performed += OnUsePotion;
     }
 
     private void OnDisable()
     {
+        actions.Player.UsePotion.performed -= OnUsePotion;
         actions.Player.UseScroll.performed -= OnUseScroll;
         actions.Player.Skill.performed -= OnSkillInput;
         actions.Player.Jump.performed -= OnJumpInput;
@@ -76,6 +82,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         actions.Player.Disable();
     }
 
+    
 
     private void Start()
     {
@@ -261,6 +268,11 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         Debug.Log("스크롤 사용");
     }
 
+    private void OnUsePotion(InputAction.CallbackContext obj)
+    {
+        PP.OnDrinkPotion();
+    }
+
     // HPㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     public float HP
     {
@@ -331,5 +343,14 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     public void Attack(IBattle target)
     {
         
+    }
+
+    public void TakeHeal(float heal)
+    {
+        HP += heal;
+        if (HP > 100.0f)
+        {
+            HP = 100.0f;
+        }
     }
 }

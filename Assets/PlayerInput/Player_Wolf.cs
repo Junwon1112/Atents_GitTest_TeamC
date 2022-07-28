@@ -71,6 +71,15 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UsePotion"",
+                    ""type"": ""Button"",
+                    ""id"": ""000129b6-2355-463d-9eaf-76b5f61f9bbf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,11 +174,22 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f096ae45-f5cb-42d1-9019-7efb1e872d5c"",
-                    ""path"": ""<Keyboard>/b"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""UseScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""301b7e7e-1b92-482c-9a3e-daa4bd0c87ab"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UsePotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -762,6 +782,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Skill = m_Player.FindAction("Skill", throwIfNotFound: true);
         m_Player_UseScroll = m_Player.FindAction("UseScroll", throwIfNotFound: true);
+        m_Player_UsePotion = m_Player.FindAction("UsePotion", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -838,6 +859,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Skill;
     private readonly InputAction m_Player_UseScroll;
+    private readonly InputAction m_Player_UsePotion;
     public struct PlayerActions
     {
         private @Player_Wolf m_Wrapper;
@@ -847,6 +869,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Skill => m_Wrapper.m_Player_Skill;
         public InputAction @UseScroll => m_Wrapper.m_Player_UseScroll;
+        public InputAction @UsePotion => m_Wrapper.m_Player_UsePotion;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -871,6 +894,9 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @UseScroll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
                 @UseScroll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
                 @UseScroll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
+                @UsePotion.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
+                @UsePotion.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
+                @UsePotion.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -890,6 +916,9 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @UseScroll.started += instance.OnUseScroll;
                 @UseScroll.performed += instance.OnUseScroll;
                 @UseScroll.canceled += instance.OnUseScroll;
+                @UsePotion.started += instance.OnUsePotion;
+                @UsePotion.performed += instance.OnUsePotion;
+                @UsePotion.canceled += instance.OnUsePotion;
             }
         }
     }
@@ -1051,6 +1080,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
         void OnUseScroll(InputAction.CallbackContext context);
+        void OnUsePotion(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
