@@ -29,6 +29,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     public float TurnSpeed = 0.1f;
 
 
+    int money = 0;
     //float inputRotY;
     //float inputRotX;
 
@@ -87,7 +88,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     private void Start()
     {
         tempJumpTime = jumpTime;
-        
+        MONEY += 500;
         //SkillAura.Stop();
     }
 
@@ -132,9 +133,8 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
                 Vector3 LookDir =(pointTolook- transform.position).normalized;
 
                 LookDir.y = 0.0f;
-                //LookDir.x = Mathf.Clamp(LookDir.x, -80.0f, 80.0f);
-                
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime*TurnSpeed);
+                LookDir.x = Mathf.Clamp(LookDir.x, -0.5f, 0.5f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.deltaTime*TurnSpeed);
                 
                 //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
                 
@@ -303,6 +303,8 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     public Action onHealthChange { get; set; }
 
+    //IBattle�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�
+
     public float AttackPower
     {
         get => attackPower;
@@ -353,4 +355,17 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
             HP = 100.0f;
         }
     }
+    //Money�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�
+    public int MONEY
+    {
+        get { return money; }
+        set { money = value;
+            MoneyChange?.Invoke();
+        }
+    }
+
+    public Action MoneyChange;
+
+
+    //�ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ�
 }

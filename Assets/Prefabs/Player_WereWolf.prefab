@@ -824,6 +824,7 @@ Transform:
   - {fileID: 9042279109062773519}
   - {fileID: 1072727087293022068}
   - {fileID: 1072887968}
+  - {fileID: 7103423680240282561}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1029,6 +1030,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b3254169-a5f1-4924-a6b0-8c49d28e7e3a
     m_ActionName: Player/UseScroll[/Keyboard/b]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 000129b6-2355-463d-9eaf-76b5f61f9bbf
+    m_ActionName: Player/UsePotion[/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1925,4 +1930,66 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: dade02dc61a9fa648a4e51958d6d90ad, type: 3}
   m_PrefabInstance: {fileID: 1072727087293146612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5002216146824537591
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9042279109062773513}
+    m_Modifications:
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326866993315239429, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+      propertyPath: m_Name
+      value: Player_WereWolf_Quad
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+--- !u!4 &7103423680240282561 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2882056537644387894, guid: 97500413aaf5d4e42b01b71e4eb7bec0, type: 3}
+  m_PrefabInstance: {fileID: 5002216146824537591}
   m_PrefabAsset: {fileID: 0}

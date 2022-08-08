@@ -213,6 +213,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     {
         if (isDead == false)
         {
+            GameManager.INSTANCE.MONSTERLIVECOUNT--;
             ChangeState(MonsterState.Dead);
         }
     }

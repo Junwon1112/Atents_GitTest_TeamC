@@ -24,6 +24,11 @@ public class Mouse_Control : MonoBehaviour
     public Camera MainCamera;
 
     Collider Mycollider;
+
+    PlayerWolf player;
+
+    int Tower1Price = 100;
+    int Tower2Price = 200;
     
     private void Awake()
     {
@@ -33,6 +38,13 @@ public class Mouse_Control : MonoBehaviour
         {
             ChildObejct[i] = transform.GetChild(i).gameObject;
         }
+
+        
+    }
+
+    private void Start()
+    {
+        player = GameManager.INSTANCE.PLAYER.GetComponent<PlayerWolf>();
     }
 
     void Update()
@@ -65,15 +77,18 @@ public class Mouse_Control : MonoBehaviour
 
         if (k.aKey.wasPressedThisFrame && WallState && !TowerZone)
         {
-            if (TowerNumber == 0)
+            
+            if (TowerNumber == 0 && player.MONEY>=Tower1Price)
             {
                 GameObject T = Instantiate(Tower);
                 T.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
+                player.MONEY -= Tower1Price;
             }
-            else if (TowerNumber == 1)
+            else if (TowerNumber == 1 && player.MONEY>=Tower2Price)
             {
                 GameObject T = Instantiate(Tower2);
                 T.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
+                player.MONEY -= Tower2Price;
             }
         }
 
