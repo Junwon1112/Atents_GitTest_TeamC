@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 {
     Player_Wolf actions;
-
+    InputAction test;
 
     Rigidbody rigid = null;
     Vector3 inputDir = Vector3.zero;
@@ -19,6 +19,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     public int jumpTime = 2;
     public float skillContinueTime = 10.0f;
     int tempJumpTime;
+    bool isDead = false;
 
 
     public float moveSpeed = 3.0f;
@@ -26,7 +27,10 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     Animator anim = null;
     ParticleSystem SkillAura;
+    public bool isSkillON = false;
     public float TurnSpeed = 0.1f;
+
+    GameObject obj;
 
 
     //float inputRotY;
@@ -55,6 +59,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         PP=FindObjectOfType<PlayerPotion>();
+        obj = GetComponent<GameObject>();
  
     }
 
@@ -66,28 +71,37 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         actions.Player.Attack.performed += OnAttackInput;
         actions.Player.Jump.performed += OnJumpInput;
         actions.Player.Skill.performed += OnSkillInput;
+        actions.Player.Screen.performed += OnScreenInput;
         actions.Player.UseScroll.performed += OnUseScroll;
         actions.Player.UsePotion.performed += OnUsePotion;
-    }
-
-    private void OnDisable()
-    {
-        actions.Player.UsePotion.performed -= OnUsePotion;
-        actions.Player.UseScroll.performed -= OnUseScroll;
-        actions.Player.Skill.performed -= OnSkillInput;
-        actions.Player.Jump.performed -= OnJumpInput;
-        actions.Player.Attack.performed -= OnAttackInput;
-        actions.Player.Move.canceled -= OnmoveInput;
-        actions.Player.Move.performed -= OnmoveInput;
-        actions.Player.Disable();
+        actions.Player.UseItem.performed += OnUseItem;
     }
 
     
 
+    private void OnDisable()
+    {
+        actions.Player.UseItem.performed -= OnUseItem;
+        actions.Player.UsePotion.performed -= OnUsePotion;
+        actions.Player.UseScroll.performed -= OnUseScroll;
+        actions.Player.Skill.performed -= OnSkillInput;
+        actions.Player.Jump.performed -= OnJumpInput;
+        actions.Player.Screen.performed -= OnScreenInput;
+        actions.Player.Attack.performed -= OnAttackInput;
+        actions.Player.Move.canceled -= OnmoveInput;
+        actions.Player.Move.performed -= OnmoveInput;
+        actions.Player.Disable();
+        Debug.Log("활성");
+    }
+
+   
     private void Start()
     {
         tempJumpTime = jumpTime;
-        
+
+        //디버깅용
+        HP = 0;
+        //isDead = true;
         //SkillAura.Stop();
     }
 
@@ -124,23 +138,23 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
 
             float rayLength;
-            if(GroupPlane.Raycast(cameraRay,out rayLength))
+            if (GroupPlane.Raycast(cameraRay, out rayLength))
             {
                 Vector3 pointTolook = cameraRay.GetPoint(rayLength);
                 //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
 
-                Vector3 LookDir =(pointTolook- transform.position).normalized;
+                Vector3 LookDir = (pointTolook - transform.position).normalized;
 
                 LookDir.y = 0.0f;
                 //LookDir.x = Mathf.Clamp(LookDir.x, -80.0f, 80.0f);
-                
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime*TurnSpeed);
-                
+
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime * TurnSpeed);
+
                 //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
-                
+
             }
 
-            
+
 
         }
 
@@ -150,54 +164,53 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     public void OnmoveInput(InputAction.CallbackContext context)
     {
-        Vector3 input;
-        input = context.ReadValue<Vector2>();
-        inputDir.x = input.x;
-        inputDir.y = 0.0f;
-        inputDir.z = input.y;
-        if (inputDir.sqrMagnitude > 0.0f)    //sqrMagnitude => vector를 제곱한거, root 연산만안한것
-        {
-
-            //inputDir = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0) * inputDir;
-            // 카메라의 y축 회전만 따로 분리해서 회전
-            //targetRotation = Quaternion.LookRotation(inputDir);
-            //카메라 보는방향기준으로 입력을 바꿈
-
-        }
-
-
-
-
-
-        //inputRot = - Mathf.Acos(inputDir.x) * 180 / Mathf.PI - Mathf.Asin(inputDir.y) * 180 / Mathf.PI;
-
-
-        //if (inputDir.y == 1) 
+        //if(isDead == false)
         //{
-        //    inputRot = 0;
-        //}
-        //else if(inputDir.y == -1)
-        //{
-        //    inputRot = 180;
-        //}
-        //if (inputDir.x == 1)
-        //{
-        //    inputRot = 90;
-        //}
-        //else if (inputDir.x == -1)
-        //{
-        //    inputRot = -90;
-        //}
+            Vector3 input;
+            input = context.ReadValue<Vector2>();
+            inputDir.x = input.x;
+            inputDir.y = 0.0f;
+            inputDir.z = input.y;
+            if (inputDir.sqrMagnitude > 0.0f)    //sqrMagnitude => vector를 제곱한거, root 연산만안한것
+            {
 
-        //inputRot = inputRotX + inputRotY;
+                //inputDir = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0) * inputDir;
+                // 카메라의 y축 회전만 따로 분리해서 회전
+                //targetRotation = Quaternion.LookRotation(inputDir);
+                //카메라 보는방향기준으로 입력을 바꿈
 
-
-        //if (context.canceled)
-        //{
-        //    inputRot = 0;
-        //}
-
+            }
     }
+
+    private void OnScreenInput(InputAction.CallbackContext context)
+    {
+        //Vector2 mousePos = context.ReadValue<Vector2>();
+
+        ////Ray cameraRay = PlayerCamera.ScreenPointToRay(mousePos);
+        //Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
+
+        ////Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
+        //Plane GroupPlane = new Plane(transform.forward, -10000);
+
+
+        //float rayLength;
+        //if (GroupPlane.Raycast(cameraRay, out rayLength))
+        //{
+        //    Vector3 pointTolook = cameraRay.GetPoint(rayLength);
+        //    //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
+
+        //    Vector3 LookDir = (pointTolook - transform.position).normalized;
+
+        //    LookDir.y = 0.0f;
+        //    //LookDir.x = Mathf.Clamp(LookDir.x, -80.0f, 80.0f);
+
+        //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime * TurnSpeed);
+
+        //    //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
+
+        //}
+    }
+
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
@@ -225,7 +238,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            if (jumpTime > 0 && context.started)
+            if (jumpTime > 0 && context.performed)
             {
                 anim.ResetTrigger("isJump");
                 anim.SetTrigger("isJump");
@@ -251,7 +264,9 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     {
         //gameObject.GetComponentInChildren<ParticleSystem>().
         SkillAura.Play();
+        isSkillON = true;
         yield return new WaitForSeconds(skillContinueTime);
+        isSkillON = false;
         SkillAura.Stop();
     }
 
@@ -266,12 +281,20 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     private void OnUseScroll(InputAction.CallbackContext obj)
     {
         Debug.Log("스크롤 사용");
+        //1번키
     }
 
     private void OnUsePotion(InputAction.CallbackContext obj)
     {
         PP.OnDrinkPotion();
+        //2번키
     }
+
+    private void OnUseItem(InputAction.CallbackContext obj)
+    {
+        // 예비 아이템, 3번키
+    }
+
 
     // HPㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     public float HP
@@ -315,18 +338,22 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     public void TakeDamage(float damage)
     {
-        float finalDamage = damage;
-        if(finalDamage<1.0f)
+        if (isDead == false)
         {
-            finalDamage = 1.0f;
-        }
-        HP -= finalDamage;
-        if(HP<0.1f)
-        {
-            Die();
-        }else
-        {
-            Hit();
+            float finalDamage = damage;
+            if (finalDamage < 1.0f)
+            {
+                finalDamage = 1.0f;
+            }
+            HP -= finalDamage;
+            if (HP < 0.1f)
+            {
+                Die();
+            }
+            else
+            {
+                Hit();
+            }
         }
         
     }
@@ -337,7 +364,17 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     }
     void Die()
     {
-        anim.SetTrigger("Die");
+        if(isDead == false)
+        {
+            anim.SetTrigger("Die");
+            anim.SetBool("isDie", true);
+            HP = 0.0f;
+            actions.Disable();
+            isDead = true;
+            
+            
+        }
+        
     }
 
     public void Attack(IBattle target)
@@ -347,10 +384,13 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     public void TakeHeal(float heal)
     {
-        HP += heal;
-        if (HP > 100.0f)
+        if(isDead == false)
         {
-            HP = 100.0f;
+            HP += heal;
+            if (HP > 100.0f)
+            {
+                HP = 100.0f;
+            }
         }
     }
 }

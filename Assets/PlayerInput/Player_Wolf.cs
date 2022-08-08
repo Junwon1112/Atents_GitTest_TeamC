@@ -64,6 +64,15 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Screen"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""65a79f78-bdf2-4d48-b8f2-69c4924747ec"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""UseScroll"",
                     ""type"": ""Button"",
                     ""id"": ""b3254169-a5f1-4924-a6b0-8c49d28e7e3a"",
@@ -76,6 +85,15 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""name"": ""UsePotion"",
                     ""type"": ""Button"",
                     ""id"": ""000129b6-2355-463d-9eaf-76b5f61f9bbf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""27b6d5a2-9522-4608-9127-cfd380e08b42"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -190,6 +208,28 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""UsePotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37e1d25d-cc38-47de-b44b-51531a67bf00"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e3916012-0ca2-4ed0-9c8a-a2fa7b1d77d4"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -781,8 +821,10 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Skill = m_Player.FindAction("Skill", throwIfNotFound: true);
+        m_Player_Screen = m_Player.FindAction("Screen", throwIfNotFound: true);
         m_Player_UseScroll = m_Player.FindAction("UseScroll", throwIfNotFound: true);
         m_Player_UsePotion = m_Player.FindAction("UsePotion", throwIfNotFound: true);
+        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -858,8 +900,10 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Skill;
+    private readonly InputAction m_Player_Screen;
     private readonly InputAction m_Player_UseScroll;
     private readonly InputAction m_Player_UsePotion;
+    private readonly InputAction m_Player_UseItem;
     public struct PlayerActions
     {
         private @Player_Wolf m_Wrapper;
@@ -868,8 +912,10 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Skill => m_Wrapper.m_Player_Skill;
+        public InputAction @Screen => m_Wrapper.m_Player_Screen;
         public InputAction @UseScroll => m_Wrapper.m_Player_UseScroll;
         public InputAction @UsePotion => m_Wrapper.m_Player_UsePotion;
+        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -891,12 +937,18 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @Skill.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill;
                 @Skill.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill;
                 @Skill.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill;
+                @Screen.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreen;
+                @Screen.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreen;
+                @Screen.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScreen;
                 @UseScroll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
                 @UseScroll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
                 @UseScroll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
                 @UsePotion.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
                 @UsePotion.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
                 @UsePotion.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
+                @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -913,12 +965,18 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @Skill.started += instance.OnSkill;
                 @Skill.performed += instance.OnSkill;
                 @Skill.canceled += instance.OnSkill;
+                @Screen.started += instance.OnScreen;
+                @Screen.performed += instance.OnScreen;
+                @Screen.canceled += instance.OnScreen;
                 @UseScroll.started += instance.OnUseScroll;
                 @UseScroll.performed += instance.OnUseScroll;
                 @UseScroll.canceled += instance.OnUseScroll;
                 @UsePotion.started += instance.OnUsePotion;
                 @UsePotion.performed += instance.OnUsePotion;
                 @UsePotion.canceled += instance.OnUsePotion;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
             }
         }
     }
@@ -1079,8 +1137,10 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
+        void OnScreen(InputAction.CallbackContext context);
         void OnUseScroll(InputAction.CallbackContext context);
         void OnUsePotion(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

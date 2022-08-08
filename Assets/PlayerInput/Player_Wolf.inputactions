@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Screen",
+                    "type": "PassThrough",
+                    "id": "65a79f78-bdf2-4d48-b8f2-69c4924747ec",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "UseScroll",
                     "type": "Button",
                     "id": "b3254169-a5f1-4924-a6b0-8c49d28e7e3a",
@@ -54,6 +63,15 @@
                     "name": "UsePotion",
                     "type": "Button",
                     "id": "000129b6-2355-463d-9eaf-76b5f61f9bbf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem",
+                    "type": "Button",
+                    "id": "27b6d5a2-9522-4608-9127-cfd380e08b42",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -168,6 +186,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "UsePotion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37e1d25d-cc38-47de-b44b-51531a67bf00",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3916012-0ca2-4ed0-9c8a-a2fa7b1d77d4",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Screen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

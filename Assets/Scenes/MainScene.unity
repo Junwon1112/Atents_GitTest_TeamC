@@ -332,7 +332,7 @@ Transform:
   m_Children:
   - {fileID: 219508276}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &219508275
 GameObject:
@@ -2098,7 +2098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4128002549895724037, guid: 21a82ae0a8445834382260f7c261c2bf, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4128002549895724037, guid: 21a82ae0a8445834382260f7c261c2bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3391,6 +3391,30 @@ PrefabInstance:
     - target: {fileID: 9042279109062773513, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042279109062773514, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042279109062773514, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042279109062773514, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionId
+      value: 000129b6-2355-463d-9eaf-76b5f61f9bbf
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042279109062773514, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: 27b6d5a2-9522-4608-9127-cfd380e08b42
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042279109062773514, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionName
+      value: Player/UsePotion[/Keyboard/2]
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042279109062773514, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: Player/UseItem[/Keyboard/3]
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
