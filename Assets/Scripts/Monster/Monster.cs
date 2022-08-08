@@ -7,19 +7,19 @@ public class Monster : MonoBehaviour, IBattle, IHealth
 {
     GameObject weapon;
 
-    NavMeshAgent nav;
-    Animator anim;
+    protected NavMeshAgent nav;
+    protected Animator anim;
 
-    
 
     public Transform target;
 
-    MonsterState state = MonsterState.Chase;
+    public MonsterState state = MonsterState.Chase;
+    public MonsterType type = MonsterType.Nomal;
 
     // 공격용
     public float attackSpeed = 1.0f;
     public float attackCoolTime = 1.0f;
-    IBattle attackTarget;
+    public IBattle attackTarget;
 
     // HP용
 
@@ -51,7 +51,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     // 사망
     bool isDead = false;
 
-    private void Awake()
+    public void Awake()
     {
         weapon = GetComponentInChildren<FindWeapon>().gameObject;
         nav = GetComponent<NavMeshAgent>();
@@ -59,14 +59,14 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     }
 
     // 스폰 후 타겟 플레이어로 변환
-    GameObject Player;
-    private void Start()
+    protected GameObject Player;
+    public void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         target = Player.transform;
     }
 
-    private void Update()
+    public virtual void Update()
     {
         switch (state)
         {
@@ -82,26 +82,27 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         }
     }
 
-    void ChaseUpdate()
+    public void ChaseUpdate()
     {
         nav.SetDestination(target.position);
         return;
     }
-    void AttackUpdate()
+    public virtual void AttackUpdate()
     {
-        attackCoolTime -= Time.deltaTime;
-
-        if (attackCoolTime < 0.0f)
+        if( type != MonsterType.Boss)
         {
-            anim.SetTrigger("Attack");
-            Attack(attackTarget);
-            attackCoolTime = attackSpeed;
-            return;
+            attackCoolTime -= Time.deltaTime;
+
+            if (attackCoolTime < 0.0f)
+            {
+                anim.SetTrigger("Attack");
+                Attack(attackTarget);
+                attackCoolTime = attackSpeed;
+                return;
+            }
         }
-
-
     }
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 6)    // 테스트불릿의 공격
         {
@@ -115,7 +116,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
             return;
         }
     }
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -125,7 +126,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
 
     }
 
-    void ChangeState(MonsterState newState)
+    public void ChangeState(MonsterState newState)
     {
         if (isDead)
         {
@@ -167,7 +168,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         anim.SetInteger("MonsterState", (int)state);
     }
 
-    void DiePresent()
+    public void DiePresent()
     {
         gameObject.layer = LayerMask.NameToLayer("Corpse");
         anim.SetBool("Dead", true);
@@ -209,7 +210,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         Debug.Log($"MonsterHP : {hp}");
     }
 
-    private void Die()
+    public void Die()
     {
         if (isDead == false)
         {

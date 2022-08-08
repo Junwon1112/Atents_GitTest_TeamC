@@ -8,3 +8,9 @@ public enum MonsterState
     Attack,
     Dead
 }
+
+public enum MonsterType
+{
+    Nomal,
+    Boss
+}

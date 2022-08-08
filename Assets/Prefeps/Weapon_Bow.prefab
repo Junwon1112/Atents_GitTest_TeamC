@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 2179469446897832516}
   - component: {fileID: 2179469446897062832}
   - component: {fileID: 2179469446895931888}
+  - component: {fileID: 8696930642042868555}
+  - component: {fileID: -925777514298855367}
   m_Layer: 0
   m_Name: Weapon_Bow
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,3 +85,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8696930642042868555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179469446898126436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79c19d3ec9cb0a643b7d58f182246b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &-925777514298855367
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179469446898126436}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 0.2
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0.000000063714104, y: 0.6081099, z: -0.00000001634295}
