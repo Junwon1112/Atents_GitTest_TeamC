@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Towel : MonoBehaviour
 {
-    public GameObject bullet = null;
+    
     public float range;
     public GameObject Target = null;
     public Animator anim;
@@ -20,12 +20,12 @@ public class Towel : MonoBehaviour
     }
     public void Attack()
     {
-        anim.SetInteger("TowelAnimSate", 2);
+        anim.SetInteger("TowelAnimState", 2);
     }
 
     public void Idle()
     {
-        anim.SetInteger("TowelAnimSate", 1);
+        anim.SetInteger("TowelAnimState", 1);
     }
 
     // Update is called once per frame
