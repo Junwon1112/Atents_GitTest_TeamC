@@ -6,11 +6,11 @@ public class Towel : MonoBehaviour
 {
     
     public float range;
-    public GameObject Target = null;
+    public GameObject Target;
     public Animator anim;
     void Start()
     {
-        InvokeRepeating("Updatetarget", 0f, 0.2f);
+        InvokeRepeating("UpdateTarget", 0f, 0.2f);
         anim = GetComponent<Animator>();
     }
     private void OnDrawGizmosSelected()
@@ -20,12 +20,12 @@ public class Towel : MonoBehaviour
     }
     public void Attack()
     {
-        anim.SetInteger("TowelAnimState", 2);
+        anim.SetInteger("NewState", 2);
     }
 
     public void Idle()
     {
-        anim.SetInteger("TowelAnimState", 1);
+        anim.SetInteger("NewState", 1);
     }
 
     // Update is called once per frame
@@ -54,10 +54,22 @@ public class Towel : MonoBehaviour
                 {
                     Idle();
                     Target = null;
-
-
                 }
             }
         }
+        else if(Target == null)
+        {
+            float DistanceToMonsters = Vector3.Distance(transform.position, Target.transform.position);
+            if(DistanceToMonsters > range)
+            {
+                Idle();
+                Target = null;
+            }
+        }
+
+    }
+    void AttackTarget()
+    {
+
     }
 }
