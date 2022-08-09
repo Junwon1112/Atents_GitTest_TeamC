@@ -16,7 +16,7 @@ public class HealArtifact : MonoBehaviour
         if(Time.time>nextTime && !GameManager.INSTANCE.CAMERASWAP)
         {
             nextTime = Time.time + timeLeft;
-            Debug.Log("Èú ¾ÆÆ¼ÆåÆ® ¹ßµ¿");
+            //Debug.Log("Èú ¾ÆÆ¼ÆåÆ® ¹ßµ¿");
             PlayerHealth.TakeHeal(healPerSeconds);
         }
     }

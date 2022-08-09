@@ -1777,8 +1777,8 @@ Rigidbody:
   m_GameObject: {fileID: 998420594195298038}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: Infinity
-  m_AngularDrag: Infinity
+  m_Drag: 0.01
+  m_AngularDrag: 0.01
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -4504,6 +4504,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin_Quad
       objectReference: {fileID: 0}
+    - target: {fileID: 2481339440992540181, guid: dce3d3c445b839742959511b55c57757, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2733517073325767878, guid: dce3d3c445b839742959511b55c57757, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4547,6 +4551,10 @@ PrefabInstance:
     - target: {fileID: 2733517073325767878, guid: dce3d3c445b839742959511b55c57757, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3659495546250729999, guid: dce3d3c445b839742959511b55c57757, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dce3d3c445b839742959511b55c57757, type: 3}

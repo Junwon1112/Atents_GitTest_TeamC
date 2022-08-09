@@ -19,6 +19,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     public int jumpTime = 2;
     public float skillContinueTime = 10.0f;
     int tempJumpTime;
+    bool isDead = false;
 
 
     public float moveSpeed = 3.0f;
@@ -27,6 +28,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     Animator anim = null;
     ParticleSystem SkillAura;
     public float TurnSpeed = 0.1f;
+    public bool isSkillOn = false;
 
 
     int money = 0;
@@ -97,7 +99,6 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            Keyboard k = Keyboard.current;
             //anim.SetBool("isMove", true);
             transform.Translate(moveSpeed * Time.fixedDeltaTime * inputDir, Space.Self);
             //rigid.MovePosition(rigid.position + moveSpeed * Time.fixedDeltaTime * inputDir);
@@ -115,29 +116,33 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
             {
                 anim.SetBool("isMove", false);
             }
-            Vector3 mousePos = Mouse.current.position.ReadValue();
-            //Debug.Log($"{mousePos}"); //마우스 좌표 : x,y값 받아옴, z는 0 : 고정된 값
-            //Ray cameraRay = PlayerCamera.ScreenPointToRay(mousePos);
-            Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
-
-            //Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
-            Plane GroupPlane = new Plane(transform.forward, -10000);
-
-
-            float rayLength;
-            if(GroupPlane.Raycast(cameraRay,out rayLength))
+            if (isDead == false)
             {
-                Vector3 pointTolook = cameraRay.GetPoint(rayLength);
-                //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
+                Vector3 mousePos = Mouse.current.position.ReadValue();
+                //Debug.Log($"{mousePos}"); //마우스 좌표 : x,y값 받아옴, z는 0 : 고정된 값
+                //Ray cameraRay = PlayerCamera.ScreenPointToRay(mousePos);
+                Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
 
-                Vector3 LookDir =(pointTolook- transform.position).normalized;
+                //Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
+                Plane GroupPlane = new Plane(transform.forward, -10000);
 
-                LookDir.y = 0.0f;
-                LookDir.x = Mathf.Clamp(LookDir.x, -0.5f, 0.5f);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.deltaTime*TurnSpeed);
-                
-                //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
-                
+
+                float rayLength;
+                if (GroupPlane.Raycast(cameraRay, out rayLength))
+                {
+                    Vector3 pointTolook = cameraRay.GetPoint(rayLength);
+                    //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
+
+                    Vector3 LookDir = (pointTolook - transform.position).normalized;
+
+                    LookDir.y = 0.0f;
+                    LookDir.x = Mathf.Clamp(LookDir.x, -1.0f, 1.0f);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.deltaTime * TurnSpeed);
+
+
+                    //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
+
+                }
             }
 
             
@@ -225,8 +230,10 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            if (jumpTime > 0 && context.started)
+            Debug.Log("점프1");
+            if (jumpTime > 0)
             {
+                Debug.Log("점프2");
                 anim.ResetTrigger("isJump");
                 anim.SetTrigger("isJump");
 
@@ -251,7 +258,9 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     {
         //gameObject.GetComponentInChildren<ParticleSystem>().
         SkillAura.Play();
+        isSkillOn = true;
         yield return new WaitForSeconds(skillContinueTime);
+        isSkillOn = false;
         SkillAura.Stop();
     }
 
@@ -317,18 +326,22 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     public void TakeDamage(float damage)
     {
-        float finalDamage = damage;
-        if(finalDamage<1.0f)
+        if (isDead == false)
         {
-            finalDamage = 1.0f;
-        }
-        HP -= finalDamage;
-        if(HP<0.1f)
-        {
-            Die();
-        }else
-        {
-            Hit();
+            float finalDamage = damage;
+            if (finalDamage < 1.0f)
+            {
+                finalDamage = 1.0f;
+            }
+            HP -= finalDamage;
+            if (HP < 0.1f)
+            {
+                Die();
+            }
+            else
+            {
+                Hit();
+            }
         }
         
     }
@@ -339,7 +352,14 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     }
     void Die()
     {
-        anim.SetTrigger("Die");
+        if (isDead == false)
+        {
+            anim.SetTrigger("Die");
+            HP = 0.0f;
+            actions.Disable();
+            isDead = true;
+        }
+
     }
 
     public void Attack(IBattle target)
@@ -349,10 +369,13 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     public void TakeHeal(float heal)
     {
-        HP += heal;
-        if (HP > 100.0f)
+        if (isDead == false)
         {
-            HP = 100.0f;
+            HP += heal;
+            if (HP > 100.0f)
+            {
+                HP = 100.0f;
+            }
         }
     }
     //Moneyㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
