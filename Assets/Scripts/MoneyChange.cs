@@ -11,6 +11,7 @@ public class MoneyChange : MonoBehaviour
     {
         textMeshProUGUI = GetComponent<TextMeshProUGUI>();
         GameManager.INSTANCE.PLAYER.GetComponent<PlayerWolf>().MoneyChange += Change;
+        Change();
     }
 
     void Change()
