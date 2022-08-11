@@ -80,6 +80,15 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""29f12df6-c8cc-4b2d-8466-26acfc0806f8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -190,6 +199,17 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""UsePotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ed3434c-f8db-4005-b26b-8e63724d4703"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -783,6 +803,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         m_Player_Skill = m_Player.FindAction("Skill", throwIfNotFound: true);
         m_Player_UseScroll = m_Player.FindAction("UseScroll", throwIfNotFound: true);
         m_Player_UsePotion = m_Player.FindAction("UsePotion", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -860,6 +881,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Skill;
     private readonly InputAction m_Player_UseScroll;
     private readonly InputAction m_Player_UsePotion;
+    private readonly InputAction m_Player_Look;
     public struct PlayerActions
     {
         private @Player_Wolf m_Wrapper;
@@ -870,6 +892,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         public InputAction @Skill => m_Wrapper.m_Player_Skill;
         public InputAction @UseScroll => m_Wrapper.m_Player_UseScroll;
         public InputAction @UsePotion => m_Wrapper.m_Player_UsePotion;
+        public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -897,6 +920,9 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @UsePotion.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
                 @UsePotion.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
                 @UsePotion.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
+                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -919,6 +945,9 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @UsePotion.started += instance.OnUsePotion;
                 @UsePotion.performed += instance.OnUsePotion;
                 @UsePotion.canceled += instance.OnUsePotion;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
         }
     }
@@ -1081,6 +1110,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         void OnSkill(InputAction.CallbackContext context);
         void OnUseScroll(InputAction.CallbackContext context);
         void OnUsePotion(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

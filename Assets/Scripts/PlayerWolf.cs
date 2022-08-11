@@ -71,10 +71,12 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         actions.Player.Skill.performed += OnSkillInput;
         actions.Player.UseScroll.performed += OnUseScroll;
         actions.Player.UsePotion.performed += OnUsePotion;
+        actions.Player.Look.performed += OnLook;
     }
 
     private void OnDisable()
     {
+        actions.Player.Look.performed -= OnLook;
         actions.Player.UsePotion.performed -= OnUsePotion;
         actions.Player.UseScroll.performed -= OnUseScroll;
         actions.Player.Skill.performed -= OnSkillInput;
@@ -85,8 +87,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         actions.Player.Disable();
     }
 
-    
-
+   
     private void Start()
     {
         tempJumpTime = jumpTime;
@@ -116,35 +117,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
             {
                 anim.SetBool("isMove", false);
             }
-            if (isDead == false)
-            {
-                Vector3 mousePos = Mouse.current.position.ReadValue();
-                //Debug.Log($"{mousePos}"); //마우스 좌표 : x,y값 받아옴, z는 0 : 고정된 값
-                //Ray cameraRay = PlayerCamera.ScreenPointToRay(mousePos);
-                Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
-
-                //Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
-                Plane GroupPlane = new Plane(transform.forward, -10000);
-
-
-                float rayLength;
-                if (GroupPlane.Raycast(cameraRay, out rayLength))
-                {
-                    Vector3 pointTolook = cameraRay.GetPoint(rayLength);
-                    //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
-
-                    Vector3 LookDir = (pointTolook - transform.position).normalized;
-
-                    LookDir.y = 0.0f;
-                    LookDir.x = Mathf.Clamp(LookDir.x, -1.0f, 1.0f);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.deltaTime * TurnSpeed);
-
-
-                    //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
-
-                }
-            }
-
+            
             
 
         }
@@ -152,6 +125,36 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
 
     }
+
+    private void OnLook(InputAction.CallbackContext obj)
+    {
+        if (isDead == false)
+        {
+            Vector3 mousePos = Mouse.current.position.ReadValue(); 
+            Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
+
+            Plane GroupPlane = new Plane(transform.forward, -10000);
+
+
+            float rayLength;
+            if (GroupPlane.Raycast(cameraRay, out rayLength))
+            {
+                Vector3 pointTolook = cameraRay.GetPoint(rayLength);
+                //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
+
+                Vector3 LookDir = (pointTolook - transform.position).normalized;
+
+                LookDir.y = 0.0f;
+                //LookDir.x = Mathf.Clamp(LookDir.x, -1.0f, 1.0f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.deltaTime * TurnSpeed);
+
+
+                //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
+
+            }
+        }
+    }
+
 
     public void OnmoveInput(InputAction.CallbackContext context)
     {
@@ -230,10 +233,10 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            Debug.Log("점프1");
+            //Debug.Log("점프1");
             if (jumpTime > 0)
             {
-                Debug.Log("점프2");
+                //Debug.Log("점프2");
                 anim.ResetTrigger("isJump");
                 anim.SetTrigger("isJump");
 
