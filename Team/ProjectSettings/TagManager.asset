@@ -16,6 +16,7 @@ TagManager:
   - TopViewCamera
   - MonsterSpawner
   - MiniMap
+  - StartButton
   layers:
   - Default
   - TransparentFX
@@ -23,11 +24,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Enemy
-  - 
-  - 
-  - 
+  - Player_Quad
+  - Enemy_Quad
+  - UIBack
+  - FogTexture
+  - FogPlane
   - 
   - 
   - 
@@ -52,4 +53,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Secondary
+    uniqueID: 360580769
     locked: 0

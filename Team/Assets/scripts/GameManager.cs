@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     private bool CameraSwap = true;
 
     public GameObject TS = null;
-    public GameObject ButtonGroup;    
+    public GameObject ButtonGroup;
 
     GameObject Mouse_Cotrol;
 
@@ -24,6 +25,23 @@ public class GameManager : MonoBehaviour
 
     private GameObject MiniMap;
 
+    GameObject StartButton;
+
+    int monterLiveCount = 0;
+
+    public int MONSTERLIVECOUNT
+    {
+        get { return monterLiveCount; }
+        set
+        {
+            monterLiveCount = value;
+            if(monterLiveCount<1)
+            {
+                TowerSwap();
+                Player.GetComponent<PlayerWolf>().MONEY += 500;
+            }
+        }
+    }
     public GameObject PLAYER
     {
         get { return Player; }
@@ -41,11 +59,6 @@ public class GameManager : MonoBehaviour
     public GameObject MOUSE
     {
         get { return Mouse_Cotrol; }
-    }
-
-    private void Start()
-    {
-        MiniMap.gameObject.SetActive(false);
     }
 
     private void Awake()
@@ -71,26 +84,36 @@ public class GameManager : MonoBehaviour
     {
         Initialize();
     }
-    
+
     private void Initialize()
-    {        
+    {
         Mouse_Cotrol = GameObject.FindGameObjectWithTag("Mouse_Control");
         Player = GameObject.FindGameObjectWithTag("Player");
         Player_Hp = GameObject.FindGameObjectWithTag("Player_Hp");
         TopViewCamera = GameObject.FindGameObjectWithTag("TopViewCamera");
         MonsterSpawner = GameObject.FindGameObjectWithTag("MonsterSpawner");
         MiniMap = GameObject.FindGameObjectWithTag("MiniMap");
+        MiniMap.gameObject.SetActive(false);
+
+        StartButton = GameObject.FindGameObjectWithTag("StartButton");
+        StartButton.GetComponent<Button>().onClick.AddListener(TowerSwap);
+
+
+        
     }
 
     public void TowerSwap()
     {
-        CameraSwap = !CameraSwap;        
+        CameraSwap = !CameraSwap;
         TS.SetActive(CameraSwap);
         ButtonGroup.SetActive(CameraSwap);
         Player_Hp.SetActive(!CameraSwap);
         TopViewCamera.SetActive(CameraSwap);
         MiniMap.SetActive(!CameraSwap);
+        StartButton.SetActive(CameraSwap);
         MonsterSpawner.GetComponent<MonsterSpawner>().StartSpawn(!CameraSwap);
+        monterLiveCount = MonsterSpawner.GetComponent<MonsterSpawner>().maxMonsterCount;
+        MonsterSpawner.GetComponent<MonsterSpawner>().monsterCount = 0;
     }
 
 }

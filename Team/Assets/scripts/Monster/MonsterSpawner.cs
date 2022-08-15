@@ -5,67 +5,98 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     public GameObject Monster = null;
-    public int xPos;
-    public int zPos;
+    int xPos;
+    int zPos;
     public int monsterCount;
     public int maxMonsterCount = 20;
-    public int spawnerSigt;
-    public float spawnInterval = 0.1f;
-
+    int spawnerSigt;
+    float spawnInterval = 1.0f;
+    //-46 -10
     public void StartSpawn(bool Swap)
     {
         if (Swap)
         {
-            StartCoroutine(MonsterSpawn());
+            StartCoroutine(Spawner());
         }
     }
 
-    IEnumerator MonsterSpawn()
+    IEnumerator Spawner()
     {
-        spawnerSigt = Random.Range(0, 4);
-
-        while ( monsterCount < maxMonsterCount)
+        while (monsterCount<maxMonsterCount)
         {
-            if (spawnerSigt == 0)
+            yield return new WaitForSeconds(spawnInterval);
+            spawnerSigt = Random.Range(0, 4);
+            if(spawnerSigt== 0)
             {
-                xPos = Random.Range(-46, 46);
-                zPos = Random.Range(-46, -45);
-                //Instantiate(monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
-
-                yield return new WaitForSeconds(spawnInterval);
-                GameObject mons = Instantiate(Monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                GameObject mons = Instantiate(Monster, new Vector3(46, 0, 0), Quaternion.identity);
                 monsterCount += 1;
             }
             if (spawnerSigt == 1)
             {
-                xPos = Random.Range(-46, -45);
-                zPos = Random.Range(46, -46);
-                //Instantiate(monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
-
-                yield return new WaitForSeconds(spawnInterval);
-                GameObject mons = Instantiate(Monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                GameObject mons = Instantiate(Monster, new Vector3(-46, 0, -10), Quaternion.identity);
                 monsterCount += 1;
             }
             if (spawnerSigt == 2)
             {
-                xPos = Random.Range(-46, 46);
-                zPos = Random.Range(46, 45);
-                //Instantiate(monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
-
-                yield return new WaitForSeconds(spawnInterval);
-                GameObject mons = Instantiate(Monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                GameObject mons = Instantiate(Monster, new Vector3(0, 0, 46), Quaternion.identity);
                 monsterCount += 1;
             }
             if (spawnerSigt == 3)
             {
-                xPos = Random.Range(45, 46);
-                zPos = Random.Range(46, -46);
-                //Instantiate(monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
-
-                yield return new WaitForSeconds(spawnInterval);
-                GameObject mons = Instantiate(Monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                GameObject mons = Instantiate(Monster, new Vector3(0, 0, -46), Quaternion.identity);
                 monsterCount += 1;
             }
+            Debug.Log("¼ÒÈ¯");
         }
+
     }
+
+    //IEnumerator MonsterSpawn()
+    //{
+    //    spawnerSigt = Random.Range(0, 4);
+
+    //    while ( monsterCount < maxMonsterCount)
+    //    {
+    //        if (spawnerSigt == 0)
+    //        {
+    //            xPos = Random.Range(-46, 46);
+    //            zPos = Random.Range(-46, -45);
+    //            //Instantiate(monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+
+    //            yield return new WaitForSeconds(spawnInterval);
+    //            GameObject mons = Instantiate(Monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+    //            monsterCount += 1;
+    //        }
+    //        if (spawnerSigt == 1)
+    //        {
+    //            xPos = Random.Range(-46, -45);
+    //            zPos = Random.Range(46, -46);
+    //            //Instantiate(monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+
+    //            yield return new WaitForSeconds(spawnInterval);
+    //            GameObject mons = Instantiate(Monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+    //            monsterCount += 1;
+    //        }
+    //        if (spawnerSigt == 2)
+    //        {
+    //            xPos = Random.Range(-46, 46);
+    //            zPos = Random.Range(46, 45);
+    //            //Instantiate(monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+
+    //            yield return new WaitForSeconds(spawnInterval);
+    //            GameObject mons = Instantiate(Monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+    //            monsterCount += 1;
+    //        }
+    //        if (spawnerSigt == 3)
+    //        {
+    //            xPos = Random.Range(45, 46);
+    //            zPos = Random.Range(46, -46);
+    //            //Instantiate(monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+
+    //            yield return new WaitForSeconds(spawnInterval);
+    //            GameObject mons = Instantiate(Monster, new Vector3(xPos, 0, zPos), Quaternion.identity);
+    //            monsterCount += 1;
+    //        }
+    //    }
+    //}
 }
