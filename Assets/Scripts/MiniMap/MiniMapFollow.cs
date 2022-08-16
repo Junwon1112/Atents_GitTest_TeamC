@@ -10,6 +10,6 @@ public class MiniMapFollow : MonoBehaviour
 
     private void Update()
     {
-        transform.position = player.transform.position + new Vector3(0, 30, 0);
+        transform.position = player.transform.position + new Vector3(0, 80, 0);
     }
 }

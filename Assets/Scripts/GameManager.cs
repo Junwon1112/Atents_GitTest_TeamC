@@ -97,9 +97,9 @@ public class GameManager : MonoBehaviour
 
         StartButton = GameObject.FindGameObjectWithTag("StartButton");
         StartButton.GetComponent<Button>().onClick.AddListener(TowerSwap);
+        Cursor.visible = false;
 
 
-        
     }
 
     public void TowerSwap()
@@ -114,6 +114,15 @@ public class GameManager : MonoBehaviour
         MonsterSpawner.GetComponent<MonsterSpawner>().StartSpawn(!CameraSwap);
         monterLiveCount = MonsterSpawner.GetComponent<MonsterSpawner>().maxMonsterCount;
         MonsterSpawner.GetComponent<MonsterSpawner>().monsterCount = 0;
+
+        if(!CameraSwap)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
     }
 
 }

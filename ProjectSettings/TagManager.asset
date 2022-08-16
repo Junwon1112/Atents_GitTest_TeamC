@@ -26,9 +26,9 @@ TagManager:
   - UI
   - Player_Quad
   - Enemy_Quad
-  - 
-  - 
-  - 
+  - FogTexture
+  - FogPlane
+  - UIBack
   - 
   - 
   - 

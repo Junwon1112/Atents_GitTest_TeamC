@@ -27,15 +27,17 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     Animator anim = null;
     ParticleSystem SkillAura;
-    public float TurnSpeed = 0.1f;
     public bool isSkillOn = false;
 
 
     int money = 0;
-    //float inputRotY;
-    //float inputRotX;
+    float rx;
+    float ry;
 
-    //public Camera PlayerCamera;
+    //미니맵관련ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    private Vector3 quadPosition;
+    Transform quad;
+
 
     //IHealthㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
@@ -58,7 +60,9 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         PP=FindObjectOfType<PlayerPotion>();
- 
+        quad = transform.Find("Player_WereWolf_Quad");
+        
+
     }
 
     private void OnEnable()
@@ -122,7 +126,8 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
         }
 
-
+        quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z);
+        quad.transform.LookAt(quadPosition);
 
     }
 
@@ -130,28 +135,45 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     {
         if (isDead == false)
         {
-            Vector3 mousePos = Mouse.current.position.ReadValue(); 
-            Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
 
-            Plane GroupPlane = new Plane(transform.forward, -10000);
+            float mx = obj.ReadValue<Vector2>().x;
+            float my = obj.ReadValue<Vector2>().y;
 
+            //rx += rotSpeed * my * Time.deltaTime;
+            ry += turnSpeed * mx * Time.deltaTime;
 
-            float rayLength;
-            if (GroupPlane.Raycast(cameraRay, out rayLength))
-            {
-                Vector3 pointTolook = cameraRay.GetPoint(rayLength);
-                //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
+            rx = Mathf.Clamp(rx, -80, 50);
 
-                Vector3 LookDir = (pointTolook - transform.position).normalized;
-
-                LookDir.y = 0.0f;
-                //LookDir.x = Mathf.Clamp(LookDir.x, -1.0f, 1.0f);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.deltaTime * TurnSpeed);
+            transform.eulerAngles = new Vector3(0, ry, 0);
 
 
-                //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
 
-            }
+
+
+
+
+            //Vector3 mousePos = Mouse.current.position.ReadValue(); 
+            //Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
+
+            //Plane GroupPlane = new Plane(transform.forward, -10000);
+
+
+            //float rayLength;
+            //if (GroupPlane.Raycast(cameraRay, out rayLength))
+            //{
+            //    Vector3 pointTolook = cameraRay.GetPoint(rayLength);
+            //    //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
+
+            //    Vector3 LookDir = (pointTolook - transform.position).normalized;
+
+            //    LookDir.y = 0.0f;
+            //    //LookDir.x = Mathf.Clamp(LookDir.x, -1.0f, 1.0f);
+            //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.deltaTime * TurnSpeed);
+
+
+            //    //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
+
+            //}
         }
     }
 

@@ -26,6 +26,10 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     public float hp = 100.0f;
     float maxHP = 100.0f;
 
+    //미니맵용
+    private Vector3 quadPosition;
+    Transform quad;
+
     public float HP
     {
         get => hp;
@@ -56,6 +60,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         weapon = GetComponentInChildren<FindWeapon>().gameObject;
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        quad = transform.Find("Goblin_Quad");
     }
 
     // 스폰 후 타겟 플레이어로 변환
@@ -80,6 +85,8 @@ public class Monster : MonoBehaviour, IBattle, IHealth
             default:
                 break;
         }
+        quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z);
+        quad.transform.LookAt(quadPosition);
     }
 
     void ChaseUpdate()
