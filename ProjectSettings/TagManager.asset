@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Ground
+  - Wall
+  - TowerSpawnerZone
+  - Tower
+  - TowerSpawnRange
+  - Mouse_Control
+  - Player_Hp
+  - FxTemporaire
+  - TopViewCamera
+  - MonsterSpawner
+  - MiniMap
+  - StartButton
   layers:
   - Default
   - TransparentFX
@@ -11,12 +24,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player_Quad
+  - Enemy_Quad
+  - FogTexture
+  - FogPlane
+  - UIBack
+  - Tower_Quad
   - 
   - 
   - 

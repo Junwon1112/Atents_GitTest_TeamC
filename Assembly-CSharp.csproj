@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Test_Scripts\Test_Player.cs" />
     <Compile Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\Scripts\Script_Tower\Tower_Archer.cs" />
     <Compile Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
     <Compile Include="Assets\Scripts\Monster\MonsterSpawner.cs" />
     <Compile Include="Assets\Scripts\Test_Scripts\Test_Enemy.cs" />
@@ -70,14 +71,20 @@
     <Compile Include="Assets\Scripts\Monster\FindWeapon.cs" />
     <Compile Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\Scripts\Test_Scripts\Test_Tower.cs" />
-    <Compile Include="Assets\Scripts\PlayerCamera.cs" />
+    <Compile Include="Assets\Scripts\MoneyChange.cs" />
+    <Compile Include="Assets\Scripts\PlayerPotion.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Script_Tower\Arrow.cs" />
+    <Compile Include="Assets\Scripts\Script_Tower\Tower_Knife.cs" />
     <Compile Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Scripts\Mouse_Control.cs" />
     <Compile Include="Assets\Scripts\IBattle.cs" />
     <Compile Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets\Scripts\Monster\MonsterWeapon.cs" />
+    <Compile Include="Assets\Scripts\Script_Tower\Knife.cs" />
+    <Compile Include="Assets\Scripts\MiniMap\CamAlpha.cs" />
     <Compile Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\Scripts\MiniMap\MiniMapFollow.cs" />
     <Compile Include="Assets\Scripts\Test_Scripts\Test_TowerSpawer.cs" />
     <Compile Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_Translate.cs" />
     <Compile Include="Assets\Scripts\Player_Wolf_Weapon.cs" />
@@ -94,13 +101,37 @@
     <Compile Include="Assets\Scripts\IHealth.cs" />
     <Compile Include="Assets\Scripts\Monster\MonsterHPBar.cs" />
     <Compile Include="Assets\Scripts\Player_HpBar.cs" />
-    <Compile Include="Assets\MiniMapCamera.cs" />
+    <Compile Include="Assets\Scripts\HealArtifact.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\_ExternalAssets\Cainos\Pixel Art Icon Pack - RPG\Shader\SH UI Icon Outline Color.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
+    <None Include="Assets\_ExternalAssets\Cainos\Pixel Art Icon Pack - RPG\Shader\SH Sprite Icon Outline Color.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\_ExternalAssets\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Shaders\FowShader.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
