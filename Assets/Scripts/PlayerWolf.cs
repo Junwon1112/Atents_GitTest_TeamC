@@ -23,7 +23,6 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
 
     public float moveSpeed = 3.0f;
-    Quaternion targetRotation = Quaternion.identity;
 
     Animator anim = null;
     ParticleSystem SkillAura;
@@ -101,18 +100,13 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     private void FixedUpdate()
     {
-        
-        if (!GameManager.INSTANCE.CAMERASWAP)
+        // GameManager에 있는 CAMERASWAP변수를 통해 타워설치인지 전투상태인지 확인 전투상태일때만 조작가능
+        if (!GameManager.INSTANCE.CAMERASWAP)  
         {
-            //anim.SetBool("isMove", true);
             transform.Translate(moveSpeed * Time.fixedDeltaTime * inputDir, Space.Self);
-            //rigid.MovePosition(rigid.position + moveSpeed * Time.fixedDeltaTime * inputDir);
-            //rigid.MoveRotation(Quaternion.Lerp(rigid.rotation, Quaternion.Euler(0, inputRot ,0), 0.5f));
-            //rigid.MovePosition(rigid.position + moveSpeed * Time.deltaTime * inputDir);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-            //transform.LookAt(inputDir);
+            
 
-
+            //플레이어가 이동중일때 애니메이션을 재생
             if (inputDir.x != 0 || inputDir.z != 0)
             {
                 anim.SetBool("isMove", true);
@@ -126,14 +120,16 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
         }
 
+        //플레이어의 미니맵표시가 돌아가지 않게 고정
         quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z);
         quad.transform.LookAt(quadPosition);
 
     }
 
+    //플레이어가 마우스 방향을 바라보게하는 함수
     private void OnLook(InputAction.CallbackContext obj)
     {
-        if (isDead == false)
+        if (isDead == false && !GameManager.INSTANCE.CAMERASWAP)
         {
 
             float mx = obj.ReadValue<Vector2>().x;
@@ -146,38 +142,10 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
             transform.eulerAngles = new Vector3(0, ry, 0);
 
-
-
-
-
-
-
-            //Vector3 mousePos = Mouse.current.position.ReadValue(); 
-            //Ray cameraRay = Camera.main.ScreenPointToRay(mousePos);
-
-            //Plane GroupPlane = new Plane(transform.forward, -10000);
-
-
-            //float rayLength;
-            //if (GroupPlane.Raycast(cameraRay, out rayLength))
-            //{
-            //    Vector3 pointTolook = cameraRay.GetPoint(rayLength);
-            //    //Debug.Log($"{pointTolook}"); // 레이를 이용해 xz값으로 바꿈, y는 0 : 마우스를 멈춰도 변화하는 값
-
-            //    Vector3 LookDir = (pointTolook - transform.position).normalized;
-
-            //    LookDir.y = 0.0f;
-            //    //LookDir.x = Mathf.Clamp(LookDir.x, -1.0f, 1.0f);
-            //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.deltaTime * TurnSpeed);
-
-
-            //    //transform.LookAt(new Vector3(pointTolook.x, transform.position.y, pointTolook.z));
-
-            //}
         }
     }
 
-
+    //플레이어 이동함수
     public void OnmoveInput(InputAction.CallbackContext context)
     {
         Vector3 input;
@@ -185,63 +153,14 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         inputDir.x = input.x;
         inputDir.y = 0.0f;
         inputDir.z = input.y;
-        if (inputDir.sqrMagnitude > 0.0f)    //sqrMagnitude => vector를 제곱한거, root 연산만안한것
-        {
+        
 
-            //inputDir = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0) * inputDir;
-            // 카메라의 y축 회전만 따로 분리해서 회전
-            //targetRotation = Quaternion.LookRotation(inputDir);
-            //카메라 보는방향기준으로 입력을 바꿈
-
-        }
-
-
-
-
-
-        //inputRot = - Mathf.Acos(inputDir.x) * 180 / Mathf.PI - Mathf.Asin(inputDir.y) * 180 / Mathf.PI;
-
-
-        //if (inputDir.y == 1) 
-        //{
-        //    inputRot = 0;
-        //}
-        //else if(inputDir.y == -1)
-        //{
-        //    inputRot = 180;
-        //}
-        //if (inputDir.x == 1)
-        //{
-        //    inputRot = 90;
-        //}
-        //else if (inputDir.x == -1)
-        //{
-        //    inputRot = -90;
-        //}
-
-        //inputRot = inputRotX + inputRotY;
-
-
-        //if (context.canceled)
-        //{
-        //    inputRot = 0;
-        //}
 
     }
-
+    //플레이어 공격함수
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        /*if (!GameManager.INSTANCE.CAMERASWAP)
-        {
-            if (context.performed)
-            {
-                anim.SetBool("isAttack", true);
-            }
-            else if (context.canceled)
-            {
-                anim.SetBool("isAttack", false);
-            }
-        }*/
+        
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
             anim.SetFloat("ComboState", Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime, 1.0f));
@@ -251,14 +170,13 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         }
     }
 
+    //플레이어 점프함수
     public void OnJumpInput(InputAction.CallbackContext context)
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            //Debug.Log("점프1");
             if (jumpTime > 0)
             {
-                //Debug.Log("점프2");
                 anim.ResetTrigger("isJump");
                 anim.SetTrigger("isJump");
 
@@ -269,6 +187,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     }
 
+    //플레이어 스킬사용함수
     public void OnSkillInput(InputAction.CallbackContext context)
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
@@ -278,7 +197,6 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         }
 
     }
-
     IEnumerator SkillAuraOnOff()
     {
         //gameObject.GetComponentInChildren<ParticleSystem>().
@@ -289,6 +207,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         SkillAura.Stop();
     }
 
+    //땅에 닿았을때 점프횟수 초기화 해주는 콜라이더 함수
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -297,17 +216,19 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         }
     }
 
+    //스크롤 사용함수
     private void OnUseScroll(InputAction.CallbackContext obj)
     {
         Debug.Log("스크롤 사용");
     }
 
+    //포션 사용함수
     private void OnUsePotion(InputAction.CallbackContext obj)
     {
         PP.OnDrinkPotion();
     }
 
-    // HPㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    //IHealth 인터페이스 구현
     public float HP
     {
         get
@@ -317,12 +238,8 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         set
         {
             Player_Hp = Mathf.Clamp(value, 0, Player_MaxHp);
-            
-            
-            onHealthChange?.Invoke();
+            onHealthChange?.Invoke(); //델리게이트를 만들어서 HP가 변화했을때만 hp바가 움직이겠끔 구현
 
-            
-            //Debug.Log(Player_Hp);
         }
 
     }
@@ -337,7 +254,19 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     public Action onHealthChange { get; set; }
 
-    //IBattleㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    public void TakeHeal(float heal)
+    {
+        if (isDead == false)
+        {
+            HP += heal;
+            if (HP > 100.0f)
+            {
+                HP = 100.0f;
+            }
+        }
+    }
+
+    //IBattle 인터페이스 구현
 
     public float AttackPower
     {
@@ -392,17 +321,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         
     }
 
-    public void TakeHeal(float heal)
-    {
-        if (isDead == false)
-        {
-            HP += heal;
-            if (HP > 100.0f)
-            {
-                HP = 100.0f;
-            }
-        }
-    }
+   
     //Moneyㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     public int MONEY
     {
