@@ -5,12 +5,10 @@ using UnityEngine.InputSystem;
 
 public class Mouse_Control : MonoBehaviour
 {
+    //마우스를 쫓아다니면서 벽위에 타워를 설치해주는 스크립트
+
     Vector3 mousePos;
-    Vector3 transPos;
-
-    //public GameObject TowerPositon = null;
-
-    // Update is called once per frame
+    
     public GameObject Tower = null;
     public GameObject Tower2 = null;
 
@@ -23,8 +21,6 @@ public class Mouse_Control : MonoBehaviour
 
     public Camera MainCamera;
 
-    Collider Mycollider;
-
     PlayerWolf player;
 
     int Tower1Price = 100;
@@ -33,7 +29,6 @@ public class Mouse_Control : MonoBehaviour
     private void Awake()
     {
         ChildObejct = new GameObject[transform.childCount];
-        Mycollider = GetComponent<Collider>();
         for(int i = 0; i < ChildObejct.Length; i++)
         {
             ChildObejct[i] = transform.GetChild(i).gameObject;
@@ -47,19 +42,16 @@ public class Mouse_Control : MonoBehaviour
         player = GameManager.INSTANCE.PLAYER.GetComponent<PlayerWolf>();
     }
 
+    /// <summary>
+    /// 마우스의 위치를 받아오고 a키를 눌렀을때 벽위+다른타워가 근처에 없고 돈이 있으면 설치
+    /// </summary>
     void Update()
     {
         
-        //mousePos = UnityEngine.Input.mousePosition;
         mousePos = Mouse.current.position.ReadValue();
-        //transPos = Camera.main.ScreenToWorldPoint(mousePos)
-        //transform.position = new Vector3(transPos.x, 3.0f, transPos.z);
+
         mousePos.z = Camera.main.farClipPlane;
-        //mousePos.y = 3.0f;
-       
-        //transform.position = new Vector3(transPos.x, 3.0f, transPos.y);
       
-        //TowerPositon.transform.position = new Vector3(transform.position.x, 3.0f, transform.position.z);
         Keyboard k = Keyboard.current;
 
         
@@ -94,22 +86,26 @@ public class Mouse_Control : MonoBehaviour
 
     }
 
+    
+
     private void OnTriggerStay(Collider other)
     {
+        //벽위에 있으면 WallState를 true로 만들어서 설치할 수 있게해줌
         if (other.CompareTag("Wall"))
         {
-            //Debug.Log("벽위에있음");
+            
             WallState = true;
             
 
         }
 
+        //다른 타워근처에 있으면 TowerZone을 true로 만들어서 설치를 못하게함
         if(other.CompareTag("TowerSpawnRange"))
         {
-            //Debug.Log("타워랑겹침");
+            
             TowerZone = true;
         }
-        //Debug.Log("벽위에있음");
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -126,6 +122,10 @@ public class Mouse_Control : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 버튼을 눌렀을 경우 선택한 버튼을 제외하고 나머지를 비활성화 해서 선택한 버튼의 오브젝트만 보이게하는 함수
+    /// </summary>
+    /// <param name="number">활성화 해야하는 타워의 번호</param>
     public void ObjectSwap(int number)
     {
         for (int i = 0; i < ChildObejct.Length; i++)

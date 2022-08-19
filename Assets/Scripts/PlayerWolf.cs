@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 {
+    //플레이어에 들어가는 스크립트
     Player_Wolf actions;
 
 

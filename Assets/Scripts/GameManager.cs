@@ -7,12 +7,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //게임의 흐름을 제어하고 미리오브젝트를 찾아주는 스크립트
+
     private static GameManager instance;
 
-    private bool CameraSwap = true;
+    private bool CameraSwap = true; //타워설치모드, 전투모드전환용 변수
 
-    public GameObject TS = null;
-    public GameObject ButtonGroup;
+    public GameObject TS = null; //마우스 오브젝트 변수
+    public GameObject ButtonGroup; // 타워변경 버튼
 
     GameObject Mouse_Cotrol;
 
@@ -85,6 +87,9 @@ public class GameManager : MonoBehaviour
         Initialize();
     }
 
+    /// <summary>
+    /// 처음 시작시 미리오브젝트를 찾고 비활성, 마우스커서 안보이게 해주는 함수
+    /// </summary>
     private void Initialize()
     {
         Mouse_Cotrol = GameObject.FindGameObjectWithTag("Mouse_Control");
@@ -101,6 +106,9 @@ public class GameManager : MonoBehaviour
 
 
     }
+    /// <summary>
+    /// 타워설치모드,전투모드를 스왑해주는 함수
+    /// </summary>
 
     public void TowerSwap()
     {

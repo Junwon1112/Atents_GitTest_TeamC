@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealArtifact : MonoBehaviour
 {
+    //체력을 회복해주는 아티펙트
     float healPerSeconds = 1.0f;
 
     float timeLeft = 1.0f;
@@ -11,6 +12,9 @@ public class HealArtifact : MonoBehaviour
 
     IHealth PlayerHealth;
 
+    /// <summary>
+    /// 일정시간마다 플에이어 체력을 회복
+    /// </summary>
     void ArtifactHealing()
     {
         if(Time.time>nextTime && !GameManager.INSTANCE.CAMERASWAP)

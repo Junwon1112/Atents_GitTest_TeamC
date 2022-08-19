@@ -5,8 +5,9 @@ using TMPro;
 
 public class MoneyChange : MonoBehaviour
 {
+    //돈 표시용 스크립트
     TextMeshProUGUI textMeshProUGUI;
-    // Start is called before the first frame update
+
     void Start()
     {
         textMeshProUGUI = GetComponent<TextMeshProUGUI>();

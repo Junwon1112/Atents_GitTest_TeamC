@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
+    //몬스터를 스폰스켜주는 스크립트
+
     public GameObject Monster = null;
     int xPos;
     int zPos;
     public int monsterCount;
-    public int maxMonsterCount = 20;
+    public int maxMonsterCount = 20; //최대로 소환될 몬스터수
     int spawnerSigt;
     float spawnInterval = 1.0f;
-    //-46 -10
+    
+
+    /// <summary>
+    /// 게임매니저에서 타워설치에서 전투모드로 갈때 몬스터 소환 코루틴을 실행시켜줄 함수
+    /// </summary>
+    /// <param name="Swap">true이면 스폰시작</param>
     public void StartSpawn(bool Swap)
     {
         if (Swap)
@@ -19,7 +26,10 @@ public class MonsterSpawner : MonoBehaviour
             StartCoroutine(Spawner());
         }
     }
-
+    /// <summary>
+    /// 몬스터 스폰해주는 IEnumerator
+    /// </summary>
+    /// <returns>spawnInterval에 설정된 시간에 따라 소환됨 </returns>
     IEnumerator Spawner()
     {
         while (monsterCount<maxMonsterCount)

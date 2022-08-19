@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterHPBar : MonoBehaviour
 {
+    //몬스터의 Hp를 표시해주는 스크립트
+
     IHealth target;
     Transform fillPivot;
 
@@ -22,7 +24,9 @@ public class MonsterHPBar : MonoBehaviour
             fillPivot.localScale = new Vector3(ratio, 1, 1);
         }
     }
-
+    /// <summary>
+    /// hp바가 회전하지 않고 플레이 하는 사람이 볼수있게 업데이트
+    /// </summary>
     private void LateUpdate()
     {
         transform.forward = -Camera.main.transform.forward;
