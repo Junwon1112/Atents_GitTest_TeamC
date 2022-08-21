@@ -12,9 +12,6 @@ public class Mouse_Control : MonoBehaviour
     public GameObject Tower = null;
     public GameObject Tower2 = null;
 
-    private bool WallState=false;
-    private bool TowerZone = false;
-
     GameObject[] ChildObejct;
 
     int TowerNumber = 0;
@@ -23,9 +20,11 @@ public class Mouse_Control : MonoBehaviour
 
     PlayerWolf player;
 
-    int Tower1Price = 100;
-    int Tower2Price = 200;
-    
+    float mouseHeight = 1.5f;
+
+    CheckTowerPosition[] checkTowerPosition=new CheckTowerPosition[4];
+
+    int[] towerPrice=new int[2] {100,200};
     private void Awake()
     {
         ChildObejct = new GameObject[transform.childCount];
@@ -34,7 +33,14 @@ public class Mouse_Control : MonoBehaviour
             ChildObejct[i] = transform.GetChild(i).gameObject;
         }
 
-        
+        int index = 0;
+        for (int i = ChildObejct.Length - 1; i >= ChildObejct.Length - 4; i--)
+        {
+            checkTowerPosition[index] = ChildObejct[i].GetComponent<CheckTowerPosition>();
+            index++;
+        }
+
+
     }
 
     private void Start()
@@ -47,80 +53,96 @@ public class Mouse_Control : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+
         mousePos = Mouse.current.position.ReadValue();
 
         mousePos.z = Camera.main.farClipPlane;
-      
+
         Keyboard k = Keyboard.current;
 
-        
+
 
         Ray cameraRay = MainCamera.ScreenPointToRay(mousePos);
         Plane GroupPlane = new Plane(Vector3.up, Vector3.zero);
         float rayLength;
         if (GroupPlane.Raycast(cameraRay, out rayLength))
         {
-            Vector3 pointTolook = cameraRay.GetPoint(rayLength);   
-            pointTolook.y = 3.5f;
+            Vector3 pointTolook = cameraRay.GetPoint(rayLength);
+            pointTolook.y = mouseHeight;
             transform.position = pointTolook;
 
         }
 
-        if (k.aKey.wasPressedThisFrame && WallState && !TowerZone)
+        if (k.aKey.wasPressedThisFrame && WallCheck() && !TowerCheck())
         {
-            
-            if (TowerNumber == 0 && player.MONEY>=Tower1Price)
+
+
+            if (TowerNumber == 0 && player.MONEY >= towerPrice[TowerNumber])
             {
                 GameObject T = Instantiate(Tower);
-                T.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
-                player.MONEY -= Tower1Price;
+                T.transform.position = new Vector3(transform.position.x, mouseHeight + 3.5f, transform.position.z);
+                player.MONEY -= towerPrice[TowerNumber];
             }
-            else if (TowerNumber == 1 && player.MONEY>=Tower2Price)
+            else if (TowerNumber == 1 && player.MONEY >= towerPrice[TowerNumber])
             {
                 GameObject T = Instantiate(Tower2);
-                T.transform.position = new Vector3(transform.position.x, 6.5f, transform.position.z);
-                player.MONEY -= Tower2Price;
+                T.transform.position = new Vector3(transform.position.x, mouseHeight + 3.5f, transform.position.z);
+                player.MONEY -= towerPrice[TowerNumber];
             }
         }
 
+        CheckColor();
+
+    }
+
+    /// <summary>
+    /// 타워를 설치할 수 있으면 초록색 아니면 빨간색을 표시해주는 함수
+    /// </summary>
+    private void CheckColor()
+    {
+        if (WallCheck() && !TowerCheck() && player.MONEY >= towerPrice[TowerNumber])
+        {
+
+            ChildObejct[TowerNumber].transform.Find("Tower_Quad").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+
+        }
+        else
+        {
+            ChildObejct[TowerNumber].transform.Find("Tower_Quad").GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+
+        }
+    }
+
+    /// <summary>
+    /// 타워가 ground위에 있는지 확인하는 함수
+    /// </summary>
+    /// <returns>위에 있으면 true 아니면 false</returns>
+    bool WallCheck()
+    {
+        bool result = false;
+        if (checkTowerPosition[0].WallState && checkTowerPosition[1].WallState && checkTowerPosition[2].WallState && checkTowerPosition[3].WallState)
+        {
+            result = true;
+        }
+
+        return result;
+    }
+    /// <summary>
+    /// 근처에 타워가 있는지 확인하는 함수
+    /// </summary>
+    /// <returns>근처에 있으면 true 아니면 false</returns>
+    bool TowerCheck()
+    {
+        bool result = false;
+        if (checkTowerPosition[0].TowerZone || checkTowerPosition[1].TowerZone || checkTowerPosition[2].TowerZone || checkTowerPosition[3].TowerZone)
+        {
+            result = true;
+        }
+
+        return result;
     }
 
     
-
-    private void OnTriggerStay(Collider other)
-    {
-        //벽위에 있으면 WallState를 true로 만들어서 설치할 수 있게해줌
-        if (other.CompareTag("Wall"))
-        {
-            
-            WallState = true;
-            
-
-        }
-
-        //다른 타워근처에 있으면 TowerZone을 true로 만들어서 설치를 못하게함
-        if(other.CompareTag("TowerSpawnRange"))
-        {
-            
-            TowerZone = true;
-        }
-        
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Wall"))
-        {
-            WallState = false;
-        }
-
-        if (other.CompareTag("TowerSpawnRange"))
-        {
-            
-            TowerZone = false;
-        }
-    }
 
     /// <summary>
     /// 버튼을 눌렀을 경우 선택한 버튼을 제외하고 나머지를 비활성화 해서 선택한 버튼의 오브젝트만 보이게하는 함수
@@ -134,5 +156,11 @@ public class Mouse_Control : MonoBehaviour
         }
         TowerNumber = number;
         ChildObejct[number].SetActive(true);
+
+
+        for(int i=ChildObejct.Length-1; i>=ChildObejct.Length-4; i--)
+        {
+            ChildObejct[i].SetActive(true);
+        }
     }
 }

@@ -20,9 +20,14 @@ public class Tower_Archer : MonoBehaviour
     bool isAttack = false;
     Animator anime;
 
+    //미니맵용
+    private Vector3 quadPosition;
+    Transform quad;
+
     private void Awake()
     {
         anime = GetComponent<Animator>();
+        quad = transform.Find("Tower_Quad");
     }
     /// <summary>
     /// 타워설치모드가 아닌 전투모드일때만 행동
@@ -71,6 +76,9 @@ public class Tower_Archer : MonoBehaviour
                 BulletDelay = 0.0f;
 
             }
+
+            quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z); //미니맵고정용
+            quad.transform.LookAt(quadPosition); //미니맵고정용
 
 
         }
