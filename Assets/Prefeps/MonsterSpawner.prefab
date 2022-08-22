@@ -48,6 +48,6 @@ MonoBehaviour:
   xPos: 0
   zPos: 0
   monsterCount: 0
-  maxMonsterCount: 10
+  maxMonsterCount: 0
   spawnerSigt: 0
   spawnInterval: 1

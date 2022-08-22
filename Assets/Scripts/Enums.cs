@@ -14,3 +14,9 @@ public enum MonsterType
     Nomal,
     Boss
 }
+
+public enum WeaponType
+{
+    NomalWeapon,
+    BossWeapon
+}

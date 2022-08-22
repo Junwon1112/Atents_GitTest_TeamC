@@ -22,43 +22,36 @@ public class BossMonster : Monster
         }
     }
 
-    //public override void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.layer == 6)    // 테스트불릿의 공격
-    //    {
-    //        anim.SetTrigger("TakeDamage");
-    //        return;
-    //    }
-    //    if (other.gameObject.CompareTag("Player"))  // 몬스터가 플레이어를 공격하기
-    //    {
-    //        ChangeState(MonsterState.Attack);
-    //        return;
-    //    }
-    //}
-
     public override void AttackUpdate()
     {
         if(state == MonsterState.Attack)
         {
             anim.SetTrigger("Attack");
-            int randomAttack = Random.Range(0, 5);
+            int randomAttack = Random.Range(0, 10);
             //Debug.Log($"{randomAttack}");
             switch (randomAttack)
             {
                 case 0:
                 case 1:
-                    QuadraAttack();
-                    break;
                 case 2:
                 case 3:
                 case 4:
-                    Double();
+                    AttackPatternA();   // 일반공격 50%
+                    break;
+                case 5:
+                case 6:
+                    AttackPatternB();   // 4연격 20%
+                    break;
+                case 7:
+                case 8:
+                case 9:
+                    AttackPatternC();   // 회전공격(2연격) 30%
                     break;
             }
         }
     }
 
-    void QuadraAttack()
+    void AttackPatternA()
     {
         anim.SetInteger("AttackType", 0);
         Attack(attackTarget);
@@ -66,9 +59,17 @@ public class BossMonster : Monster
         return;
     }
 
-    void Double()
+    void AttackPatternB()
     {
         anim.SetInteger("AttackType", 1);
+        Attack(attackTarget);
+        attackCoolTime = attackSpeed;
+        return;
+    }
+
+    void AttackPatternC()
+    {
+        anim.SetInteger("AttackType", 2);
         Attack(attackTarget);
         attackCoolTime = attackSpeed;
         return;

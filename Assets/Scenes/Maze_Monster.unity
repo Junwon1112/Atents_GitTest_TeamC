@@ -498,10 +498,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4128002549921875424, guid: 054918f1c3934574884e90a6d15033a9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 054918f1c3934574884e90a6d15033a9, type: 3}
 --- !u!1 &1401781148
@@ -776,17 +772,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 934417765207614593, guid: e11e4cb77129f5a438fcfe9ff682e4e7, type: 3}
-      propertyPath: maxMonsterCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 934417765207614620, guid: e11e4cb77129f5a438fcfe9ff682e4e7, type: 3}
       propertyPath: m_Name
       value: MonsterSpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 934417765207614620, guid: e11e4cb77129f5a438fcfe9ff682e4e7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 934417765207614622, guid: e11e4cb77129f5a438fcfe9ff682e4e7, type: 3}
       propertyPath: m_RootOrder

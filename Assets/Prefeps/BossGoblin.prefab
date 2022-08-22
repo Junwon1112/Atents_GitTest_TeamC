@@ -3023,7 +3023,6 @@ GameObject:
   - component: {fileID: 4945704277253774095}
   - component: {fileID: 4945704277244358253}
   - component: {fileID: 1767535153}
-  - component: {fileID: 1767535149}
   - component: {fileID: 1767535154}
   - component: {fileID: 4593188166455046959}
   - component: {fileID: 1767535155}
@@ -3098,26 +3097,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1767535149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945704277244258663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eff209edcebce440b6b23736b959cad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  state: 0
-  type: 1
-  attackSpeed: 1
-  attackCoolTime: 1
-  hp: 5000
-  attackPower: 100
-  defencePower: 50
 --- !u!54 &1767535154
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3151,9 +3130,9 @@ MonoBehaviour:
   type: 1
   attackSpeed: 1
   attackCoolTime: 1
-  hp: 5000
-  attackPower: 100
-  defencePower: 50
+  hp: 500
+  attackPower: 10
+  defencePower: 5
 --- !u!195 &1767535155
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4145,6 +4124,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1516850370887045376}
     m_Modifications:
+    - target: {fileID: -4612887431283731955, guid: 99654043bd349b844b3334312fc6f6af, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8011866242786951028, guid: 99654043bd349b844b3334312fc6f6af, type: 3}
       propertyPath: m_Name
       value: Weapon_Sword
@@ -4215,6 +4198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1516850370887045376}
     m_Modifications:
+    - target: {fileID: 6760294111733258845, guid: 2a256ae5efbbcc043a056a333940bbf3, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6813187849174838898, guid: 2a256ae5efbbcc043a056a333940bbf3, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4337,6 +4324,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3204323276644837012, guid: f16118ec877424f4c82cb266980c96bc, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4915419590651273549, guid: f16118ec877424f4c82cb266980c96bc, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4411,6 +4402,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8696930642042868555, guid: 23aa5726f06c8f44a8b23bb459c54fec, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23aa5726f06c8f44a8b23bb459c54fec, type: 3}
 --- !u!4 &5688759187364269982 stripped
@@ -4425,6 +4420,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1516850370887045376}
     m_Modifications:
+    - target: {fileID: -8620407987881815999, guid: 06899b6f2cce8c046a33810574967004, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8620407987881815999, guid: 06899b6f2cce8c046a33810574967004, type: 3}
+      propertyPath: bossPower
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2429747873324391943, guid: 06899b6f2cce8c046a33810574967004, type: 3}
       propertyPath: m_RootOrder
       value: 0
