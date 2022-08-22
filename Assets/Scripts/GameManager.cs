@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
+    ItemDataManager itemData;
 
     private bool CameraSwap = true;
 
@@ -22,6 +24,12 @@ public class GameManager : MonoBehaviour
     {
         get { return Player; }
     }
+
+    PlayerWolf player;
+    public PlayerWolf MainPlayer
+    {
+        get => player;
+    }
     public bool CAMERASWAP
     {
         get { return CameraSwap; }
@@ -30,6 +38,14 @@ public class GameManager : MonoBehaviour
     public static GameManager INSTANCE
     {
         get { return instance; }
+    }
+
+    InventoryUI inventoryUI;
+    public InventoryUI InvenUI => inventoryUI;
+
+    public ItemDataManager ItemData
+    {
+        get => itemData;
     }
 
     public GameObject MOUSE
@@ -66,6 +82,8 @@ public class GameManager : MonoBehaviour
         Mouse_Cotrol = GameObject.FindGameObjectWithTag("Mouse_Control");
         Player = GameObject.FindGameObjectWithTag("Player");
         Player_Hp = GameObject.FindGameObjectWithTag("Player_Hp");
+        itemData = GetComponent<ItemDataManager>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
     public void TowerSwap()

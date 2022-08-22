@@ -628,6 +628,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Inventory",
+            "id": "5598710f-5075-4c0e-ba5e-e48d5928b339",
+            "actions": [
+                {
+                    "name": "InventoryOnOff",
+                    "type": "Button",
+                    "id": "0af31d5e-3aab-49ae-b963-93a822b51666",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "630f9eb9-8fbf-4a14-9ac2-fac7507c1c97",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "InventoryOnOff",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

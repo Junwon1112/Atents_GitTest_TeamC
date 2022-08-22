@@ -35,6 +35,13 @@ public class PlayerWolf : MonoBehaviour , IHealth
     public bool isDelay;
     public float delayTime = 5.0f;
 
+    // 인벤토리용 --------------
+    Inventory inven;
+    ItemSlot equipItemSlot;
+
+    public ItemSlot EquipItemSlot => equipItemSlot;
+
+
     public float PlayerHp
     {
         get => Player_Hp;
@@ -46,14 +53,14 @@ public class PlayerWolf : MonoBehaviour , IHealth
         SkillAura = GetComponentInChildren<ParticleSystem>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        
- 
+        inven = new Inventory();
     }
 
     private void Start()
     {
         tempJumpTime = jumpTime;
         //SkillAura.Stop();
+        GameManager.INSTANCE.InvenUI.InitializeInventory(inven);
     }
 
     private void FixedUpdate()
