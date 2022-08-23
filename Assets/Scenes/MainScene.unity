@@ -4014,9 +4014,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1280445744, guid: ecd1e31ae3896e54682ff9c74e4f266c, type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 4945704277244258663, guid: f30dc73f88433e242815056c2ca7cfc8, type: 3}
     - target: {fileID: 4772720517502506252, guid: ecd1e31ae3896e54682ff9c74e4f266c, type: 3}
       propertyPath: m_Name
       value: MonsterSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 4772720517502506252, guid: ecd1e31ae3896e54682ff9c74e4f266c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4772720517502506252, guid: ecd1e31ae3896e54682ff9c74e4f266c, type: 3}
       propertyPath: m_TagString
@@ -8954,7 +8962,13 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Bip001 L Hand'\n\tTransform 'Bip001 Spine1'\n\tTransform
+    'Bip001 L Finger11'\n\tTransform 'Bip001 R UpperArm'\n\tTransform 'Bip001 R Finger11'\n\tTransform
+    'Bip001 L UpperArm'\n\tTransform 'Bip001 L Forearm'\n\tTransform 'Bip001 Spine'\n\tTransform
+    'Bip001 R Thigh'\n\tTransform 'Bip001 R Finger01'\n\tand more ...\n\tFrom animation
+    clip 'ma04_Idle'\n\tFrom animation clip 'ma04_KnifeAttack'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0

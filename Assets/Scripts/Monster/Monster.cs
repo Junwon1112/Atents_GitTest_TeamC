@@ -9,19 +9,21 @@ public class Monster : MonoBehaviour, IBattle, IHealth
 
     GameObject weapon;
 
-    NavMeshAgent nav;
-    Animator anim;
+    protected NavMeshAgent nav;
+    protected Animator anim;
 
     
 
     public Transform target;
 
-    MonsterState state = MonsterState.Chase;
+    public MonsterState state = MonsterState.Chase;
+    public MonsterType type = MonsterType.Nomal;
+    
 
     // 공격용
     public float attackSpeed = 1.0f;
     public float attackCoolTime = 1.0f;
-    IBattle attackTarget;
+    public IBattle attackTarget;
 
     // HP용
 
@@ -29,8 +31,8 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     float maxHP = 100.0f;
 
     //미니맵용
-    private Vector3 quadPosition;
-    Transform quad;
+    protected Vector3 quadPosition;
+    protected Transform quad;
 
     public float HP
     {
@@ -38,6 +40,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         private set
         {
             hp = Mathf.Clamp(value, 0.0f, maxHP);
+
             onHealthChange?.Invoke();
         }
     }
@@ -66,14 +69,23 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     }
 
     // 스폰 후 타겟 플레이어로 변환
-    GameObject Player;
+    protected GameObject Player;
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         target = Player.transform;
+        if(type==MonsterType.Nomal)
+        {
+            maxHP = 100;
+            HP = maxHP;
+        }else if(type==MonsterType.Boss)
+        {
+            maxHP = 500;
+            HP = maxHP;
+        }
     }
 
-    private void Update()
+    public virtual void Update()
     {
         switch (state)
         {
@@ -95,7 +107,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     /// <summary>
     /// 플레이어 추격용 함수
     /// </summary>
-    void ChaseUpdate()
+    public void ChaseUpdate()
     {
         nav.SetDestination(target.position);
         return;
@@ -105,21 +117,24 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     /// 플레이어 공격용함수
     /// </summary>
     /// <returns>어택쿨타임이 0.0f보다 작아지면 애니메이션재생 쿨타임초기화 Attack함수 실행</returns>
-    void AttackUpdate()
+    public virtual void AttackUpdate()
     {
-        attackCoolTime -= Time.deltaTime;
-
-        if (attackCoolTime < 0.0f)
+        if (type != MonsterType.Boss)
         {
-            anim.SetTrigger("Attack");
-            Attack(attackTarget);
-            attackCoolTime = attackSpeed;
-            return;
+            attackCoolTime -= Time.deltaTime;
+
+            if (attackCoolTime < 0.0f)
+            {
+                anim.SetTrigger("Attack");
+                Attack(attackTarget);
+                attackCoolTime = attackSpeed;
+                return;
+            }
         }
 
 
     }
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 6)    // 테스트불릿의 공격
         {
@@ -133,7 +148,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
             return;
         }
     }
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -147,7 +162,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     /// 상태변화함수
     /// </summary>
     /// <param name="newState">새로운상태표시</param>
-    void ChangeState(MonsterState newState)
+    public void ChangeState(MonsterState newState)
     {
         if (isDead)
         {
@@ -192,7 +207,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     /// <summary>
     /// 죽었을때 사용되는 함수
     /// </summary>
-    void DiePresent()
+    public void DiePresent()
     {
         //gameObject.layer = LayerMask.NameToLayer("Corpse");
         anim.SetBool("Dead", true);
@@ -244,7 +259,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     /// <summary>
     /// 죽었을때 사용되는 함수
     /// </summary>
-    private void Die()
+    public void Die()
     {
         if (isDead == false)
         {

@@ -7,6 +7,7 @@ public class MonsterSpawner : MonoBehaviour
     //몬스터를 스폰스켜주는 스크립트
 
     public GameObject Monster = null;
+    public GameObject boss = null;
     int xPos;
     int zPos;
     public int monsterCount;
@@ -32,7 +33,7 @@ public class MonsterSpawner : MonoBehaviour
     /// <returns>spawnInterval에 설정된 시간에 따라 소환됨 </returns>
     IEnumerator Spawner()
     {
-        while (monsterCount<maxMonsterCount)
+        while (monsterCount<maxMonsterCount-1)
         {
             yield return new WaitForSeconds(spawnInterval);
             spawnerSigt = Random.Range(0, 4);
@@ -58,7 +59,32 @@ public class MonsterSpawner : MonoBehaviour
             }
             Debug.Log("소환");
         }
+        spawnerSigt = Random.Range(0, 4);
+        if (spawnerSigt == 0)
+        {
+            BossSpawn();
+        }
+        if (spawnerSigt == 1)
+        {
+            BossSpawn();
+        }
+        if (spawnerSigt == 2)
+        {
+            BossSpawn();
+        }
+        if (spawnerSigt == 3)
+        {
+            BossSpawn();
+        }
+        
 
+    }
+
+    private void BossSpawn()
+    {
+        GameObject bossmons = Instantiate(boss, new Vector3(0, 0, -46), Quaternion.identity);
+        monsterCount += 1;
+        Debug.Log("보스소환");
     }
 
     //IEnumerator MonsterSpawn()
