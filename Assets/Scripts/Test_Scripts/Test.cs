@@ -1,0 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Test : MonoBehaviour
+{
+    
+    // Update is called once per frame
+    void Update()
+    {
+        Keyboard k = Keyboard.current;
+        if(k.digit1Key.wasPressedThisFrame)
+        {
+            GameManager.INSTANCE.PLAYER.GetComponent<IBattle>().TakeDamage(10);
+        }
+    }
+}
