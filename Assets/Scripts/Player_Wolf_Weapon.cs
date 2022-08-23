@@ -34,7 +34,7 @@ public class Player_Wolf_Weapon : MonoBehaviour
     /// 스킬발동시 적들을 밀어내는 IEnumerator
     /// </summary>
     /// <param name="other">타겟</param>
-    /// <returns>1초뒤에 비활성화</returns>
+    /// <returns></returns>
     IEnumerator SkillAttack(Collider other)
     {
         other.attachedRigidbody.isKinematic = false;

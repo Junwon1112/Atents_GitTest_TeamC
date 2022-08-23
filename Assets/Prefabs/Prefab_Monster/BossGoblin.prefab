@@ -3108,8 +3108,8 @@ Rigidbody:
   m_GameObject: {fileID: 4945704277244258663}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: Infinity
-  m_AngularDrag: Infinity
+  m_Drag: 0.01
+  m_AngularDrag: 0.01
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0

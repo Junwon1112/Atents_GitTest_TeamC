@@ -22,6 +22,8 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     int tempJumpTime;
     bool isDead = false;
 
+    public float skillCooltime; // 쿨타임 13초로 설정예정
+
 
     public float moveSpeed = 3.0f;
 
@@ -29,6 +31,8 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     ParticleSystem SkillAura;
     public bool isSkillOn = false;
 
+    bool isAttackOn;
+    bool isSkillMotionOn;
 
     int money = 0;
     float rx;
@@ -101,6 +105,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     private void FixedUpdate()
     {
+        skillCooltime -= Time.fixedDeltaTime;
         // GameManager에 있는 CAMERASWAP변수를 통해 타워설치인지 전투상태인지 확인 전투상태일때만 조작가능
         if (!GameManager.INSTANCE.CAMERASWAP)  
         {
@@ -149,11 +154,14 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     //플레이어 이동함수
     public void OnmoveInput(InputAction.CallbackContext context)
     {
-        Vector3 input;
-        input = context.ReadValue<Vector2>();
-        inputDir.x = input.x;
-        inputDir.y = 0.0f;
-        inputDir.z = input.y;
+        if (!isAttackOn && !isSkillMotionOn) //공격과 스킬사용중 움직임 멈춤
+        {
+            Vector3 input;
+            input = context.ReadValue<Vector2>();
+            inputDir.x = input.x;
+            inputDir.y = 0.0f;
+            inputDir.z = input.y;
+        }
         
 
 
@@ -164,10 +172,14 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            anim.SetFloat("ComboState", Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime, 1.0f));
-            anim.ResetTrigger("isAttack");
-            anim.SetTrigger("isAttack");
-            anim.SetBool("isAttackM", true);
+            if (transform.position.y < 1.3f)
+            {
+                inputDir = Vector3.zero; //움직임 도중 공격할 경우 정지시킴
+                anim.SetFloat("ComboState", Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime, 1.0f));
+                anim.ResetTrigger("isAttack");
+                anim.SetTrigger("isAttack");
+                anim.SetBool("isAttackM", true);
+            }
         }
     }
 
@@ -176,7 +188,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            if (jumpTime > 0)
+            if (jumpTime > 0 && !isAttackOn && !isSkillMotionOn)
             {
                 anim.ResetTrigger("isJump");
                 anim.SetTrigger("isJump");
@@ -193,8 +205,17 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            StartCoroutine(SkillAuraOnOff());
-            anim.SetBool("isSkill", true);
+            if (skillCooltime < 0 && (transform.position.y < 1.3f))
+            {
+                inputDir = Vector3.zero; //이동중 스킬사용시 정지
+                skillCooltime = 13; //스킬 쿨타임 13초
+                StartCoroutine(SkillAuraOnOff());
+                anim.SetBool("isSkill", true);
+            }
+            else
+            {
+                Debug.Log($"스킬 쿨타임이 {skillCooltime}초 남았습니다");
+            }
         }
 
     }
@@ -336,4 +357,27 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
 
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+    public void IsAttackOn()
+    {
+        isAttackOn = true;
+        //Debug.Log("공격실행");
+    }
+
+    public void IsAttackOff()
+    {
+        isAttackOn = false;
+        //Debug.Log("공격중지");
+    }
+
+    public void IsSkillMotionOn()
+    {
+        isSkillMotionOn = true;
+    }
+
+    public void IsSkillMotionOff()
+    {
+        isSkillMotionOn = false;
+    }
+
 }
