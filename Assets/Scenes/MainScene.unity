@@ -9446,13 +9446,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 L Hand'\n\tTransform 'Bip001 Spine1'\n\tTransform
-    'Bip001 L Finger11'\n\tTransform 'Bip001 R UpperArm'\n\tTransform 'Bip001 R Finger11'\n\tTransform
-    'Bip001 L UpperArm'\n\tTransform 'Bip001 L Forearm'\n\tTransform 'Bip001 Spine'\n\tTransform
-    'Bip001 R Thigh'\n\tTransform 'Bip001 R Finger01'\n\tand more ...\n\tFrom animation
-    clip 'ma04_Idle'\n\tFrom animation clip 'ma04_KnifeAttack'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
