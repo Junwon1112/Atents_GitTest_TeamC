@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerWolf : MonoBehaviour , IHealth
+public class PlayerWolf : MonoBehaviour, IHealth
 {
     Rigidbody rigid = null;
     Vector3 inputDir = Vector3.zero;
@@ -23,7 +23,7 @@ public class PlayerWolf : MonoBehaviour , IHealth
 
     Animator anim = null;
     ParticleSystem SkillAura;
-    
+
 
     public float Player_Hp = 100.0f;
     float Player_MaxHp = 100.0f;
@@ -35,11 +35,75 @@ public class PlayerWolf : MonoBehaviour , IHealth
     public bool isDelay;
     public float delayTime = 5.0f;
 
+
     // 인벤토리용 --------------
     Inventory inven;
     ItemSlot equipItemSlot;
-
     public ItemSlot EquipItemSlot => equipItemSlot;
+
+    // 아이템 용 -----------------------
+    int money = 0;  // 플레이어 돈
+    public int Money
+    {
+        get => money;
+        set
+        {
+            if (money != value)
+            {
+                money = value;
+                OnMoneyChange?.Invoke(money);
+            }
+        }
+    }
+    public System.Action<int> OnMoneyChange; // 돈이 변경되면 실행될 델리게이트
+    float itemPickupRange = 2.0f;
+    float dropRange = 2.0f;
+    public void ItemPickup()
+    {
+        // 주변에 Item레이어에 있는 컬라이더 전부 가져오기
+        Collider[] cols = Physics.OverlapSphere(transform.position, itemPickupRange, LayerMask.GetMask("Item"));
+        foreach (var col in cols)
+        {
+            Item item = col.GetComponent<Item>();
+
+            // as : as 앞의 변수가 as 뒤의 타입으로 캐스팅이 되면 캐스팅 된 결과를 주고 안되면 null을 준다.
+            // is : is 앞의 변수가 is 뒤의 타입으로 캐스팅이 되면 true, 아니면 false
+            IConsumable consumable = item.data as IConsumable;
+            if (consumable != null)
+            {
+                consumable.Consume(this);   // 먹자마자 소비하는 형태의 아이템은 각자의 효과에 맞게 사용됨                
+                Destroy(col.gameObject);
+            }
+            else
+            {
+                if (inven.AddItem(item.data))
+                {
+                    Destroy(col.gameObject);
+                }
+            }
+        }
+
+        //Debug.Log($"플레이어의 돈 : {money}");
+    }
+
+    public Vector3 ItemDropPosition(Vector3 inputPos)
+    {
+        Vector3 result = Vector3.zero;
+        Vector3 toInputPos = inputPos - transform.position;
+        if (toInputPos.sqrMagnitude > dropRange * dropRange)
+        {
+            // inputPos가 dropRange 밖에 있다.
+            result = transform.position + toInputPos.normalized * dropRange;
+        }
+        else
+        {
+            // inputPos가 dropRange 안에 있다.
+            result = inputPos;
+        }
+
+        return result;
+    }
+
 
 
     public float PlayerHp
@@ -273,5 +337,9 @@ public class PlayerWolf : MonoBehaviour , IHealth
     void Die()
     {
         anim.SetTrigger("Die");
+    }
+    public void Test()
+    {
+        inven.AddItem(ItemIDCode.HP_potion);
     }
 }

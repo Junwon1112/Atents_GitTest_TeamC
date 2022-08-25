@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
         Player_Hp = GameObject.FindGameObjectWithTag("Player_Hp");
         itemData = GetComponent<ItemDataManager>();
         inventoryUI = FindObjectOfType<InventoryUI>();
+        player = FindObjectOfType<PlayerWolf>();
     }
 
     public void TowerSwap()

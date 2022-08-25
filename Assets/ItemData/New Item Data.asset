@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a452d58721ae5947863881acd5c4f70, type: 3}
-  m_Name: New HealingPotion
+  m_Script: {fileID: 11500000, guid: 4b04ad39955da88439130bc0ec61a3f5, type: 3}
+  m_Name: New Item Data
   m_EditorClassIdentifier: 
-  id: 0
-  itemName: "\uD790\uB9C1\uD3EC\uC158"
-  itemIcon: {fileID: 21300040, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  prefab: {fileID: 0}
+  id: 1
+  itemName: "\uC544\uC774\uD15C"
+  itemIcon: {fileID: 21300014, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  prefab: {fileID: 8090901536112974858, guid: e3c8adf1d65f69b40beebe71efae9f14, type: 3}
   value: 0
   maxStackCount: 1

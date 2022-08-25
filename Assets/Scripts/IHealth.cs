@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IHealth 
 {
-    float HP { get; }
+    float HP { get; set; }
     float MAXHP { get; }
 
     void TakeDamage(float damage);

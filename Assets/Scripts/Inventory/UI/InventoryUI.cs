@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public GameObject slotPrefab;
 
@@ -61,7 +61,7 @@ public class InventoryUI : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         goldText = transform.Find("Gold").Find("GoldText").GetComponent<TextMeshProUGUI>();
         slotParent = transform.Find("ItemSlots");
-        tempItemSlotUI = GetComponent<TempItemSlotUI>();
+        tempItemSlotUI = GetComponentInChildren<TempItemSlotUI>();
         detail = GetComponentInChildren<DetailInfoUI>();
         itemSpliterUI = GetComponentInChildren<ItemSpliterUI>();
 
@@ -99,8 +99,8 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         player = GameManager.INSTANCE.MainPlayer;
-        //player.OnMoneyChange += RefreshMoney;   // 플레이어의 Money가 변경되는 실행되는 델리게이트에 함수 등록
-        //RefreshMoney(player.Money);             // 첫 갱신
+        player.OnMoneyChange += RefreshMoney;   // 플레이어의 Money가 변경되는 실행되는 델리게이트에 함수 등록
+        RefreshMoney(player.Money);             // 첫 갱신
 
         Close();    // 시작할 때 무조건 닫기
     }
@@ -156,7 +156,7 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     private void RefreshAllSlots()
     {
-        foreach (var slotUI in slotUIs)
+        foreach(var slotUI in slotUIs)
         {
             slotUI.Refresh();
         }
@@ -185,14 +185,6 @@ public class InventoryUI : MonoBehaviour
             Open();
         }
     }
-
-    /// <summary>
-    /// 인벤토리 열기
-    /// </summary>
-
-    /// <summary>
-    /// 인벤토리 닫기
-    /// </summary>
 
     public void ClearAllEquipMark()
     {

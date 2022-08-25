@@ -81,12 +81,12 @@ public class TempItemSlotUI : ItemSlotUI
             if (Physics.Raycast(ray, out RaycastHit hit, 1000.0f, LayerMask.GetMask("Ground")))
             {
                 //Debug.Log("땅 레이캐스트 성공");
-                //Vector3 pos = GameManager.INSTANCE.PLAYER.ItemDropPosition(hit.point);      // 아이템 드랍할 위치 계산
-                //ItemFactory.MakeItems(ItemSlot.SlotItemData.id, pos, ItemSlot.ItemCount);   // 임시 슬롯에 들어있는 모든 아이템을 생성
+                Vector3 pos = GameManager.INSTANCE.MainPlayer.ItemDropPosition(hit.point);      // 아이템 드랍할 위치 계산
+                ItemFactory.MakeItems(ItemSlot.SlotItemData.id, pos, ItemSlot.ItemCount);   // 임시 슬롯에 들어있는 모든 아이템을 생성
 
                 if (itemSlot.ItemEquiped)  // 장비중인 아이템을 버리는 상황이면 장비 해재
                 {
-                    //GameManager.INSTANCE.PLAYER.UnEquipWeapon();
+                    //GameManager.INSTANCE.MainPlayer.UnEquipWeapon();
 
                 }
 
