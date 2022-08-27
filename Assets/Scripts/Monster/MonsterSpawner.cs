@@ -59,22 +59,27 @@ public class MonsterSpawner : MonoBehaviour
             }
             Debug.Log("소환");
         }
-        spawnerSigt = Random.Range(0, 4);
-        if (spawnerSigt == 0)
+
+        if (GameManager.INSTANCE.Wave == GameManager.INSTANCE.MaxWave)
         {
-            BossSpawn();
-        }
-        if (spawnerSigt == 1)
-        {
-            BossSpawn();
-        }
-        if (spawnerSigt == 2)
-        {
-            BossSpawn();
-        }
-        if (spawnerSigt == 3)
-        {
-            BossSpawn();
+
+            spawnerSigt = Random.Range(0, 4);
+            if (spawnerSigt == 0)
+            {
+                BossSpawn();
+            }
+            if (spawnerSigt == 1)
+            {
+                BossSpawn();
+            }
+            if (spawnerSigt == 2)
+            {
+                BossSpawn();
+            }
+            if (spawnerSigt == 3)
+            {
+                BossSpawn();
+            }
         }
         
 
@@ -82,6 +87,7 @@ public class MonsterSpawner : MonoBehaviour
 
     private void BossSpawn()
     {
+        StartCoroutine(GameManager.INSTANCE.BossMasageOn());
         GameObject bossmons = Instantiate(boss, new Vector3(0, 0, -46), Quaternion.identity);
         monsterCount += 1;
         Debug.Log("보스소환");

@@ -31,16 +31,65 @@ public class GameManager : MonoBehaviour
 
     int monterLiveCount = 0;
 
+    int maxWave = 2; //최대 웨이브수
+    int wave = 1;  // 현재웨이브
+    int stage = 1; // 현재 스태이지
+
+    private GameObject[] StageText; //스테이지를 보여주는 텍스트를 저장하는 변수 타워설치와 전투모드때 위치가 다르기 때문에 배열로 받아옴
+    private GameObject[] WaveText; //웨이브를 보여주는 텍스트를 저장하는 변수 타워설치와 전투모드때 위치가 다르기 때문에 배열로 받아옴
+
+    private GameObject BossMasage; //보스등장 경고 메시지를 보여주는 게임오브젝트를 저장하는 변수
+
+    public int MaxWave
+    {
+        get { return maxWave; }
+    }
+    public int Wave
+    {
+        get { return wave; }
+        set { wave = value;
+            WaveChange?.Invoke();
+        
+        }
+    }
+
+    public System.Action WaveChange; //wave가 변할때마다 실행시켜주는 델리게이트
+
+    public int Stage
+    {
+        get { return stage; }
+        set { stage = value;
+        StageChange?.Invoke();
+        }
+    }
+
+    public System.Action StageChange; //stage가 변할때만다 실행시켜주는 델리게이트 
+
     public int MONSTERLIVECOUNT
     {
         get { return monterLiveCount; }
         set
         {
             monterLiveCount = value;
-            if(monterLiveCount<1)
+
+            if (wave == maxWave)
             {
-                TowerSwap();
-                Player.GetComponent<PlayerWolf>().MONEY += 500;
+
+                if (monterLiveCount < 1)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    SceneManager.LoadScene(1);
+                }
+            }
+            else
+            {
+
+                if (monterLiveCount < 2)
+                {
+                    TowerSwap();
+                    Wave += 1;
+                    Player.GetComponent<PlayerWolf>().MONEY += 500;
+                }
             }
         }
     }
@@ -69,8 +118,10 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
 
-            DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            //DontDestroyOnLoad(gameObject);
+            //SceneManager.sceneLoaded += OnSceneLoaded;
+            Initialize();
+
             
             
         }else
@@ -104,6 +155,15 @@ public class GameManager : MonoBehaviour
         StartButton.GetComponent<Button>().onClick.AddListener(TowerSwap);
         Cursor.visible = false;
 
+        StageText = GameObject.FindGameObjectsWithTag("StageText");
+
+        WaveText = GameObject.FindGameObjectsWithTag("WaveText");
+
+        StageText[1].SetActive(false);
+        WaveText[1].SetActive(false);
+
+        BossMasage = GameObject.FindGameObjectWithTag("BossText");
+        BossMasage.SetActive(false);
 
     }
     /// <summary>
@@ -122,6 +182,11 @@ public class GameManager : MonoBehaviour
         MonsterSpawner.GetComponent<MonsterSpawner>().StartSpawn(!CameraSwap);
         monterLiveCount = MonsterSpawner.GetComponent<MonsterSpawner>().maxMonsterCount;
         MonsterSpawner.GetComponent<MonsterSpawner>().monsterCount = 0;
+        StageText[0].SetActive(CameraSwap);
+        StageText[1].SetActive(!CameraSwap);
+        WaveText[0].SetActive(CameraSwap);
+        WaveText[1].SetActive(!CameraSwap);
+
 
         if(!CameraSwap)
         {
@@ -131,6 +196,13 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
+    }
+
+    public IEnumerator BossMasageOn()
+    {
+        BossMasage.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        BossMasage.SetActive(false);
     }
 
 }

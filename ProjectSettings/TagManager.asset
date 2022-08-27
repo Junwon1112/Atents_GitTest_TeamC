@@ -17,6 +17,9 @@ TagManager:
   - MonsterSpawner
   - MiniMap
   - StartButton
+  - WaveText
+  - StageText
+  - BossText
   layers:
   - Default
   - TransparentFX

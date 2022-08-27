@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Test : MonoBehaviour
 {
@@ -9,10 +10,9 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Keyboard k = Keyboard.current;
-        if(k.digit1Key.wasPressedThisFrame)
+        if(Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            GameManager.INSTANCE.PLAYER.GetComponent<IBattle>().TakeDamage(10);
+            SceneManager.LoadScene(0);
         }
     }
 }

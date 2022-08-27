@@ -17,8 +17,11 @@ public class Knife : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<IBattle>().TakeDamage(attackPower);
-            //Debug.Log("Enemy Hit!!!");
+            IBattle battle = other.GetComponent<IBattle>();
+            if (battle != null)
+            {
+                battle.TakeDamage(attackPower);
+            }
             Destroy(this.gameObject);
         }
     }
