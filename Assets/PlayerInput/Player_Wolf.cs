@@ -663,6 +663,24 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemDrop"",
+                    ""type"": ""Button"",
+                    ""id"": ""633f7ad9-1b2b-4ec6-9bf4-7a7c73f5cc16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d7182d4-c1b1-489e-a71c-4ab1bc0f4fb1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -674,6 +692,28 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""InventoryOnOff"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83c4fc00-b41b-48fe-81ba-35d8976b69a0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ItemDrop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82c3fe1d-54a5-4b72-ab64-943f2b91c848"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PickUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -763,6 +803,8 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_InventoryOnOff = m_Inventory.FindAction("InventoryOnOff", throwIfNotFound: true);
+        m_Inventory_ItemDrop = m_Inventory.FindAction("ItemDrop", throwIfNotFound: true);
+        m_Inventory_PickUp = m_Inventory.FindAction("PickUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -977,11 +1019,15 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Inventory;
     private IInventoryActions m_InventoryActionsCallbackInterface;
     private readonly InputAction m_Inventory_InventoryOnOff;
+    private readonly InputAction m_Inventory_ItemDrop;
+    private readonly InputAction m_Inventory_PickUp;
     public struct InventoryActions
     {
         private @Player_Wolf m_Wrapper;
         public InventoryActions(@Player_Wolf wrapper) { m_Wrapper = wrapper; }
         public InputAction @InventoryOnOff => m_Wrapper.m_Inventory_InventoryOnOff;
+        public InputAction @ItemDrop => m_Wrapper.m_Inventory_ItemDrop;
+        public InputAction @PickUp => m_Wrapper.m_Inventory_PickUp;
         public InputActionMap Get() { return m_Wrapper.m_Inventory; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -994,6 +1040,12 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @InventoryOnOff.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnInventoryOnOff;
                 @InventoryOnOff.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnInventoryOnOff;
                 @InventoryOnOff.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnInventoryOnOff;
+                @ItemDrop.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnItemDrop;
+                @ItemDrop.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnItemDrop;
+                @ItemDrop.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnItemDrop;
+                @PickUp.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPickUp;
+                @PickUp.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPickUp;
+                @PickUp.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPickUp;
             }
             m_Wrapper.m_InventoryActionsCallbackInterface = instance;
             if (instance != null)
@@ -1001,6 +1053,12 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @InventoryOnOff.started += instance.OnInventoryOnOff;
                 @InventoryOnOff.performed += instance.OnInventoryOnOff;
                 @InventoryOnOff.canceled += instance.OnInventoryOnOff;
+                @ItemDrop.started += instance.OnItemDrop;
+                @ItemDrop.performed += instance.OnItemDrop;
+                @ItemDrop.canceled += instance.OnItemDrop;
+                @PickUp.started += instance.OnPickUp;
+                @PickUp.performed += instance.OnPickUp;
+                @PickUp.canceled += instance.OnPickUp;
             }
         }
     }
@@ -1072,5 +1130,7 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
     public interface IInventoryActions
     {
         void OnInventoryOnOff(InputAction.CallbackContext context);
+        void OnItemDrop(InputAction.CallbackContext context);
+        void OnPickUp(InputAction.CallbackContext context);
     }
 }

@@ -66,32 +66,31 @@ public class TempItemSlotUI : ItemSlotUI
     /// 인벤토리 바깥쪽에 아이템을 떨구는 함수. 임시 슬롯에 아이템이 들어있고 마우스 왼쪽 버튼이 떨어질 때 실행.
     /// </summary>
     /// <param name="obj"></param>
-    public void OnDrop(InputAction.CallbackContext obj)
-    {
-        Vector2 mousePos = Mouse.current.position.ReadValue();      // 마우스 위치 받아오기
-        eventData.position = mousePos;
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);         // 이벤트 시스템을 이용해 UI와 레이캐스팅
-        if (results.Count < 1 && !IsEmpty())    // UI 중에 레이캐스팅된 UI가 없고 임시 슬롯에 아이템이 들어있다.
-        {
-            //Debug.Log("UI 바깥쪽 드랍");
+    //public void OnDrop(InputAction.CallbackContext obj)
+    //{
+    //    Vector2 mousePos = Mouse.current.position.ReadValue();      // 마우스 위치 받아오기
+    //    eventData.position = mousePos;
+    //    List<RaycastResult> results = new();
+    //    EventSystem.current.RaycastAll(eventData, results);         // 이벤트 시스템을 이용해 UI와 레이캐스팅
+    //    if (results.Count < 1 && !IsEmpty())    // UI 중에 레이캐스팅된 UI가 없고 임시 슬롯에 아이템이 들어있다.
+    //    {
+    //        //Debug.Log("UI 바깥쪽 드랍");
 
-            Ray ray = Camera.main.ScreenPointToRay(mousePos);
-            // Ground 레이어에 들어있는 오브젝트가 피킹(레이캐스팅)되었는지 확인
-            if (Physics.Raycast(ray, out RaycastHit hit, 1000.0f, LayerMask.GetMask("Ground")))
-            {
-                //Debug.Log("땅 레이캐스트 성공");
-                Vector3 pos = GameManager.INSTANCE.MainPlayer.ItemDropPosition(hit.point);      // 아이템 드랍할 위치 계산
-                ItemFactory.MakeItems(ItemSlot.SlotItemData.id, pos, ItemSlot.ItemCount);   // 임시 슬롯에 들어있는 모든 아이템을 생성
+    //        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+    //        // Ground 레이어에 들어있는 오브젝트가 피킹(레이캐스팅)되었는지 확인
+    //        if (Physics.Raycast(ray, out RaycastHit hit, 1000.0f, LayerMask.GetMask("Ground")))
+    //        {
+    //            //Debug.Log("땅 레이캐스트 성공");
+    //            Vector3 pos = GameManager.INSTANCE.MainPlayer.ItemDropPosition(hit.point);      // 아이템 드랍할 위치 계산
+    //            ItemFactory.MakeItems(ItemSlot.SlotItemData.id, pos, ItemSlot.ItemCount);   // 임시 슬롯에 들어있는 모든 아이템을 생성
 
-                if (itemSlot.ItemEquiped)  // 장비중인 아이템을 버리는 상황이면 장비 해재
-                {
-                    //GameManager.INSTANCE.MainPlayer.UnEquipWeapon();
+    //            if (itemSlot.ItemEquiped)  // 장비중인 아이템을 버리는 상황이면 장비 해재
+    //            {
+    //                GameManager.INSTANCE.MainPlayer.UnEquipWeapon();
+    //            }
 
-                }
-
-                Close();    // 임시슬롯UI 닫고 클리어하기
-            }
-        }
-    }
+    //            Close();    // 임시슬롯UI 닫고 클리어하기
+    //        }
+    //    }
+    //}
 }

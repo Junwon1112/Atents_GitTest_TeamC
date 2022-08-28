@@ -21,7 +21,7 @@ public class Inventory
     /// <summary>
     /// 인벤토리 기본 크기
     /// </summary>
-    public const int Default_Inventory_Size = 6;
+    public const int Default_Inventory_Size = 12;
 
     /// <summary>
     /// TempSlot용 아이디

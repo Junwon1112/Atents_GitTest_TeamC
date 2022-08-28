@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerWolf : MonoBehaviour, IHealth
+public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
 {
     Rigidbody rigid = null;
     Vector3 inputDir = Vector3.zero;
@@ -341,5 +341,23 @@ public class PlayerWolf : MonoBehaviour, IHealth
     public void Test()
     {
         inven.AddItem(ItemIDCode.HP_potion);
+    }
+
+    public void EquipWeapon(ItemSlot weaponSlot)
+    {
+        //ShowWeapons(true);  // 장비하면 무조건 보이도록
+        //GameObject obj = Instantiate(weaponSlot.SlotItemData.prefab, weapon.transform);  // 새로 장비할 아이템 생성하기
+        //obj.transform.localPosition = new(0, 0, 0);             // 부모에게 정확히 붙도록 로컬을 0,0,0으로 설정
+        equipItemSlot = weaponSlot;                             // 장비한 아이템 표시
+        equipItemSlot.ItemEquiped = true;
+    }
+
+    public void UnEquipWeapon()
+    {
+        equipItemSlot.ItemEquiped = false;
+        equipItemSlot = null;   // 장비가 해재됬다는 것을 표시하기 위함(IsWeaponEquiped 변경용)
+        //Transform weaponChild = weapon.transform.GetChild(0);
+        //weaponChild.parent = null;          // 무기가 붙는 장소에 있는 자식 지우기
+        //Destroy(weaponChild.gameObject);    // 무기 디스트로이
     }
 }

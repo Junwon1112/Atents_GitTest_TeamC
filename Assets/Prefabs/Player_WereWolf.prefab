@@ -115,6 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9042279109062773603}
+  - component: {fileID: 1048683316}
   m_Layer: 0
   m_Name: Bip001 R Forearm
   m_TagString: Untagged
@@ -138,6 +139,20 @@ Transform:
   m_Father: {fileID: 9042279109062773529}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1048683316
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042279109062350595}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.1
+  m_Height: 0.65
+  m_Direction: 0
+  m_Center: {x: -0.32, y: 0, z: 0}
 --- !u!1 &9042279109062350597
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9042279109062773631}
+  - component: {fileID: 1640813757}
   m_Layer: 0
   m_Name: Bip001 L UpperArm
   m_TagString: Untagged
@@ -552,6 +568,20 @@ Transform:
   m_Father: {fileID: 9042279109062773595}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1640813757
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042279109062350623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.1
+  m_Height: 0.42
+  m_Direction: 0
+  m_Center: {x: -0.16, y: 0, z: 0}
 --- !u!1 &9042279109062350633
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +746,7 @@ GameObject:
   - component: {fileID: 9042279109052966077}
   - component: {fileID: 9042279109867669247}
   - component: {fileID: 9042279109062773515}
+  - component: {fileID: 1526761313744497467}
   - component: {fileID: 9042279109062773509}
   - component: {fileID: 9042279109062773514}
   m_Layer: 0
@@ -794,6 +825,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1526761313744497467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042279109062350639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0126b348ca5e7484b9ba48504ce4b51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9042279109062773509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,6 +855,9 @@ MonoBehaviour:
   jumpTime: 2
   skillContinueTime: 10
   moveSpeed: 3
+  Player_Hp: 100
+  isDelay: 0
+  delayTime: 5
 --- !u!114 &9042279109062773514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,6 +1131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9042279109062773529}
+  - component: {fileID: 266193123}
   m_Layer: 0
   m_Name: Bip001 R UpperArm
   m_TagString: Untagged
@@ -1108,6 +1155,20 @@ Transform:
   m_Father: {fileID: 9042279109062773623}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &266193123
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042279109062350649}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.1
+  m_Height: 0.42
+  m_Direction: 0
+  m_Center: {x: -0.16, y: 0, z: 0}
 --- !u!1 &9042279109062350651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,6 +1375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9042279109062773575}
+  - component: {fileID: 1271049027}
   m_Layer: 0
   m_Name: Bip001 L Forearm
   m_TagString: Untagged
@@ -1337,6 +1399,20 @@ Transform:
   m_Father: {fileID: 9042279109062773631}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1271049027
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042279109062350695}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.1
+  m_Height: 0.65
+  m_Direction: 0
+  m_Center: {x: -0.32, y: 0, z: 0}
 --- !u!1 &9042279109062350697
 GameObject:
   m_ObjectHideFlags: 0
