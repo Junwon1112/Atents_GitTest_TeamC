@@ -39,7 +39,11 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
     // 인벤토리용 --------------
     Inventory inven;
     ItemSlot equipItemSlot;
+
+    GameObject artifact;
+
     public ItemSlot EquipItemSlot => equipItemSlot;
+
 
     // 아이템 용 -----------------------
     int money = 0;  // 플레이어 돈
@@ -104,6 +108,11 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
         return result;
     }
 
+    public void ShowArtifacts(bool isShow)
+    {
+        artifact.SetActive(isShow);
+    }
+
 
 
     public float PlayerHp
@@ -118,6 +127,7 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         inven = new Inventory();
+        artifact = GetComponentInChildren<FindArtifact>().gameObject;
     }
 
     private void Start()
@@ -343,12 +353,12 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
         inven.AddItem(ItemIDCode.HP_potion);
     }
 
-    public void EquipWeapon(ItemSlot weaponSlot)
+    public void EquipWeapon(ItemSlot artifactSlot)
     {
-        //ShowWeapons(true);  // 장비하면 무조건 보이도록
-        //GameObject obj = Instantiate(weaponSlot.SlotItemData.prefab, weapon.transform);  // 새로 장비할 아이템 생성하기
-        //obj.transform.localPosition = new(0, 0, 0);             // 부모에게 정확히 붙도록 로컬을 0,0,0으로 설정
-        equipItemSlot = weaponSlot;                             // 장비한 아이템 표시
+        ShowArtifacts(true);  // 장비하면 무조건 보이도록
+        GameObject obj = Instantiate(artifactSlot.SlotItemData.prefab, artifact.transform);  // 새로 장비할 아이템 생성하기
+        obj.transform.localPosition = new(0, 0, 0);             // 부모에게 정확히 붙도록 로컬을 0,0,0으로 설정
+        equipItemSlot = artifactSlot;                             // 장비한 아이템 표시
         equipItemSlot.ItemEquiped = true;
     }
 
@@ -356,8 +366,8 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
     {
         equipItemSlot.ItemEquiped = false;
         equipItemSlot = null;   // 장비가 해재됬다는 것을 표시하기 위함(IsWeaponEquiped 변경용)
-        //Transform weaponChild = weapon.transform.GetChild(0);
-        //weaponChild.parent = null;          // 무기가 붙는 장소에 있는 자식 지우기
-        //Destroy(weaponChild.gameObject);    // 무기 디스트로이
+        Transform weaponChild = artifact.transform.GetChild(0);
+        weaponChild.parent = null;          // 무기가 붙는 장소에 있는 자식 지우기
+        Destroy(weaponChild.gameObject);    // 무기 디스트로이
     }
 }

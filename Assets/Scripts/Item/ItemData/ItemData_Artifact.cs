@@ -5,12 +5,13 @@ using UnityEngine;
 /// <summary>
 /// 아이템 데이터를 저장하는 데이터 파일을 만들게 해주는 스크립트
 /// </summary>
-[CreateAssetMenu(fileName = "New Weapon Item Data", menuName = "Scriptable Object/Item Data - Weapon", order = 5)]
+[CreateAssetMenu(fileName = "New Artifact Item Data", menuName = "Scriptable Object/Item Data - Artifact", order = 5)]
 public class ItemData_Artifact : ItemData, IEquipArtifact
 {
-    [Header("무기 데이터")]
+    [Header("아티팩트 데이터")]
     public float attackPower = 10.0f;
     public float attackSpeed = 1.0f;
+    public float healingPerSec = 1.0f;
 
     /// <summary>
     /// 아이템 장비

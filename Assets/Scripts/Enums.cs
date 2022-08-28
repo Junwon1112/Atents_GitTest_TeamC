@@ -5,6 +5,6 @@ using UnityEngine;
 public enum ItemIDCode
 {
     HP_potion = 0,
-    MP_potion,
+    Healing_Artifact,
     Trap
 }
