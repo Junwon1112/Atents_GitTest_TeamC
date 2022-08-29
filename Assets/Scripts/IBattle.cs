@@ -9,5 +9,5 @@ public interface IBattle
     float DefencePower { get; }
 
     void Attack(IBattle target);
-    void TakeDamage(float damage);
+    void TakeDamage(float damage,int type=0);
 }

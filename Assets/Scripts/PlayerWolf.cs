@@ -24,6 +24,8 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
     public float skillCooltime; // 쿨타임 13초로 설정예정
 
+    Player_Virtual upDownMove;
+
 
     public float moveSpeed = 3.0f;
 
@@ -37,6 +39,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
     int money = 0;
     float rx;
     float ry;
+    float rz;
 
     //미니맵관련ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     private Vector3 quadPosition;
@@ -65,6 +68,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         anim = GetComponent<Animator>();
         PP=FindObjectOfType<PlayerPotion>();
         quad = transform.Find("Player_WereWolf_Quad");
+        upDownMove = FindObjectOfType<Player_Virtual>();
         
 
     }
@@ -143,8 +147,13 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
 
             //rx += rotSpeed * my * Time.deltaTime;
             ry += turnSpeed * mx * Time.deltaTime;
+            rz+=turnSpeed*0.8f*my*Time.deltaTime;
 
             rx = Mathf.Clamp(rx, -80, 50);
+            rz = Mathf.Clamp(rz, -20, 20);
+
+
+            upDownMove.UpDownView(ry, rz);
 
             transform.eulerAngles = new Vector3(0, ry, 0);
 
@@ -300,7 +309,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         get => defencePower;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, int type = 0)
     {
         if (isDead == false)
         {
