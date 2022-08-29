@@ -4508,10 +4508,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2481339440992540181, guid: dce3d3c445b839742959511b55c57757, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 2733517073325767878, guid: dce3d3c445b839742959511b55c57757, type: 3}
       propertyPath: m_RootOrder
       value: 3

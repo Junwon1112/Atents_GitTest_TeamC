@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player_Wolf_Weapon : MonoBehaviour
 {
+    //플레이어의 무기에 들어가는 스크립트
+
+
     PlayerWolf weaponOwner;
 
     private void Start()
@@ -27,7 +30,11 @@ public class Player_Wolf_Weapon : MonoBehaviour
 
         }
     }
-
+    /// <summary>
+    /// 스킬발동시 적들을 밀어내는 IEnumerator
+    /// </summary>
+    /// <param name="other">타겟</param>
+    /// <returns>1초뒤에 비활성화</returns>
     IEnumerator SkillAttack(Collider other)
     {
         other.attachedRigidbody.isKinematic = false;

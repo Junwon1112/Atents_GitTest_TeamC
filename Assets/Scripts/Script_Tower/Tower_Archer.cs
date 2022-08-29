@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tower_Archer : MonoBehaviour
 {
+    //화살 타워에 들어가는 스크립트
+
     public GameObject bullet = null;
     public float BulletSpeed = 10.0f;
 
@@ -18,35 +20,43 @@ public class Tower_Archer : MonoBehaviour
     bool isAttack = false;
     Animator anime;
 
+    //미니맵용
+    private Vector3 quadPosition;
+    Transform quad;
+
     private void Awake()
     {
         anime = GetComponent<Animator>();
+        quad = transform.Find("Tower_Quad");
     }
-
+    /// <summary>
+    /// 타워설치모드가 아닌 전투모드일때만 행동
+    /// </summary>
     private void FixedUpdate()
     {
 
 
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            if (BulletDelay < BulletDelayMax && !isAttack)
+            if (BulletDelay < BulletDelayMax && !isAttack) 
             {
                 BulletDelay += Time.fixedDeltaTime;
             }
 
-
-            if (EnemyQueue.Count > 0 && target == null)
+            //EnemyQueue에 enemy가 있고 타겟이 없을 때 EnemyQueue에서 타겟에 할당
+            if (EnemyQueue.Count > 0 && target == null) 
             {
 
                 target = EnemyQueue.Dequeue();
-                if (target.activeInHierarchy == false)
+                if (target.activeInHierarchy == false) //EnemyQueue에 있는 enemy가 이미 죽었다면 타겟을 null로 만듬
                 {
                     target = null;
                 }
             }
 
 
-            if (target != null)
+            //타겟이 존재하면 타겟을 바라봄
+            if (target != null) 
             {
                 Vector3 LookDir = (target.transform.position - transform.position).normalized;
                 LookDir.y = 0;
@@ -58,7 +68,7 @@ public class Tower_Archer : MonoBehaviour
                 }
 
             }
-
+            //타겟이 존재하면서 딜레이가 딜레이Max를 넘어가면 공격애니메이션 활성
             if (BulletDelay > BulletDelayMax && target != null)
             {
                 isAttack = true;
@@ -67,10 +77,15 @@ public class Tower_Archer : MonoBehaviour
 
             }
 
+            quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z); //미니맵고정용
+            quad.transform.LookAt(quadPosition); //미니맵고정용
+
 
         }
     }
-
+    /// <summary>
+    /// 할당되있는 불렛을 생성하여 타겟방향을 발사하는 함수
+    /// </summary>
     public void Attack()
     {
 
@@ -85,6 +100,8 @@ public class Tower_Archer : MonoBehaviour
         }
         isAttack = false;
     }
+
+    //범위에 들어온 적들을 queue에 넣는다
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))

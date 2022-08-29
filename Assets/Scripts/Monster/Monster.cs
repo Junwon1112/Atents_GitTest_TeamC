@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour, IBattle, IHealth
 {
+    //플레이어를 추격하는 몬스터 스크립트
+
     GameObject weapon;
 
     NavMeshAgent nav;
@@ -85,15 +87,24 @@ public class Monster : MonoBehaviour, IBattle, IHealth
             default:
                 break;
         }
-        quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z);
-        quad.transform.LookAt(quadPosition);
+        quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z); //미니맵고정용
+        quad.transform.LookAt(quadPosition); //미니맵고정용
     }
 
+
+    /// <summary>
+    /// 플레이어 추격용 함수
+    /// </summary>
     void ChaseUpdate()
     {
         nav.SetDestination(target.position);
         return;
     }
+
+    /// <summary>
+    /// 플레이어 공격용함수
+    /// </summary>
+    /// <returns>어택쿨타임이 0.0f보다 작아지면 애니메이션재생 쿨타임초기화 Attack함수 실행</returns>
     void AttackUpdate()
     {
         attackCoolTime -= Time.deltaTime;
@@ -132,6 +143,10 @@ public class Monster : MonoBehaviour, IBattle, IHealth
 
     }
 
+    /// <summary>
+    /// 상태변화함수
+    /// </summary>
+    /// <param name="newState">새로운상태표시</param>
     void ChangeState(MonsterState newState)
     {
         if (isDead)
@@ -139,7 +154,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
             return;
         }
 
-        switch (state)
+        switch (state) //이전 상태를 나가면서 해야할일
         {
             case MonsterState.Chase:
                 nav.isStopped = true;
@@ -155,7 +170,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
             default:
                 break;
         }
-        switch (newState)
+        switch (newState) // 새로운 상태로 들어가면서 해야할일
         {
             case MonsterState.Chase:
                 nav.isStopped = false;
@@ -170,10 +185,13 @@ public class Monster : MonoBehaviour, IBattle, IHealth
             default:
                 break;
         }
-        state = newState;
-        anim.SetInteger("MonsterState", (int)state);
+        state = newState; //새로운 상태로 변경
+        anim.SetInteger("MonsterState", (int)state); // 새로운상태에 따라 애니메이션 변경
     }
 
+    /// <summary>
+    /// 죽었을때 사용되는 함수
+    /// </summary>
     void DiePresent()
     {
         //gameObject.layer = LayerMask.NameToLayer("Corpse");
@@ -186,6 +204,10 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         StartCoroutine(DeadEffect());
     }
 
+    /// <summary>
+    /// 인터페이스 IBattle의 공격하기위한 함수
+    /// </summary>
+    /// <param name="target">공격하기 위한 타겟</param>
     public void Attack(IBattle target)
     {
         if (target != null)
@@ -194,7 +216,10 @@ public class Monster : MonoBehaviour, IBattle, IHealth
             target.TakeDamage(damage);
         }
     }
-
+    /// <summary>
+    /// 인터페이스 IBattle의 공격받기 위한 함수
+    /// </summary>
+    /// <param name="damage">받을 데미지</param>
     public void TakeDamage(float damage)
     {
         float finalDamage = damage - defencePower;
@@ -216,6 +241,9 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         //Debug.Log($"MonsterHP : {hp}");
     }
 
+    /// <summary>
+    /// 죽었을때 사용되는 함수
+    /// </summary>
     private void Die()
     {
         if (isDead == false)
@@ -225,6 +253,10 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         }
     }
 
+    /// <summary>
+    /// 죽을때 사용되는 함수
+    /// </summary>
+    /// <returns>1.0f뒤 실행됨</returns>
     IEnumerator DeadEffect()
     {
         yield return new WaitForSeconds(1.0f);
@@ -237,7 +269,10 @@ public class Monster : MonoBehaviour, IBattle, IHealth
         gameObject.SetActive(false);
         //Destroy(this.gameObject, 1.0f);
     }
-
+    /// <summary>
+    /// 인터페이스 IHealth의 회복할때 사용할 함수
+    /// </summary>
+    /// <param name="heal">회복될 양</param>
     public void TakeHeal(float heal)
     {
         Debug.Log("몬스터 힐링");
