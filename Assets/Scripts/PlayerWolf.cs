@@ -300,7 +300,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle
         get => defencePower;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, int type = 0)
     {
         if (isDead == false)
         {

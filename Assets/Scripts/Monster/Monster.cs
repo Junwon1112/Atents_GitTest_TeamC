@@ -235,7 +235,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     /// 인터페이스 IBattle의 공격받기 위한 함수
     /// </summary>
     /// <param name="damage">받을 데미지</param>
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, int type = 0)
     {
         float finalDamage = damage - defencePower;
         if (finalDamage < 1.0f)
@@ -246,8 +246,11 @@ public class Monster : MonoBehaviour, IBattle, IHealth
 
         if (HP > 0.0f)
         {
-            anim.SetTrigger("TakeDamage");
-            attackCoolTime = attackSpeed;
+            if(type == 1)
+            {
+                anim.SetTrigger("TakeDamage");
+                attackCoolTime = attackSpeed;
+            }
         }
         else
         {

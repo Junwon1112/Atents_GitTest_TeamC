@@ -21,7 +21,7 @@ public class Player_Wolf_Weapon : MonoBehaviour
             IBattle battle = other.GetComponent<IBattle>();
             if (battle != null)
             {
-                battle.TakeDamage(50.0f);
+                battle.TakeDamage(50.0f,1);
                 if(weaponOwner.isSkillOn)
                 {
                     StartCoroutine(SkillAttack(other));
