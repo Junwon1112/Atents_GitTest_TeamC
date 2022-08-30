@@ -21,3 +21,10 @@ public enum WeaponType
     NomalWeapon,
     BossWeapon
 }
+
+public enum ItemIDCode
+{
+    HP_potion = 0,
+    Healing_Artifact,
+    Trap
+}

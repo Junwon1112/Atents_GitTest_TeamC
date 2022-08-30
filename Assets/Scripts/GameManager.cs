@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     //게임의 흐름을 제어하고 미리오브젝트를 찾아주는 스크립트
 
     private static GameManager instance;
+    ItemDataManager itemData;
 
     private bool CameraSwap = true; //타워설치모드, 전투모드전환용 변수
 
@@ -39,6 +40,17 @@ public class GameManager : MonoBehaviour
     private GameObject[] WaveText; //웨이브를 보여주는 텍스트를 저장하는 변수 타워설치와 전투모드때 위치가 다르기 때문에 배열로 받아옴
 
     private GameObject BossMasage; //보스등장 경고 메시지를 보여주는 게임오브젝트를 저장하는 변수
+
+    InventoryUI inventoryUI;
+    public InventoryUI InvenUI
+    {
+        get => inventoryUI;
+    }
+
+    public ItemDataManager ItemData
+    {
+        get => itemData;
+    }
 
     public int MaxWave
     {
@@ -164,6 +176,9 @@ public class GameManager : MonoBehaviour
 
         BossMasage = GameObject.FindGameObjectWithTag("BossText");
         BossMasage.SetActive(false);
+
+        itemData = GetComponent<ItemDataManager>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
 
     }
     /// <summary>
