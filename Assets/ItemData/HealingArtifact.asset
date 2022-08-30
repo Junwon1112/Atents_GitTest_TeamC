@@ -20,4 +20,4 @@ MonoBehaviour:
   maxStackCount: 1
   attackPower: 0
   attackSpeed: 0
-  healingPerSec: 1
+  healingPerSec: 10

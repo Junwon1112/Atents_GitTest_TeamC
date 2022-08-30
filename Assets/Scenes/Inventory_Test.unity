@@ -1014,6 +1014,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1487045163150565858, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1487045163150565858, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1487045163150565858, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 9042279109062350639, guid: ad1d354d2f99f274f9ccdbaae893c690, type: 3}
       propertyPath: m_Name
       value: Player_WereWolf
