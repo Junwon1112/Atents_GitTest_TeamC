@@ -277,7 +277,7 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     /// <returns>1.0fµÚ ½ÇÇàµÊ</returns>
     IEnumerator DeadEffect()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         Collider[] colliders = GetComponents<Collider>();
         foreach (var col in colliders)
         {
