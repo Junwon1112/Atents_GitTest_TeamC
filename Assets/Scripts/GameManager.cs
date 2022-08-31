@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
 
         StartButton = GameObject.FindGameObjectWithTag("StartButton");
         StartButton.GetComponent<Button>().onClick.AddListener(TowerSwap);
-        Cursor.visible = false;
+        Cursor.visible = true;
 
         StageText = GameObject.FindGameObjectsWithTag("StageText");
 
@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
         CameraSwap = !CameraSwap;
         TS.SetActive(CameraSwap);
         ButtonGroup.SetActive(CameraSwap);
-        Player_Hp.SetActive(!CameraSwap);
+        //Player_Hp.SetActive(!CameraSwap);
         TopViewCamera.SetActive(CameraSwap);
         MiniMap.SetActive(!CameraSwap);
         StartButton.SetActive(CameraSwap);
@@ -202,16 +202,21 @@ public class GameManager : MonoBehaviour
         WaveText[0].SetActive(CameraSwap);
         WaveText[1].SetActive(!CameraSwap);
 
+        towerSwapDelegate?.Invoke();
 
         if(!CameraSwap)
         {
+            Cursor.visible=false;
             Cursor.lockState = CursorLockMode.Locked;
         }else
         {
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
 
     }
+
+    public System.Action towerSwapDelegate;
 
     public IEnumerator BossMasageOn()
     {

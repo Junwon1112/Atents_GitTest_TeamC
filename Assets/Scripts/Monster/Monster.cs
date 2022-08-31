@@ -278,6 +278,13 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     IEnumerator DeadEffect()
     {
         yield return new WaitForSeconds(1.0f);
+        float r = Random.Range(0f, 1.0f);
+        if(r<0.2f)
+        {
+            ItemFactory.MakeItem(ItemIDCode.HP_potion, new(transform.position.x, 1.0f, transform.position.z), true);
+        }
+
+
         Collider[] colliders = GetComponents<Collider>();
         foreach (var col in colliders)
         {

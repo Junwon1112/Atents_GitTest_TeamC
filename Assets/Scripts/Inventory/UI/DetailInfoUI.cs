@@ -70,5 +70,6 @@ public class DetailInfoUI : MonoBehaviour
         itemPrice = transform.Find("Value").GetComponent<TextMeshProUGUI>();
         itemIcon = transform.Find("Icon").GetComponent<Image>();
         canvasGroup = GetComponent<CanvasGroup>();
+        Close();
     }
 }

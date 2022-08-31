@@ -10,5 +10,6 @@ public class Tower_Knife : Tower_Archer
     private void Start()
     {
         BulletDelayMax = 0.3f;
+        GameManager.INSTANCE.towerSwapDelegate += LayerChange;
     }
 }

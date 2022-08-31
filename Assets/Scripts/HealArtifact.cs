@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HealArtifact : MonoBehaviour
 {
+    public GameObject healingEffect;
+
+
     //체력을 회복해주는 아티펙트
     float healPerSeconds = 1.0f;
 

@@ -89,6 +89,24 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""InventoryOnOff"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c8ad752-f209-4cc3-be5e-2a8e3643d8c0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemPick"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4d2426a-5521-418d-be0e-78fca273321e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -210,6 +228,28 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2becdeea-4807-47d7-8526-16bfd7d19ca4"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InventoryOnOff"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06e3838d-2aa7-4068-a6dd-dd94ee42d429"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ItemPick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -804,6 +844,8 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         m_Player_UseScroll = m_Player.FindAction("UseScroll", throwIfNotFound: true);
         m_Player_UsePotion = m_Player.FindAction("UsePotion", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_InventoryOnOff = m_Player.FindAction("InventoryOnOff", throwIfNotFound: true);
+        m_Player_ItemPick = m_Player.FindAction("ItemPick", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -882,6 +924,8 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_UseScroll;
     private readonly InputAction m_Player_UsePotion;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_InventoryOnOff;
+    private readonly InputAction m_Player_ItemPick;
     public struct PlayerActions
     {
         private @Player_Wolf m_Wrapper;
@@ -893,6 +937,8 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         public InputAction @UseScroll => m_Wrapper.m_Player_UseScroll;
         public InputAction @UsePotion => m_Wrapper.m_Player_UsePotion;
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @InventoryOnOff => m_Wrapper.m_Player_InventoryOnOff;
+        public InputAction @ItemPick => m_Wrapper.m_Player_ItemPick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -923,6 +969,12 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @InventoryOnOff.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOnOff;
+                @InventoryOnOff.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOnOff;
+                @InventoryOnOff.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOnOff;
+                @ItemPick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPick;
+                @ItemPick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPick;
+                @ItemPick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPick;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -948,6 +1000,12 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @InventoryOnOff.started += instance.OnInventoryOnOff;
+                @InventoryOnOff.performed += instance.OnInventoryOnOff;
+                @InventoryOnOff.canceled += instance.OnInventoryOnOff;
+                @ItemPick.started += instance.OnItemPick;
+                @ItemPick.performed += instance.OnItemPick;
+                @ItemPick.canceled += instance.OnItemPick;
             }
         }
     }
@@ -1111,6 +1169,8 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         void OnUseScroll(InputAction.CallbackContext context);
         void OnUsePotion(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnInventoryOnOff(InputAction.CallbackContext context);
+        void OnItemPick(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
