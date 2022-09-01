@@ -46,9 +46,63 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Potion"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""e1307326-4da2-4844-bd68-d202b263a811"",
+                    ""id"": ""a1179d42-9a42-4c8f-aff3-78e5cf788c84"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill"",
+                    ""type"": ""Button"",
+                    ""id"": ""76db8507-d277-44b6-83c5-9e91c078dd16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseScroll"",
+                    ""type"": ""Button"",
+                    ""id"": ""b3254169-a5f1-4924-a6b0-8c49d28e7e3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UsePotion"",
+                    ""type"": ""Button"",
+                    ""id"": ""000129b6-2355-463d-9eaf-76b5f61f9bbf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""29f12df6-c8cc-4b2d-8466-26acfc0806f8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""InventoryOnOff"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c8ad752-f209-4cc3-be5e-2a8e3643d8c0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemPick"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4d2426a-5521-418d-be0e-78fca273321e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -124,12 +178,78 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a09ed705-63f3-4806-9a55-486cb4c0111c"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""id"": ""3a94e445-e9a7-4fc9-9b97-f916cbd2f100"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Potion"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4711890f-b605-4dc4-93ac-a125fd3681c5"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f096ae45-f5cb-42d1-9019-7efb1e872d5c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UseScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""301b7e7e-1b92-482c-9a3e-daa4bd0c87ab"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UsePotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ed3434c-f8db-4005-b26b-8e63724d4703"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2becdeea-4807-47d7-8526-16bfd7d19ca4"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InventoryOnOff"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06e3838d-2aa7-4068-a6dd-dd94ee42d429"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ItemPick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -650,74 +770,6 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Inventory"",
-            ""id"": ""5598710f-5075-4c0e-ba5e-e48d5928b339"",
-            ""actions"": [
-                {
-                    ""name"": ""InventoryOnOff"",
-                    ""type"": ""Button"",
-                    ""id"": ""0af31d5e-3aab-49ae-b963-93a822b51666"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ItemDrop"",
-                    ""type"": ""Button"",
-                    ""id"": ""633f7ad9-1b2b-4ec6-9bf4-7a7c73f5cc16"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PickUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""8d7182d4-c1b1-489e-a71c-4ab1bc0f4fb1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""630f9eb9-8fbf-4a14-9ac2-fac7507c1c97"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""InventoryOnOff"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""83c4fc00-b41b-48fe-81ba-35d8976b69a0"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ItemDrop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""82c3fe1d-54a5-4b72-ab64-943f2b91c848"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""PickUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -787,7 +839,13 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_Potion = m_Player.FindAction("Potion", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Skill = m_Player.FindAction("Skill", throwIfNotFound: true);
+        m_Player_UseScroll = m_Player.FindAction("UseScroll", throwIfNotFound: true);
+        m_Player_UsePotion = m_Player.FindAction("UsePotion", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_InventoryOnOff = m_Player.FindAction("InventoryOnOff", throwIfNotFound: true);
+        m_Player_ItemPick = m_Player.FindAction("ItemPick", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -800,11 +858,6 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        // Inventory
-        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
-        m_Inventory_InventoryOnOff = m_Inventory.FindAction("InventoryOnOff", throwIfNotFound: true);
-        m_Inventory_ItemDrop = m_Inventory.FindAction("ItemDrop", throwIfNotFound: true);
-        m_Inventory_PickUp = m_Inventory.FindAction("PickUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -866,14 +919,26 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_Potion;
+    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Skill;
+    private readonly InputAction m_Player_UseScroll;
+    private readonly InputAction m_Player_UsePotion;
+    private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_InventoryOnOff;
+    private readonly InputAction m_Player_ItemPick;
     public struct PlayerActions
     {
         private @Player_Wolf m_Wrapper;
         public PlayerActions(@Player_Wolf wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @Potion => m_Wrapper.m_Player_Potion;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Skill => m_Wrapper.m_Player_Skill;
+        public InputAction @UseScroll => m_Wrapper.m_Player_UseScroll;
+        public InputAction @UsePotion => m_Wrapper.m_Player_UsePotion;
+        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @InventoryOnOff => m_Wrapper.m_Player_InventoryOnOff;
+        public InputAction @ItemPick => m_Wrapper.m_Player_ItemPick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -889,9 +954,27 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Potion.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPotion;
-                @Potion.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPotion;
-                @Potion.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPotion;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Skill.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill;
+                @Skill.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill;
+                @Skill.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill;
+                @UseScroll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
+                @UseScroll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
+                @UseScroll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseScroll;
+                @UsePotion.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
+                @UsePotion.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
+                @UsePotion.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUsePotion;
+                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @InventoryOnOff.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOnOff;
+                @InventoryOnOff.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOnOff;
+                @InventoryOnOff.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOnOff;
+                @ItemPick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPick;
+                @ItemPick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPick;
+                @ItemPick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemPick;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -902,9 +985,27 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @Potion.started += instance.OnPotion;
-                @Potion.performed += instance.OnPotion;
-                @Potion.canceled += instance.OnPotion;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Skill.started += instance.OnSkill;
+                @Skill.performed += instance.OnSkill;
+                @Skill.canceled += instance.OnSkill;
+                @UseScroll.started += instance.OnUseScroll;
+                @UseScroll.performed += instance.OnUseScroll;
+                @UseScroll.canceled += instance.OnUseScroll;
+                @UsePotion.started += instance.OnUsePotion;
+                @UsePotion.performed += instance.OnUsePotion;
+                @UsePotion.canceled += instance.OnUsePotion;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @InventoryOnOff.started += instance.OnInventoryOnOff;
+                @InventoryOnOff.performed += instance.OnInventoryOnOff;
+                @InventoryOnOff.canceled += instance.OnInventoryOnOff;
+                @ItemPick.started += instance.OnItemPick;
+                @ItemPick.performed += instance.OnItemPick;
+                @ItemPick.canceled += instance.OnItemPick;
             }
         }
     }
@@ -1014,55 +1115,6 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
-
-    // Inventory
-    private readonly InputActionMap m_Inventory;
-    private IInventoryActions m_InventoryActionsCallbackInterface;
-    private readonly InputAction m_Inventory_InventoryOnOff;
-    private readonly InputAction m_Inventory_ItemDrop;
-    private readonly InputAction m_Inventory_PickUp;
-    public struct InventoryActions
-    {
-        private @Player_Wolf m_Wrapper;
-        public InventoryActions(@Player_Wolf wrapper) { m_Wrapper = wrapper; }
-        public InputAction @InventoryOnOff => m_Wrapper.m_Inventory_InventoryOnOff;
-        public InputAction @ItemDrop => m_Wrapper.m_Inventory_ItemDrop;
-        public InputAction @PickUp => m_Wrapper.m_Inventory_PickUp;
-        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
-        public void SetCallbacks(IInventoryActions instance)
-        {
-            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
-            {
-                @InventoryOnOff.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnInventoryOnOff;
-                @InventoryOnOff.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnInventoryOnOff;
-                @InventoryOnOff.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnInventoryOnOff;
-                @ItemDrop.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnItemDrop;
-                @ItemDrop.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnItemDrop;
-                @ItemDrop.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnItemDrop;
-                @PickUp.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPickUp;
-                @PickUp.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPickUp;
-                @PickUp.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPickUp;
-            }
-            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @InventoryOnOff.started += instance.OnInventoryOnOff;
-                @InventoryOnOff.performed += instance.OnInventoryOnOff;
-                @InventoryOnOff.canceled += instance.OnInventoryOnOff;
-                @ItemDrop.started += instance.OnItemDrop;
-                @ItemDrop.performed += instance.OnItemDrop;
-                @ItemDrop.canceled += instance.OnItemDrop;
-                @PickUp.started += instance.OnPickUp;
-                @PickUp.performed += instance.OnPickUp;
-                @PickUp.canceled += instance.OnPickUp;
-            }
-        }
-    }
-    public InventoryActions @Inventory => new InventoryActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1112,7 +1164,13 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnPotion(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnSkill(InputAction.CallbackContext context);
+        void OnUseScroll(InputAction.CallbackContext context);
+        void OnUsePotion(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnInventoryOnOff(InputAction.CallbackContext context);
+        void OnItemPick(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1126,11 +1184,5 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
-    }
-    public interface IInventoryActions
-    {
-        void OnInventoryOnOff(InputAction.CallbackContext context);
-        void OnItemDrop(InputAction.CallbackContext context);
-        void OnPickUp(InputAction.CallbackContext context);
     }
 }

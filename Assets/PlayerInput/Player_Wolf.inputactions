@@ -24,9 +24,63 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Potion",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "e1307326-4da2-4844-bd68-d202b263a811",
+                    "id": "a1179d42-9a42-4c8f-aff3-78e5cf788c84",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill",
+                    "type": "Button",
+                    "id": "76db8507-d277-44b6-83c5-9e91c078dd16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseScroll",
+                    "type": "Button",
+                    "id": "b3254169-a5f1-4924-a6b0-8c49d28e7e3a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UsePotion",
+                    "type": "Button",
+                    "id": "000129b6-2355-463d-9eaf-76b5f61f9bbf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "29f12df6-c8cc-4b2d-8466-26acfc0806f8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "InventoryOnOff",
+                    "type": "Button",
+                    "id": "1c8ad752-f209-4cc3-be5e-2a8e3643d8c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ItemPick",
+                    "type": "Button",
+                    "id": "f4d2426a-5521-418d-be0e-78fca273321e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -102,12 +156,78 @@
                 },
                 {
                     "name": "",
-                    "id": "a09ed705-63f3-4806-9a55-486cb4c0111c",
-                    "path": "<Keyboard>/c",
+                    "id": "3a94e445-e9a7-4fc9-9b97-f916cbd2f100",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Potion",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4711890f-b605-4dc4-93ac-a125fd3681c5",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f096ae45-f5cb-42d1-9019-7efb1e872d5c",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "UseScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "301b7e7e-1b92-482c-9a3e-daa4bd0c87ab",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "UsePotion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ed3434c-f8db-4005-b26b-8e63724d4703",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2becdeea-4807-47d7-8526-16bfd7d19ca4",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "InventoryOnOff",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06e3838d-2aa7-4068-a6dd-dd94ee42d429",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ItemPick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -624,74 +744,6 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Inventory",
-            "id": "5598710f-5075-4c0e-ba5e-e48d5928b339",
-            "actions": [
-                {
-                    "name": "InventoryOnOff",
-                    "type": "Button",
-                    "id": "0af31d5e-3aab-49ae-b963-93a822b51666",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ItemDrop",
-                    "type": "Button",
-                    "id": "633f7ad9-1b2b-4ec6-9bf4-7a7c73f5cc16",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "PickUp",
-                    "type": "Button",
-                    "id": "8d7182d4-c1b1-489e-a71c-4ab1bc0f4fb1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "630f9eb9-8fbf-4a14-9ac2-fac7507c1c97",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "InventoryOnOff",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "83c4fc00-b41b-48fe-81ba-35d8976b69a0",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "ItemDrop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "82c3fe1d-54a5-4b72-ab64-943f2b91c848",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "PickUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

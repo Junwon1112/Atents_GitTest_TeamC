@@ -16,7 +16,8 @@ public class ItemData_HealingPotion : ItemData, IUsable
         IHealth health = target.GetComponent<IHealth>();
         if (health != null)
         {
-            health.HP += healPoint;
+            //health.HP += healPoint;
+            health.TakeHeal(healPoint);
             Debug.Log($"{itemName}을 사용했습니다. HP가 {healPoint} 회복되었습니다. 현재 HP는 {health.HP}입니다.");
         }
     }

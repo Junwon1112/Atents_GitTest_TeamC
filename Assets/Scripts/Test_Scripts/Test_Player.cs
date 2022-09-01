@@ -5,49 +5,48 @@ using UnityEngine.InputSystem;
 
 public class Test_Player : MonoBehaviour
 {
-    public float speed = 10.0f;
+    public Transform camTr;
 
-    Rigidbody rigdbody;
-    Vector3 movement;
-    Renderer r;
+    float h;
+    float v;
+    float mouseX;
+    float mouseY;
+
+    Vector3 velocity;
 
     private void Awake()
     {
-        rigdbody = GetComponent<Rigidbody>();
-        r= GetComponentInChildren<Renderer>();
-        r.material.color = Color.red;
+        Camera cam = GetComponentInChildren<Camera>();
+        camTr = cam.transform;
     }
 
     private void Update()
     {
-        Keyboard k = Keyboard.current;
+        GetPlayerInput();
         
-        if (!GameManager.INSTANCE.CAMERASWAP)
-        {
-            if (k.wKey.isPressed )
-            {
-                transform.Translate(Vector3.forward * speed * Time.deltaTime);
-               
-            }
-
-            if (k.aKey.isPressed )
-            {
-                transform.Rotate(Vector3.down * 100.0f * Time.deltaTime);
-               
-            }
-
-            if (k.dKey.isPressed)
-            {
-                transform.Rotate(Vector3.up * 100.0f * Time.deltaTime);
-                
-            }
-
-            if (k.sKey.isPressed)
-            {
-                transform.Translate(Vector3.back * speed * Time.deltaTime);
-                
-            }
-            
-        }
+        MoveAndRotate();
     }
+
+    void GetPlayerInput()
+    {
+        mouseX = Mouse.current.position.ReadValue().x;
+        mouseY = Mouse.current.position.ReadValue().y;
+    }
+
+    private void CalculateVelocity()
+    {
+        velocity = ((transform.forward * v) + (transform.right * h)) * Time.deltaTime;
+        
+    }
+
+    private void MoveAndRotate()
+    {
+        // Rotate
+        transform.Rotate(Vector3.up * mouseX);
+        camTr.Rotate(Vector3.right * -mouseY);
+
+        // Move
+        transform.Translate(velocity, Space.World);
+    }
+
 }

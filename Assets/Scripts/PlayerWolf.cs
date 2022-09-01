@@ -5,8 +5,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
+public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
 {
+    //플레이어에 들어가는 스크립트
+    Player_Wolf actions;
+
+
     Rigidbody rigid = null;
     Vector3 inputDir = Vector3.zero;
     public float turnSpeed = 10.0f;
@@ -16,52 +20,101 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
     public int jumpTime = 2;
     public float skillContinueTime = 10.0f;
     int tempJumpTime;
+    bool isDead = false;
+
+    public float skillCooltime; // 쿨타임 13초로 설정예정
+
+    Player_Virtual upDownMove;
 
 
     public float moveSpeed = 3.0f;
-    Quaternion targetRotation = Quaternion.identity;
 
     Animator anim = null;
     ParticleSystem SkillAura;
+    public bool isSkillOn = false;
 
+    bool isAttackOn;
+    bool isSkillMotionOn;
 
-    public float Player_Hp = 100.0f;
-    float Player_MaxHp = 100.0f;
+    int money = 0;
+    float rx;
+    float ry;
+    float rz;
 
-    //float inputRotY;
-    //float inputRotX;
-
-    // 포션----------------
-    public bool isDelay;
-    public float delayTime = 5.0f;
-
-
-    // 인벤토리용 --------------
+    InventoryUI inventoryUI;
     Inventory inven;
-    ItemSlot equipItemSlot;
-
     GameObject artifact;
 
-    public ItemSlot EquipItemSlot => equipItemSlot;
+    //미니맵관련ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    private Vector3 quadPosition;
+    Transform quad;
 
 
-    // 아이템 용 -----------------------
-    int money = 0;  // 플레이어 돈
-    public int Money
+    //IHealthㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+    float Player_Hp = 100.0f;
+    float Player_MaxHp = 100.0f;
+
+    //IBattleㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+    float attackPower = 10.0f;
+    float defencePower = 1.0f;
+
+    //임시로 쓰는것 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    PlayerPotion PP; //플레이어 포션 찾아두기
+
+
+    private void Awake()
     {
-        get => money;
-        set
-        {
-            if (money != value)
-            {
-                money = value;
-                OnMoneyChange?.Invoke(money);
-            }
-        }
+        actions = new();
+        SkillAura = GetComponentInChildren<ParticleSystem>();
+        rigid = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        PP=FindObjectOfType<PlayerPotion>();
+        quad = transform.Find("Player_WereWolf_Quad");
+        upDownMove = FindObjectOfType<Player_Virtual>();
+        inven = new Inventory();
+        artifact = GetComponentInChildren<FindArtifact>().gameObject;
+
     }
-    public System.Action<int> OnMoneyChange; // 돈이 변경되면 실행될 델리게이트
+
+    private void OnEnable()
+    {
+        actions.Player.Enable();
+        actions.Player.Move.performed += OnmoveInput;
+        actions.Player.Move.canceled += OnmoveInput;
+        actions.Player.Attack.performed += OnAttackInput;
+        actions.Player.Jump.performed += OnJumpInput;
+        actions.Player.Skill.performed += OnSkillInput;
+        actions.Player.UseScroll.performed += OnUseScroll;
+        actions.Player.UsePotion.performed += OnUsePotion;
+        actions.Player.Look.performed += OnLook;
+        actions.Player.InventoryOnOff.performed += OnInventory;
+        actions.Player.ItemPick.performed += OnItemPick;
+    }
+    private void OnDisable()
+    {
+        actions.Player.ItemPick.performed-=OnItemPick;
+        actions.Player.InventoryOnOff.performed-=OnInventory;
+        actions.Player.Look.performed -= OnLook;
+        actions.Player.UsePotion.performed -= OnUsePotion;
+        actions.Player.UseScroll.performed -= OnUseScroll;
+        actions.Player.Skill.performed -= OnSkillInput;
+        actions.Player.Jump.performed -= OnJumpInput;
+        actions.Player.Attack.performed -= OnAttackInput;
+        actions.Player.Move.canceled -= OnmoveInput;
+        actions.Player.Move.performed -= OnmoveInput;
+        actions.Player.Disable();
+    }
+
+   
+    private void OnItemPick(InputAction.CallbackContext obj)
+    {
+        ItemPickup();
+    }
+
     float itemPickupRange = 2.0f;
-    float dropRange = 2.0f;
+    
     public void ItemPickup()
     {
         // 주변에 Item레이어에 있는 컬라이더 전부 가져오기
@@ -90,66 +143,36 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
         //Debug.Log($"플레이어의 돈 : {money}");
     }
 
-    public Vector3 ItemDropPosition(Vector3 inputPos)
-    {
-        Vector3 result = Vector3.zero;
-        Vector3 toInputPos = inputPos - transform.position;
-        if (toInputPos.sqrMagnitude > dropRange * dropRange)
-        {
-            // inputPos가 dropRange 밖에 있다.
-            result = transform.position + toInputPos.normalized * dropRange;
-        }
-        else
-        {
-            // inputPos가 dropRange 안에 있다.
-            result = inputPos;
-        }
 
-        return result;
-    }
-
-    public void ShowArtifacts(bool isShow)
+    private void OnInventory(InputAction.CallbackContext obj)
     {
-        artifact.SetActive(isShow);
+        inventoryUI.InventoryOnOffSwitch();
     }
 
 
-
-    public float PlayerHp
-    {
-        get => Player_Hp;
-        set => Player_Hp = value;
-    }
-
-    private void Awake()
-    {
-        SkillAura = GetComponentInChildren<ParticleSystem>();
-        rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-        inven = new Inventory();
-        artifact = GetComponentInChildren<FindArtifact>().gameObject;
-    }
-
+   
     private void Start()
     {
-        tempJumpTime = jumpTime;
-        //SkillAura.Stop();
+        inventoryUI = GameManager.INSTANCE.InvenUI;
         GameManager.INSTANCE.InvenUI.InitializeInventory(inven);
+        tempJumpTime = jumpTime;
+        MONEY += 500;
+
+        inven.AddItem(ItemIDCode.HP_potion);
+        inven.AddItem(ItemIDCode.Healing_Artifact);
+        //SkillAura.Stop();
     }
 
     private void FixedUpdate()
     {
-        if (!GameManager.INSTANCE.CAMERASWAP)
+        skillCooltime -= Time.fixedDeltaTime;
+        // GameManager에 있는 CAMERASWAP변수를 통해 타워설치인지 전투상태인지 확인 전투상태일때만 조작가능
+        if (!GameManager.INSTANCE.CAMERASWAP)  
         {
-            Keyboard k = Keyboard.current;
-            //anim.SetBool("isMove", true);
-            rigid.MovePosition(rigid.position + moveSpeed * Time.fixedDeltaTime * inputDir);
-            //rigid.MoveRotation(Quaternion.Lerp(rigid.rotation, Quaternion.Euler(0, inputRot ,0), 0.5f));
-            //rigid.MovePosition(rigid.position + moveSpeed * Time.deltaTime * inputDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-            //transform.LookAt(inputDir);
-           
+            transform.Translate(moveSpeed * Time.fixedDeltaTime * inputDir, Space.Self);
+            
 
+            //플레이어가 이동중일때 애니메이션을 재생
             if (inputDir.x != 0 || inputDir.z != 0)
             {
                 anim.SetBool("isMove", true);
@@ -158,92 +181,78 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
             {
                 anim.SetBool("isMove", false);
             }
-
+            
+            
 
         }
-        
-        
+
+        //플레이어의 미니맵표시가 돌아가지 않게 고정
+        quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z);
+        quad.transform.LookAt(quadPosition);
+
     }
 
+    //플레이어가 마우스 방향을 바라보게하는 함수
+    private void OnLook(InputAction.CallbackContext obj)
+    {
+        if (isDead == false && !GameManager.INSTANCE.CAMERASWAP && !inventoryUI.inventoryOn)
+        {
 
+            float mx = obj.ReadValue<Vector2>().x;
+            float my = obj.ReadValue<Vector2>().y;
+
+            //rx += rotSpeed * my * Time.deltaTime;
+            ry += turnSpeed * mx * Time.deltaTime;
+            rz+=turnSpeed*0.8f*my*Time.deltaTime;
+
+            rx = Mathf.Clamp(rx, -80, 50);
+            rz = Mathf.Clamp(rz, -20, 20);
+
+
+            upDownMove.UpDownView(ry, rz);
+
+            transform.eulerAngles = new Vector3(0, ry, 0);
+        }
+    }
+
+    //플레이어 이동함수
     public void OnmoveInput(InputAction.CallbackContext context)
     {
-        Vector3 input;
-        input = context.ReadValue<Vector2>();
-        inputDir.x = input.x;
-        inputDir.y = 0.0f;
-        inputDir.z = input.y;
-        if (inputDir.sqrMagnitude > 0.0f)    //sqrMagnitude => vector를 제곱한거, root 연산만안한것
+        if (!isAttackOn && !isSkillMotionOn) //공격과 스킬사용중 움직임 멈춤
         {
-
-            //inputDir = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0) * inputDir;
-            // 카메라의 y축 회전만 따로 분리해서 회전
-            //targetRotation = Quaternion.LookRotation(inputDir);
-            //카메라 보는방향기준으로 입력을 바꿈
-
+            Vector3 input;
+            input = context.ReadValue<Vector2>();
+            inputDir.x = input.x;
+            inputDir.y = 0.0f;
+            inputDir.z = input.y;
         }
+        
 
-
-
-
-
-        //inputRot = - Mathf.Acos(inputDir.x) * 180 / Mathf.PI - Mathf.Asin(inputDir.y) * 180 / Mathf.PI;
-
-
-        //if (inputDir.y == 1) 
-        //{
-        //    inputRot = 0;
-        //}
-        //else if(inputDir.y == -1)
-        //{
-        //    inputRot = 180;
-        //}
-        //if (inputDir.x == 1)
-        //{
-        //    inputRot = 90;
-        //}
-        //else if (inputDir.x == -1)
-        //{
-        //    inputRot = -90;
-        //}
-
-        //inputRot = inputRotX + inputRotY;
-
-
-        //if (context.canceled)
-        //{
-        //    inputRot = 0;
-        //}
 
     }
-
+    //플레이어 공격함수
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        /*if (!GameManager.INSTANCE.CAMERASWAP)
-        {
-            if (context.performed)
-            {
-                anim.SetBool("isAttack", true);
-            }
-            else if (context.canceled)
-            {
-                anim.SetBool("isAttack", false);
-            }
-        }*/
+        
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            anim.SetFloat("ComboState", Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime, 1.0f));
-            anim.ResetTrigger("isAttack");
-            anim.SetTrigger("isAttack");
-            anim.SetBool("isAttackM", true);
+            if (transform.position.y < 1.3f)
+            {
+                inputDir = Vector3.zero; //움직임 도중 공격할 경우 정지시킴
+                anim.SetFloat("ComboState", Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime, 1.0f));
+                anim.ResetTrigger("isAttack");
+                anim.SetTrigger("isAttack");
+                anim.SetBool("isAttackM", true);
+            }
         }
     }
 
+    //플레이어 점프함수
     public void OnJumpInput(InputAction.CallbackContext context)
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            if (jumpTime > 0 && context.started)
+            if (jumpTime > 0 && !isAttackOn && !isSkillMotionOn)
             {
                 anim.ResetTrigger("isJump");
                 anim.SetTrigger("isJump");
@@ -255,26 +264,36 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
 
     }
 
+    //플레이어 스킬사용함수
     public void OnSkillInput(InputAction.CallbackContext context)
     {
         if (!GameManager.INSTANCE.CAMERASWAP)
         {
-            StartCoroutine(SkillAuraOnOff());
-            anim.SetBool("isSkill", true);
+            if (skillCooltime < 0 && (transform.position.y < 1.3f))
+            {
+                inputDir = Vector3.zero; //이동중 스킬사용시 정지
+                skillCooltime = 13; //스킬 쿨타임 13초
+                StartCoroutine(SkillAuraOnOff());
+                anim.SetBool("isSkill", true);
+            }
+            else
+            {
+                Debug.Log($"스킬 쿨타임이 {skillCooltime}초 남았습니다");
+            }
         }
 
     }
-
-
-
     IEnumerator SkillAuraOnOff()
     {
         //gameObject.GetComponentInChildren<ParticleSystem>().
         SkillAura.Play();
+        isSkillOn = true;
         yield return new WaitForSeconds(skillContinueTime);
+        isSkillOn = false;
         SkillAura.Stop();
     }
 
+    //땅에 닿았을때 점프횟수 초기화 해주는 콜라이더 함수
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -283,7 +302,19 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
         }
     }
 
-    // HPㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    //스크롤 사용함수
+    private void OnUseScroll(InputAction.CallbackContext obj)
+    {
+        Debug.Log("미구현");
+    }
+
+    //포션 사용함수
+    private void OnUsePotion(InputAction.CallbackContext obj)
+    {
+        Debug.Log("미구현");
+    }
+
+    //IHealth 인터페이스 구현
     public float HP
     {
         get
@@ -293,17 +324,15 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
         set
         {
             Player_Hp = Mathf.Clamp(value, 0, Player_MaxHp);
-            
-            
-            onHealthChange?.Invoke();
 
-            
             //Debug.Log(Player_Hp);
+            onHealthChange?.Invoke(); //델리게이트를 만들어서 HP가 변화했을때만 hp바가 움직이겠끔 구현
+
         }
 
     }
 
-    public float MAXHP
+    public float MaxHP
     {
         get
         {
@@ -313,31 +342,50 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
 
     public Action onHealthChange { get; set; }
 
-    public void TakeDamage(float damage)
-    {
-        float finalDamage = damage;
-        if(finalDamage<1.0f)
-        {
-            finalDamage = 1.0f;
-        }
-        HP -= finalDamage;
-        if(HP<0.1f)
-        {
-            Die();
-        }else
-        {
-            Hit();
-        }
-        
-    }
-
     public void TakeHeal(float heal)
     {
-        HP += heal;
-        if (HP > 100.0f)
+        if (isDead == false)
         {
-            HP = 100.0f;
+            HP += heal;
+            if (HP > 100.0f)
+            {
+                HP = 100.0f;
+            }
         }
+    }
+
+    //IBattle 인터페이스 구현
+
+    public float AttackPower
+    {
+        get => attackPower;
+    }
+
+    public float DefencePower
+    {
+        get => defencePower;
+    }
+
+    public void TakeDamage(float damage, int type = 0)
+    {
+        if (isDead == false)
+        {
+            float finalDamage = damage;
+            if (finalDamage < 1.0f)
+            {
+                finalDamage = 1.0f;
+            }
+            HP -= finalDamage;
+            if (HP < 0.1f)
+            {
+                Die();
+            }
+            else
+            {
+                Hit();
+            }
+        }
+        
     }
 
     public void Hit()
@@ -346,13 +394,68 @@ public class PlayerWolf : MonoBehaviour, IHealth, IEquipTarget
     }
     void Die()
     {
-        anim.SetTrigger("Die");
-    }
-    public void Test()
-    {
-        inven.AddItem(ItemIDCode.HP_potion);
+        if (isDead == false)
+        {
+            anim.SetTrigger("Die");
+            HP = 0.0f;
+            actions.Disable();
+            isDead = true;
+        }
+
     }
 
+    public void Attack(IBattle target)
+    {
+        
+    }
+
+   
+    //Moneyㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    public int MONEY
+    {
+        get { return money; }
+        set { money = value;
+            MoneyChange?.Invoke();
+        }
+    }
+
+    
+
+    public Action MoneyChange;
+
+
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+    public void IsAttackOn()
+    {
+        isAttackOn = true;
+        //Debug.Log("공격실행");
+    }
+
+    public void IsAttackOff()
+    {
+        isAttackOn = false;
+        //Debug.Log("공격중지");
+    }
+
+    public void IsSkillMotionOn()
+    {
+        isSkillMotionOn = true;
+    }
+
+    public void IsSkillMotionOff()
+    {
+        isSkillMotionOn = false;
+    }
+    public void ShowArtifacts(bool isShow)
+    {
+        artifact.SetActive(isShow);
+    }
+
+    ///IEquipTarget 인터페이스 구현ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  
+
+    ItemSlot equipItemSlot;
+    public ItemSlot EquipItemSlot => equipItemSlot;
     public void EquipWeapon(ItemSlot artifactSlot)
     {
         ShowArtifacts(true);  // 장비하면 무조건 보이도록

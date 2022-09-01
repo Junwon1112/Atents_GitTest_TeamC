@@ -12,6 +12,14 @@ TagManager:
   - TowerSpawnRange
   - Mouse_Control
   - Player_Hp
+  - FxTemporaire
+  - TopViewCamera
+  - MonsterSpawner
+  - MiniMap
+  - StartButton
+  - WaveText
+  - StageText
+  - BossText
   layers:
   - Default
   - TransparentFX
@@ -19,13 +27,13 @@ TagManager:
   - 
   - Water
   - UI
+  - Player_Quad
+  - Enemy_Quad
+  - FogTexture
+  - FogPlane
+  - UIBack
+  - Tower_Quad
   - Item
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 

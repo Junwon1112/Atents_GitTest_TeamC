@@ -2,24 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Test : MonoBehaviour
 {
-
     
     // Update is called once per frame
     void Update()
     {
-        Keyboard k = Keyboard.current;
-        if(k.digit1Key.wasPressedThisFrame)
+        if(Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            GameManager.INSTANCE.PLAYER.GetComponent<IHealth>().TakeDamage(10);
+            SceneManager.LoadScene(0);
         }
-
-        //Keyboard b = Keyboard.current;
-        //if (k.digit2Key.wasPressedThisFrame)
-        //{
-        //    GameManager.INSTANCE.PLAYER.GetComponent<IHealth>().TakeHeal(10);
-        //}
     }
 }

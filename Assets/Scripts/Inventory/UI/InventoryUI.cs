@@ -20,7 +20,9 @@ public class InventoryUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
     CanvasGroup canvasGroup;
 
-    Player_Wolf inputActions;
+    public bool inventoryOn;
+
+    //Player_Wolf inputActions;
 
     // 아이템 관련
 
@@ -68,24 +70,35 @@ public class InventoryUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         Button closeButton = transform.Find("CloseButton").GetComponent<Button>();
         closeButton.onClick.AddListener(Close);
 
-        inputActions = new Player_Wolf();
+        //inputActions = new Player_Wolf();
         
+    }
+    private void Start()
+    {
+        player = GameManager.INSTANCE.PLAYER.GetComponent<PlayerWolf>();
+        player.MoneyChange += RefreshMoney;   // 플레이어의 Money가 변경되는 실행되는 델리게이트에 함수 등록
+        RefreshMoney();             // 첫 갱신
+
+        Close();    // 시작할 때 무조건 닫기
     }
 
-    private void OnEnable()
-    {
-        inputActions.Inventory.Enable();
+    //private void OnEnable()
+    //{
+    //    inputActions.Inventory.Enable();
         
-    }
-    private void OnDisable()
-    {
-        inputActions.Inventory.Disable();
-    }
+    //}
+    //private void OnDisable()
+    //{
+    //    inputActions.Inventory.Disable();
+    //}
     void Open()
     {
+        inventoryOn = true;
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         OnInventoryOpen?.Invoke();
     }
     void Close()
@@ -93,17 +106,12 @@ public class InventoryUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        inventoryOn = false;
         OnInventoryClose?.Invoke();
     }
 
-    private void Start()
-    {
-        player = GameManager.INSTANCE.MainPlayer;
-        player.OnMoneyChange += RefreshMoney;   // 플레이어의 Money가 변경되는 실행되는 델리게이트에 함수 등록
-        RefreshMoney(player.Money);             // 첫 갱신
-
-        Close();    // 시작할 때 무조건 닫기
-    }
 
     public void InitializeInventory(Inventory newInven)
     {
@@ -166,9 +174,9 @@ public class InventoryUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     /// 플레이어가 가진 돈을 갱신
     /// </summary>
     /// <param name="money">표시될 금액</param>
-    private void RefreshMoney(int money)
+    private void RefreshMoney()
     {
-        goldText.text = $"{money:N0}";  // Money가 변경될 때 실행될 함수
+        goldText.text = $"{player.MONEY:N0}";  // Money가 변경될 때 실행될 함수
     }
 
     /// <summary>
