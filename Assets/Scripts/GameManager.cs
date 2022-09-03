@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     //게임의 흐름을 제어하고 미리오브젝트를 찾아주는 스크립트
 
     private static GameManager instance;
+    ItemDataManager itemData;
 
     private bool CameraSwap = true; //타워설치모드, 전투모드전환용 변수
 
@@ -27,9 +28,56 @@ public class GameManager : MonoBehaviour
 
     private GameObject MiniMap;
 
+    private GameObject StageClear;
+
     GameObject StartButton;
 
     int monterLiveCount = 0;
+
+    int maxWave = 2; //최대 웨이브수
+    int wave = 1;  // 현재웨이브
+    int stage = 1; // 현재 스태이지
+
+    private GameObject[] StageText; //스테이지를 보여주는 텍스트를 저장하는 변수 타워설치와 전투모드때 위치가 다르기 때문에 배열로 받아옴
+    private GameObject[] WaveText; //웨이브를 보여주는 텍스트를 저장하는 변수 타워설치와 전투모드때 위치가 다르기 때문에 배열로 받아옴
+
+    private GameObject BossMasage; //보스등장 경고 메시지를 보여주는 게임오브젝트를 저장하는 변수
+
+    InventoryUI inventoryUI;
+    public InventoryUI InvenUI
+    {
+        get => inventoryUI;
+    }
+
+    public ItemDataManager ItemData
+    {
+        get => itemData;
+    }
+
+    public int MaxWave
+    {
+        get { return maxWave; }
+    }
+    public int Wave
+    {
+        get { return wave; }
+        set { wave = value;
+            WaveChange?.Invoke();
+        
+        }
+    }
+
+    public System.Action WaveChange; //wave가 변할때마다 실행시켜주는 델리게이트
+
+    public int Stage
+    {
+        get { return stage; }
+        set { stage = value;
+        StageChange?.Invoke();
+        }
+    }
+
+    public System.Action StageChange; //stage가 변할때만다 실행시켜주는 델리게이트 
 
     public int MONSTERLIVECOUNT
     {
@@ -37,10 +85,26 @@ public class GameManager : MonoBehaviour
         set
         {
             monterLiveCount = value;
-            if(monterLiveCount<1)
+
+            if (wave == maxWave)
             {
-                TowerSwap();
-                Player.GetComponent<PlayerWolf>().MONEY += 500;
+
+                if (monterLiveCount < 1)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    SceneManager.LoadScene(1);
+                    StageClear.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+
+                if (monterLiveCount < 2)
+                {
+                    TowerSwap();
+                    Wave += 1;
+                    Player.GetComponent<PlayerWolf>().MONEY += 500;
+                }
             }
         }
     }
@@ -69,8 +133,10 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
 
-            DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            //DontDestroyOnLoad(gameObject);
+            //SceneManager.sceneLoaded += OnSceneLoaded;
+            Initialize();
+
             
             
         }else
@@ -98,12 +164,26 @@ public class GameManager : MonoBehaviour
         TopViewCamera = GameObject.FindGameObjectWithTag("TopViewCamera");
         MonsterSpawner = GameObject.FindGameObjectWithTag("MonsterSpawner");
         MiniMap = GameObject.FindGameObjectWithTag("MiniMap");
+        StageClear = GameObject.FindGameObjectWithTag("StageClear");
         MiniMap.gameObject.SetActive(false);
+        StageClear.gameObject.SetActive(false);
 
         StartButton = GameObject.FindGameObjectWithTag("StartButton");
         StartButton.GetComponent<Button>().onClick.AddListener(TowerSwap);
-        Cursor.visible = false;
+        Cursor.visible = true;
 
+        StageText = GameObject.FindGameObjectsWithTag("StageText");
+
+        WaveText = GameObject.FindGameObjectsWithTag("WaveText");
+
+        StageText[1].SetActive(false);
+        WaveText[1].SetActive(false);
+
+        BossMasage = GameObject.FindGameObjectWithTag("BossText");
+        BossMasage.SetActive(false);
+
+        itemData = GetComponent<ItemDataManager>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
 
     }
     /// <summary>
@@ -115,22 +195,39 @@ public class GameManager : MonoBehaviour
         CameraSwap = !CameraSwap;
         TS.SetActive(CameraSwap);
         ButtonGroup.SetActive(CameraSwap);
-        Player_Hp.SetActive(!CameraSwap);
+        //Player_Hp.SetActive(!CameraSwap);
         TopViewCamera.SetActive(CameraSwap);
         MiniMap.SetActive(!CameraSwap);
         StartButton.SetActive(CameraSwap);
         MonsterSpawner.GetComponent<MonsterSpawner>().StartSpawn(!CameraSwap);
         monterLiveCount = MonsterSpawner.GetComponent<MonsterSpawner>().maxMonsterCount;
         MonsterSpawner.GetComponent<MonsterSpawner>().monsterCount = 0;
+        StageText[0].SetActive(CameraSwap);
+        StageText[1].SetActive(!CameraSwap);
+        WaveText[0].SetActive(CameraSwap);
+        WaveText[1].SetActive(!CameraSwap);
+
+        towerSwapDelegate?.Invoke();
 
         if(!CameraSwap)
         {
+            Cursor.visible=false;
             Cursor.lockState = CursorLockMode.Locked;
         }else
         {
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
 
+    }
+
+    public System.Action towerSwapDelegate;
+
+    public IEnumerator BossMasageOn()
+    {
+        BossMasage.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        BossMasage.SetActive(false);
     }
 
 }

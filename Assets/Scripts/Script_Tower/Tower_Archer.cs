@@ -23,11 +23,16 @@ public class Tower_Archer : MonoBehaviour
     //미니맵용
     private Vector3 quadPosition;
     Transform quad;
-
+    
     private void Awake()
     {
         anime = GetComponent<Animator>();
         quad = transform.Find("Tower_Quad");
+    }
+
+    private void Start()
+    {
+        GameManager.INSTANCE.towerSwapDelegate += LayerChange;
     }
     /// <summary>
     /// 타워설치모드가 아닌 전투모드일때만 행동
@@ -80,6 +85,22 @@ public class Tower_Archer : MonoBehaviour
             quadPosition = new Vector3(quad.position.x, transform.position.y, quad.position.z); //미니맵고정용
             quad.transform.LookAt(quadPosition); //미니맵고정용
 
+            
+        }
+    }
+
+    protected void LayerChange()
+    {
+        
+        if(!GameManager.INSTANCE.CAMERASWAP)
+        {
+            int temp = LayerMask.NameToLayer("Player_Quad");
+            quad.gameObject.layer = temp;
+
+        }else
+        {
+            int temp = LayerMask.NameToLayer("Tower_Quad");
+            quad.gameObject.layer = temp;
 
         }
     }

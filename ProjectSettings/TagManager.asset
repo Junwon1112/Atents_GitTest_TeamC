@@ -17,6 +17,10 @@ TagManager:
   - MonsterSpawner
   - MiniMap
   - StartButton
+  - WaveText
+  - StageText
+  - BossText
+  - StageClear
   layers:
   - Default
   - TransparentFX
@@ -30,7 +34,7 @@ TagManager:
   - FogPlane
   - UIBack
   - Tower_Quad
-  - 
+  - Item
   - 
   - 
   - 

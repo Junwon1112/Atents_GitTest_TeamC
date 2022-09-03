@@ -1,317 +1,919 @@
 fileFormatVersion: 2
 guid: 244d4d9923ac0424a90bd7c52f9931d3
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Axe
-    100002: Bip001
-    100004: Bip001 Head
-    100006: Bip001 L Calf
-    100008: Bip001 L Clavicle
-    100010: Bip001 L Finger0
-    100012: Bip001 L Finger01
-    100014: Bip001 L Finger1
-    100016: Bip001 L Finger11
-    100018: Bip001 L Finger2
-    100020: Bip001 L Finger21
-    100022: Bip001 L Foot
-    100024: Bip001 L Forearm
-    100026: Bip001 L Hand
-    100028: Bip001 L Thigh
-    100030: Bip001 L Toe0
-    100032: Bip001 L UpperArm
-    100034: Bip001 Neck
-    100036: Bip001 Pelvis
-    100038: Bip001 R Calf
-    100040: Bip001 R Clavicle
-    100042: Bip001 R Finger0
-    100044: Bip001 R Finger01
-    100046: Bip001 R Finger1
-    100048: Bip001 R Finger11
-    100050: Bip001 R Finger2
-    100052: Bip001 R Finger21
-    100054: Bip001 R Foot
-    100056: Bip001 R Forearm
-    100058: Bip001 R Hand
-    100060: Bip001 R Thigh
-    100062: Bip001 R Toe0
-    100064: Bip001 R UpperArm
-    100066: Bip001 Spine
-    100068: Bip001 Spine1
-    100070: Bip001 Xtra01
-    100072: Bow
-    100074: Calf_Armor_01_L
-    100076: Calf_Armor_01_R
-    100078: Calf_Armor_02_R
-    100080: Calf_Armor_02_R 1
-    100082: Forearm_Armor_01_L
-    100084: Forearm_Armor_01_R
-    100086: Forearm_Armor_02_L
-    100088: Forearm_Armor_02_R
-    100090: Forearm_Armor_03_L
-    100092: Forearm_Armor_03_R
-    100094: Head_Armor_01
-    100096: Head_Armor_02
-    100098: Head_Armor_03
-    100100: Head_Armor_04
-    100102: Knife
-    100104: //RootNode
-    100106: Pelvis_Armor_01
-    100108: Pelvis_Armor_02_L
-    100110: Pelvis_Armor_02_R
-    100112: shield
-    100114: shoulder_Armor_01_L
-    100116: shoulder_Armor_01_R
-    100118: shoulder_Armor_02_L
-    100120: shoulder_Armor_02_R
-    100122: shoulder_Armor_03_L
-    100124: shoulder_Armor_03_R
-    100126: Spine_Armor_01
-    100128: Spine_Armor_02
-    100130: Spine_Armor_03
-    100132: Staff
-    100134: Sword
-    100136: Thigh_Armor_L
-    100138: Thigh_Armor_R
-    100140: UpperArm_Armor_L
-    100142: UpperArm_Armor_R
-    100144: Bip001 Footsteps
-    100146: ma04_Goblin
-    100148: Spine_ArrowBag
-    100150: Weapon_Axe
-    100152: Weapon_Bow
-    100154: Weapon_Knife
-    100156: Weapon_Staff
-    100158: Weapon_Sword
-    100160: Calf_Armor_02_L
-    100162: Head_Armor_05
-    400000: Axe
-    400002: Bip001
-    400004: Bip001 Head
-    400006: Bip001 L Calf
-    400008: Bip001 L Clavicle
-    400010: Bip001 L Finger0
-    400012: Bip001 L Finger01
-    400014: Bip001 L Finger1
-    400016: Bip001 L Finger11
-    400018: Bip001 L Finger2
-    400020: Bip001 L Finger21
-    400022: Bip001 L Foot
-    400024: Bip001 L Forearm
-    400026: Bip001 L Hand
-    400028: Bip001 L Thigh
-    400030: Bip001 L Toe0
-    400032: Bip001 L UpperArm
-    400034: Bip001 Neck
-    400036: Bip001 Pelvis
-    400038: Bip001 R Calf
-    400040: Bip001 R Clavicle
-    400042: Bip001 R Finger0
-    400044: Bip001 R Finger01
-    400046: Bip001 R Finger1
-    400048: Bip001 R Finger11
-    400050: Bip001 R Finger2
-    400052: Bip001 R Finger21
-    400054: Bip001 R Foot
-    400056: Bip001 R Forearm
-    400058: Bip001 R Hand
-    400060: Bip001 R Thigh
-    400062: Bip001 R Toe0
-    400064: Bip001 R UpperArm
-    400066: Bip001 Spine
-    400068: Bip001 Spine1
-    400070: Bip001 Xtra01
-    400072: Bow
-    400074: Calf_Armor_01_L
-    400076: Calf_Armor_01_R
-    400078: Calf_Armor_02_R
-    400080: Calf_Armor_02_R 1
-    400082: Forearm_Armor_01_L
-    400084: Forearm_Armor_01_R
-    400086: Forearm_Armor_02_L
-    400088: Forearm_Armor_02_R
-    400090: Forearm_Armor_03_L
-    400092: Forearm_Armor_03_R
-    400094: Head_Armor_01
-    400096: Head_Armor_02
-    400098: Head_Armor_03
-    400100: Head_Armor_04
-    400102: Knife
-    400104: //RootNode
-    400106: Pelvis_Armor_01
-    400108: Pelvis_Armor_02_L
-    400110: Pelvis_Armor_02_R
-    400112: shield
-    400114: shoulder_Armor_01_L
-    400116: shoulder_Armor_01_R
-    400118: shoulder_Armor_02_L
-    400120: shoulder_Armor_02_R
-    400122: shoulder_Armor_03_L
-    400124: shoulder_Armor_03_R
-    400126: Spine_Armor_01
-    400128: Spine_Armor_02
-    400130: Spine_Armor_03
-    400132: Staff
-    400134: Sword
-    400136: Thigh_Armor_L
-    400138: Thigh_Armor_R
-    400140: UpperArm_Armor_L
-    400142: UpperArm_Armor_R
-    400144: Bip001 Footsteps
-    400146: ma04_Goblin
-    400148: Spine_ArrowBag
-    400150: Weapon_Axe
-    400152: Weapon_Bow
-    400154: Weapon_Knife
-    400156: Weapon_Staff
-    400158: Weapon_Sword
-    400160: Calf_Armor_02_L
-    400162: Head_Armor_05
-    2300000: Axe
-    2300002: Bow
-    2300004: Calf_Armor_01_L
-    2300006: Calf_Armor_01_R
-    2300008: Calf_Armor_02_R
-    2300010: Calf_Armor_02_R 1
-    2300012: Forearm_Armor_01_L
-    2300014: Forearm_Armor_01_R
-    2300016: Forearm_Armor_02_L
-    2300018: Forearm_Armor_02_R
-    2300020: Forearm_Armor_03_L
-    2300022: Forearm_Armor_03_R
-    2300024: Head_Armor_01
-    2300026: Head_Armor_02
-    2300028: Head_Armor_03
-    2300030: Head_Armor_04
-    2300032: Knife
-    2300034: Pelvis_Armor_01
-    2300036: Pelvis_Armor_02_L
-    2300038: Pelvis_Armor_02_R
-    2300040: shield
-    2300042: shoulder_Armor_01_L
-    2300044: shoulder_Armor_01_R
-    2300046: shoulder_Armor_02_L
-    2300048: shoulder_Armor_02_R
-    2300050: shoulder_Armor_03_L
-    2300052: shoulder_Armor_03_R
-    2300054: Spine_Armor_01
-    2300056: Spine_Armor_02
-    2300058: Spine_Armor_03
-    2300060: Staff
-    2300062: Sword
-    2300064: Thigh_Armor_L
-    2300066: Thigh_Armor_R
-    2300068: UpperArm_Armor_L
-    2300070: UpperArm_Armor_R
-    2300072: Spine_ArrowBag
-    2300074: Weapon_Axe
-    2300076: Weapon_Bow
-    2300078: Weapon_Knife
-    2300080: Weapon_Staff
-    2300082: Weapon_Sword
-    2300084: Calf_Armor_02_L
-    2300086: Head_Armor_05
-    3300000: Axe
-    3300002: Bow
-    3300004: Calf_Armor_01_L
-    3300006: Calf_Armor_01_R
-    3300008: Calf_Armor_02_R
-    3300010: Calf_Armor_02_R 1
-    3300012: Forearm_Armor_01_L
-    3300014: Forearm_Armor_01_R
-    3300016: Forearm_Armor_02_L
-    3300018: Forearm_Armor_02_R
-    3300020: Forearm_Armor_03_L
-    3300022: Forearm_Armor_03_R
-    3300024: Head_Armor_01
-    3300026: Head_Armor_02
-    3300028: Head_Armor_03
-    3300030: Head_Armor_04
-    3300032: Knife
-    3300034: Pelvis_Armor_01
-    3300036: Pelvis_Armor_02_L
-    3300038: Pelvis_Armor_02_R
-    3300040: shield
-    3300042: shoulder_Armor_01_L
-    3300044: shoulder_Armor_01_R
-    3300046: shoulder_Armor_02_L
-    3300048: shoulder_Armor_02_R
-    3300050: shoulder_Armor_03_L
-    3300052: shoulder_Armor_03_R
-    3300054: Spine_Armor_01
-    3300056: Spine_Armor_02
-    3300058: Spine_Armor_03
-    3300060: Staff
-    3300062: Sword
-    3300064: Thigh_Armor_L
-    3300066: Thigh_Armor_R
-    3300068: UpperArm_Armor_L
-    3300070: UpperArm_Armor_R
-    3300072: Spine_ArrowBag
-    3300074: Weapon_Axe
-    3300076: Weapon_Bow
-    3300078: Weapon_Knife
-    3300080: Weapon_Staff
-    3300082: Weapon_Sword
-    3300084: Calf_Armor_02_L
-    3300086: Head_Armor_05
-    4300000: Calf_Armor_01_L
-    4300002: Calf_Armor_02_R
-    4300004: Thigh_Armor_L
-    4300006: Calf_Armor_01_R
-    4300008: Calf_Armor_02_R
-    4300010: Thigh_Armor_R
-    4300012: shield
-    4300014: Forearm_Armor_01_L
-    4300016: Forearm_Armor_02_L
-    4300018: Forearm_Armor_03_L
-    4300020: UpperArm_Armor_L
-    4300022: Sword
-    4300024: Knife
-    4300026: Staff
-    4300028: Bow
-    4300030: Axe
-    4300032: Forearm_Armor_01_R
-    4300034: Forearm_Armor_02_R
-    4300036: Forearm_Armor_03_R
-    4300038: UpperArm_Armor_R
-    4300040: Head_Armor_01
-    4300042: Head_Armor_02
-    4300044: Head_Armor_03
-    4300046: Head_Armor_04
-    4300048: shoulder_Armor_01_L
-    4300050: shoulder_Armor_01_R
-    4300052: shoulder_Armor_02_L
-    4300054: shoulder_Armor_02_R
-    4300056: shoulder_Armor_03_L
-    4300058: shoulder_Armor_03_R
-    4300060: Spine_Armor_01
-    4300062: Spine_Armor_02
-    4300064: Spine_Armor_03
-    4300066: Pelvis_Armor_02_L
-    4300068: Pelvis_Armor_02_R
-    4300070: Pelvis_Armor_01
-    4300072: ma04_Goblin
-    4300074: Spine_ArrowBag
-    4300076: Weapon_Sword
-    4300078: Weapon_Knife
-    4300080: Weapon_Staff
-    4300082: Weapon_Bow
-    4300084: Weapon_Axe
-    4300086: Calf_Armor_02_L
-    4300088: Head_Armor_05
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: ma04_Goblin
-    2186277476908879412: ImportLogs
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Axe
+  - first:
+      1: 100002
+    second: Bip001
+  - first:
+      1: 100004
+    second: Bip001 Head
+  - first:
+      1: 100006
+    second: Bip001 L Calf
+  - first:
+      1: 100008
+    second: Bip001 L Clavicle
+  - first:
+      1: 100010
+    second: Bip001 L Finger0
+  - first:
+      1: 100012
+    second: Bip001 L Finger01
+  - first:
+      1: 100014
+    second: Bip001 L Finger1
+  - first:
+      1: 100016
+    second: Bip001 L Finger11
+  - first:
+      1: 100018
+    second: Bip001 L Finger2
+  - first:
+      1: 100020
+    second: Bip001 L Finger21
+  - first:
+      1: 100022
+    second: Bip001 L Foot
+  - first:
+      1: 100024
+    second: Bip001 L Forearm
+  - first:
+      1: 100026
+    second: Bip001 L Hand
+  - first:
+      1: 100028
+    second: Bip001 L Thigh
+  - first:
+      1: 100030
+    second: Bip001 L Toe0
+  - first:
+      1: 100032
+    second: Bip001 L UpperArm
+  - first:
+      1: 100034
+    second: Bip001 Neck
+  - first:
+      1: 100036
+    second: Bip001 Pelvis
+  - first:
+      1: 100038
+    second: Bip001 R Calf
+  - first:
+      1: 100040
+    second: Bip001 R Clavicle
+  - first:
+      1: 100042
+    second: Bip001 R Finger0
+  - first:
+      1: 100044
+    second: Bip001 R Finger01
+  - first:
+      1: 100046
+    second: Bip001 R Finger1
+  - first:
+      1: 100048
+    second: Bip001 R Finger11
+  - first:
+      1: 100050
+    second: Bip001 R Finger2
+  - first:
+      1: 100052
+    second: Bip001 R Finger21
+  - first:
+      1: 100054
+    second: Bip001 R Foot
+  - first:
+      1: 100056
+    second: Bip001 R Forearm
+  - first:
+      1: 100058
+    second: Bip001 R Hand
+  - first:
+      1: 100060
+    second: Bip001 R Thigh
+  - first:
+      1: 100062
+    second: Bip001 R Toe0
+  - first:
+      1: 100064
+    second: Bip001 R UpperArm
+  - first:
+      1: 100066
+    second: Bip001 Spine
+  - first:
+      1: 100068
+    second: Bip001 Spine1
+  - first:
+      1: 100070
+    second: Bip001 Xtra01
+  - first:
+      1: 100072
+    second: Bow
+  - first:
+      1: 100074
+    second: Calf_Armor_01_L
+  - first:
+      1: 100076
+    second: Calf_Armor_01_R
+  - first:
+      1: 100078
+    second: Calf_Armor_02_R
+  - first:
+      1: 100080
+    second: Calf_Armor_02_R 1
+  - first:
+      1: 100082
+    second: Forearm_Armor_01_L
+  - first:
+      1: 100084
+    second: Forearm_Armor_01_R
+  - first:
+      1: 100086
+    second: Forearm_Armor_02_L
+  - first:
+      1: 100088
+    second: Forearm_Armor_02_R
+  - first:
+      1: 100090
+    second: Forearm_Armor_03_L
+  - first:
+      1: 100092
+    second: Forearm_Armor_03_R
+  - first:
+      1: 100094
+    second: Head_Armor_01
+  - first:
+      1: 100096
+    second: Head_Armor_02
+  - first:
+      1: 100098
+    second: Head_Armor_03
+  - first:
+      1: 100100
+    second: Head_Armor_04
+  - first:
+      1: 100102
+    second: Knife
+  - first:
+      1: 100104
+    second: //RootNode
+  - first:
+      1: 100106
+    second: Pelvis_Armor_01
+  - first:
+      1: 100108
+    second: Pelvis_Armor_02_L
+  - first:
+      1: 100110
+    second: Pelvis_Armor_02_R
+  - first:
+      1: 100112
+    second: shield
+  - first:
+      1: 100114
+    second: shoulder_Armor_01_L
+  - first:
+      1: 100116
+    second: shoulder_Armor_01_R
+  - first:
+      1: 100118
+    second: shoulder_Armor_02_L
+  - first:
+      1: 100120
+    second: shoulder_Armor_02_R
+  - first:
+      1: 100122
+    second: shoulder_Armor_03_L
+  - first:
+      1: 100124
+    second: shoulder_Armor_03_R
+  - first:
+      1: 100126
+    second: Spine_Armor_01
+  - first:
+      1: 100128
+    second: Spine_Armor_02
+  - first:
+      1: 100130
+    second: Spine_Armor_03
+  - first:
+      1: 100132
+    second: Staff
+  - first:
+      1: 100134
+    second: Sword
+  - first:
+      1: 100136
+    second: Thigh_Armor_L
+  - first:
+      1: 100138
+    second: Thigh_Armor_R
+  - first:
+      1: 100140
+    second: UpperArm_Armor_L
+  - first:
+      1: 100142
+    second: UpperArm_Armor_R
+  - first:
+      1: 100144
+    second: Bip001 Footsteps
+  - first:
+      1: 100146
+    second: ma04_Goblin
+  - first:
+      1: 100148
+    second: Spine_ArrowBag
+  - first:
+      1: 100150
+    second: Weapon_Axe
+  - first:
+      1: 100152
+    second: Weapon_Bow
+  - first:
+      1: 100154
+    second: Weapon_Knife
+  - first:
+      1: 100156
+    second: Weapon_Staff
+  - first:
+      1: 100158
+    second: Weapon_Sword
+  - first:
+      1: 100160
+    second: Calf_Armor_02_L
+  - first:
+      1: 100162
+    second: Head_Armor_05
+  - first:
+      4: 400000
+    second: Axe
+  - first:
+      4: 400002
+    second: Bip001
+  - first:
+      4: 400004
+    second: Bip001 Head
+  - first:
+      4: 400006
+    second: Bip001 L Calf
+  - first:
+      4: 400008
+    second: Bip001 L Clavicle
+  - first:
+      4: 400010
+    second: Bip001 L Finger0
+  - first:
+      4: 400012
+    second: Bip001 L Finger01
+  - first:
+      4: 400014
+    second: Bip001 L Finger1
+  - first:
+      4: 400016
+    second: Bip001 L Finger11
+  - first:
+      4: 400018
+    second: Bip001 L Finger2
+  - first:
+      4: 400020
+    second: Bip001 L Finger21
+  - first:
+      4: 400022
+    second: Bip001 L Foot
+  - first:
+      4: 400024
+    second: Bip001 L Forearm
+  - first:
+      4: 400026
+    second: Bip001 L Hand
+  - first:
+      4: 400028
+    second: Bip001 L Thigh
+  - first:
+      4: 400030
+    second: Bip001 L Toe0
+  - first:
+      4: 400032
+    second: Bip001 L UpperArm
+  - first:
+      4: 400034
+    second: Bip001 Neck
+  - first:
+      4: 400036
+    second: Bip001 Pelvis
+  - first:
+      4: 400038
+    second: Bip001 R Calf
+  - first:
+      4: 400040
+    second: Bip001 R Clavicle
+  - first:
+      4: 400042
+    second: Bip001 R Finger0
+  - first:
+      4: 400044
+    second: Bip001 R Finger01
+  - first:
+      4: 400046
+    second: Bip001 R Finger1
+  - first:
+      4: 400048
+    second: Bip001 R Finger11
+  - first:
+      4: 400050
+    second: Bip001 R Finger2
+  - first:
+      4: 400052
+    second: Bip001 R Finger21
+  - first:
+      4: 400054
+    second: Bip001 R Foot
+  - first:
+      4: 400056
+    second: Bip001 R Forearm
+  - first:
+      4: 400058
+    second: Bip001 R Hand
+  - first:
+      4: 400060
+    second: Bip001 R Thigh
+  - first:
+      4: 400062
+    second: Bip001 R Toe0
+  - first:
+      4: 400064
+    second: Bip001 R UpperArm
+  - first:
+      4: 400066
+    second: Bip001 Spine
+  - first:
+      4: 400068
+    second: Bip001 Spine1
+  - first:
+      4: 400070
+    second: Bip001 Xtra01
+  - first:
+      4: 400072
+    second: Bow
+  - first:
+      4: 400074
+    second: Calf_Armor_01_L
+  - first:
+      4: 400076
+    second: Calf_Armor_01_R
+  - first:
+      4: 400078
+    second: Calf_Armor_02_R
+  - first:
+      4: 400080
+    second: Calf_Armor_02_R 1
+  - first:
+      4: 400082
+    second: Forearm_Armor_01_L
+  - first:
+      4: 400084
+    second: Forearm_Armor_01_R
+  - first:
+      4: 400086
+    second: Forearm_Armor_02_L
+  - first:
+      4: 400088
+    second: Forearm_Armor_02_R
+  - first:
+      4: 400090
+    second: Forearm_Armor_03_L
+  - first:
+      4: 400092
+    second: Forearm_Armor_03_R
+  - first:
+      4: 400094
+    second: Head_Armor_01
+  - first:
+      4: 400096
+    second: Head_Armor_02
+  - first:
+      4: 400098
+    second: Head_Armor_03
+  - first:
+      4: 400100
+    second: Head_Armor_04
+  - first:
+      4: 400102
+    second: Knife
+  - first:
+      4: 400104
+    second: //RootNode
+  - first:
+      4: 400106
+    second: Pelvis_Armor_01
+  - first:
+      4: 400108
+    second: Pelvis_Armor_02_L
+  - first:
+      4: 400110
+    second: Pelvis_Armor_02_R
+  - first:
+      4: 400112
+    second: shield
+  - first:
+      4: 400114
+    second: shoulder_Armor_01_L
+  - first:
+      4: 400116
+    second: shoulder_Armor_01_R
+  - first:
+      4: 400118
+    second: shoulder_Armor_02_L
+  - first:
+      4: 400120
+    second: shoulder_Armor_02_R
+  - first:
+      4: 400122
+    second: shoulder_Armor_03_L
+  - first:
+      4: 400124
+    second: shoulder_Armor_03_R
+  - first:
+      4: 400126
+    second: Spine_Armor_01
+  - first:
+      4: 400128
+    second: Spine_Armor_02
+  - first:
+      4: 400130
+    second: Spine_Armor_03
+  - first:
+      4: 400132
+    second: Staff
+  - first:
+      4: 400134
+    second: Sword
+  - first:
+      4: 400136
+    second: Thigh_Armor_L
+  - first:
+      4: 400138
+    second: Thigh_Armor_R
+  - first:
+      4: 400140
+    second: UpperArm_Armor_L
+  - first:
+      4: 400142
+    second: UpperArm_Armor_R
+  - first:
+      4: 400144
+    second: Bip001 Footsteps
+  - first:
+      4: 400146
+    second: ma04_Goblin
+  - first:
+      4: 400148
+    second: Spine_ArrowBag
+  - first:
+      4: 400150
+    second: Weapon_Axe
+  - first:
+      4: 400152
+    second: Weapon_Bow
+  - first:
+      4: 400154
+    second: Weapon_Knife
+  - first:
+      4: 400156
+    second: Weapon_Staff
+  - first:
+      4: 400158
+    second: Weapon_Sword
+  - first:
+      4: 400160
+    second: Calf_Armor_02_L
+  - first:
+      4: 400162
+    second: Head_Armor_05
+  - first:
+      23: 2300000
+    second: Axe
+  - first:
+      23: 2300002
+    second: Bow
+  - first:
+      23: 2300004
+    second: Calf_Armor_01_L
+  - first:
+      23: 2300006
+    second: Calf_Armor_01_R
+  - first:
+      23: 2300008
+    second: Calf_Armor_02_R
+  - first:
+      23: 2300010
+    second: Calf_Armor_02_R 1
+  - first:
+      23: 2300012
+    second: Forearm_Armor_01_L
+  - first:
+      23: 2300014
+    second: Forearm_Armor_01_R
+  - first:
+      23: 2300016
+    second: Forearm_Armor_02_L
+  - first:
+      23: 2300018
+    second: Forearm_Armor_02_R
+  - first:
+      23: 2300020
+    second: Forearm_Armor_03_L
+  - first:
+      23: 2300022
+    second: Forearm_Armor_03_R
+  - first:
+      23: 2300024
+    second: Head_Armor_01
+  - first:
+      23: 2300026
+    second: Head_Armor_02
+  - first:
+      23: 2300028
+    second: Head_Armor_03
+  - first:
+      23: 2300030
+    second: Head_Armor_04
+  - first:
+      23: 2300032
+    second: Knife
+  - first:
+      23: 2300034
+    second: Pelvis_Armor_01
+  - first:
+      23: 2300036
+    second: Pelvis_Armor_02_L
+  - first:
+      23: 2300038
+    second: Pelvis_Armor_02_R
+  - first:
+      23: 2300040
+    second: shield
+  - first:
+      23: 2300042
+    second: shoulder_Armor_01_L
+  - first:
+      23: 2300044
+    second: shoulder_Armor_01_R
+  - first:
+      23: 2300046
+    second: shoulder_Armor_02_L
+  - first:
+      23: 2300048
+    second: shoulder_Armor_02_R
+  - first:
+      23: 2300050
+    second: shoulder_Armor_03_L
+  - first:
+      23: 2300052
+    second: shoulder_Armor_03_R
+  - first:
+      23: 2300054
+    second: Spine_Armor_01
+  - first:
+      23: 2300056
+    second: Spine_Armor_02
+  - first:
+      23: 2300058
+    second: Spine_Armor_03
+  - first:
+      23: 2300060
+    second: Staff
+  - first:
+      23: 2300062
+    second: Sword
+  - first:
+      23: 2300064
+    second: Thigh_Armor_L
+  - first:
+      23: 2300066
+    second: Thigh_Armor_R
+  - first:
+      23: 2300068
+    second: UpperArm_Armor_L
+  - first:
+      23: 2300070
+    second: UpperArm_Armor_R
+  - first:
+      23: 2300072
+    second: Spine_ArrowBag
+  - first:
+      23: 2300074
+    second: Weapon_Axe
+  - first:
+      23: 2300076
+    second: Weapon_Bow
+  - first:
+      23: 2300078
+    second: Weapon_Knife
+  - first:
+      23: 2300080
+    second: Weapon_Staff
+  - first:
+      23: 2300082
+    second: Weapon_Sword
+  - first:
+      23: 2300084
+    second: Calf_Armor_02_L
+  - first:
+      23: 2300086
+    second: Head_Armor_05
+  - first:
+      33: 3300000
+    second: Axe
+  - first:
+      33: 3300002
+    second: Bow
+  - first:
+      33: 3300004
+    second: Calf_Armor_01_L
+  - first:
+      33: 3300006
+    second: Calf_Armor_01_R
+  - first:
+      33: 3300008
+    second: Calf_Armor_02_R
+  - first:
+      33: 3300010
+    second: Calf_Armor_02_R 1
+  - first:
+      33: 3300012
+    second: Forearm_Armor_01_L
+  - first:
+      33: 3300014
+    second: Forearm_Armor_01_R
+  - first:
+      33: 3300016
+    second: Forearm_Armor_02_L
+  - first:
+      33: 3300018
+    second: Forearm_Armor_02_R
+  - first:
+      33: 3300020
+    second: Forearm_Armor_03_L
+  - first:
+      33: 3300022
+    second: Forearm_Armor_03_R
+  - first:
+      33: 3300024
+    second: Head_Armor_01
+  - first:
+      33: 3300026
+    second: Head_Armor_02
+  - first:
+      33: 3300028
+    second: Head_Armor_03
+  - first:
+      33: 3300030
+    second: Head_Armor_04
+  - first:
+      33: 3300032
+    second: Knife
+  - first:
+      33: 3300034
+    second: Pelvis_Armor_01
+  - first:
+      33: 3300036
+    second: Pelvis_Armor_02_L
+  - first:
+      33: 3300038
+    second: Pelvis_Armor_02_R
+  - first:
+      33: 3300040
+    second: shield
+  - first:
+      33: 3300042
+    second: shoulder_Armor_01_L
+  - first:
+      33: 3300044
+    second: shoulder_Armor_01_R
+  - first:
+      33: 3300046
+    second: shoulder_Armor_02_L
+  - first:
+      33: 3300048
+    second: shoulder_Armor_02_R
+  - first:
+      33: 3300050
+    second: shoulder_Armor_03_L
+  - first:
+      33: 3300052
+    second: shoulder_Armor_03_R
+  - first:
+      33: 3300054
+    second: Spine_Armor_01
+  - first:
+      33: 3300056
+    second: Spine_Armor_02
+  - first:
+      33: 3300058
+    second: Spine_Armor_03
+  - first:
+      33: 3300060
+    second: Staff
+  - first:
+      33: 3300062
+    second: Sword
+  - first:
+      33: 3300064
+    second: Thigh_Armor_L
+  - first:
+      33: 3300066
+    second: Thigh_Armor_R
+  - first:
+      33: 3300068
+    second: UpperArm_Armor_L
+  - first:
+      33: 3300070
+    second: UpperArm_Armor_R
+  - first:
+      33: 3300072
+    second: Spine_ArrowBag
+  - first:
+      33: 3300074
+    second: Weapon_Axe
+  - first:
+      33: 3300076
+    second: Weapon_Bow
+  - first:
+      33: 3300078
+    second: Weapon_Knife
+  - first:
+      33: 3300080
+    second: Weapon_Staff
+  - first:
+      33: 3300082
+    second: Weapon_Sword
+  - first:
+      33: 3300084
+    second: Calf_Armor_02_L
+  - first:
+      33: 3300086
+    second: Head_Armor_05
+  - first:
+      43: 4300000
+    second: Calf_Armor_01_L
+  - first:
+      43: 4300002
+    second: Calf_Armor_02_R
+  - first:
+      43: 4300004
+    second: Thigh_Armor_L
+  - first:
+      43: 4300006
+    second: Calf_Armor_01_R
+  - first:
+      43: 4300008
+    second: Calf_Armor_02_R
+  - first:
+      43: 4300010
+    second: Thigh_Armor_R
+  - first:
+      43: 4300012
+    second: shield
+  - first:
+      43: 4300014
+    second: Forearm_Armor_01_L
+  - first:
+      43: 4300016
+    second: Forearm_Armor_02_L
+  - first:
+      43: 4300018
+    second: Forearm_Armor_03_L
+  - first:
+      43: 4300020
+    second: UpperArm_Armor_L
+  - first:
+      43: 4300022
+    second: Sword
+  - first:
+      43: 4300024
+    second: Knife
+  - first:
+      43: 4300026
+    second: Staff
+  - first:
+      43: 4300028
+    second: Bow
+  - first:
+      43: 4300030
+    second: Axe
+  - first:
+      43: 4300032
+    second: Forearm_Armor_01_R
+  - first:
+      43: 4300034
+    second: Forearm_Armor_02_R
+  - first:
+      43: 4300036
+    second: Forearm_Armor_03_R
+  - first:
+      43: 4300038
+    second: UpperArm_Armor_R
+  - first:
+      43: 4300040
+    second: Head_Armor_01
+  - first:
+      43: 4300042
+    second: Head_Armor_02
+  - first:
+      43: 4300044
+    second: Head_Armor_03
+  - first:
+      43: 4300046
+    second: Head_Armor_04
+  - first:
+      43: 4300048
+    second: shoulder_Armor_01_L
+  - first:
+      43: 4300050
+    second: shoulder_Armor_01_R
+  - first:
+      43: 4300052
+    second: shoulder_Armor_02_L
+  - first:
+      43: 4300054
+    second: shoulder_Armor_02_R
+  - first:
+      43: 4300056
+    second: shoulder_Armor_03_L
+  - first:
+      43: 4300058
+    second: shoulder_Armor_03_R
+  - first:
+      43: 4300060
+    second: Spine_Armor_01
+  - first:
+      43: 4300062
+    second: Spine_Armor_02
+  - first:
+      43: 4300064
+    second: Spine_Armor_03
+  - first:
+      43: 4300066
+    second: Pelvis_Armor_02_L
+  - first:
+      43: 4300068
+    second: Pelvis_Armor_02_R
+  - first:
+      43: 4300070
+    second: Pelvis_Armor_01
+  - first:
+      43: 4300072
+    second: ma04_Goblin
+  - first:
+      43: 4300074
+    second: Spine_ArrowBag
+  - first:
+      43: 4300076
+    second: Weapon_Sword
+  - first:
+      43: 4300078
+    second: Weapon_Knife
+  - first:
+      43: 4300080
+    second: Weapon_Staff
+  - first:
+      43: 4300082
+    second: Weapon_Bow
+  - first:
+      43: 4300084
+    second: Weapon_Axe
+  - first:
+      43: 4300086
+    second: Calf_Armor_02_L
+  - first:
+      43: 4300088
+    second: Head_Armor_05
+  - first:
+      74: 7400000
+    second: Take 001
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: ma04_Goblin
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 'Material #0'
+      name: Material #0
     second: {fileID: 2100000, guid: 5faab88e3e1aa2e419ea10c486b79095, type: 2}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 1
     materialSearch: 1
     materialLocation: 0
@@ -320,6 +922,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -344,25 +947,34 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 0
     importCameras: 0
     importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 0
     keepQuads: 0
     weldVertices: 0
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: 1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.012999999
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -371,10 +983,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 0
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton:
     - name: ma04_Goblin_customize(Clone)
@@ -575,8 +1187,7 @@ ModelImporter:
     - name: Weapon_Axe
       parentName: Bip001 R Hand
       position: {x: -6.0260963, y: 2.4237366, z: -3.263626}
-      rotation: {x: 0.00000004377216, y: -0.00000004353501, z: -0.00000001164153,
-        w: 1}
+      rotation: {x: 0.00000004377216, y: -0.00000004353501, z: -0.00000001164153, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Weapon_Bow
       parentName: Bip001 R Hand
@@ -755,13 +1366,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 1
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

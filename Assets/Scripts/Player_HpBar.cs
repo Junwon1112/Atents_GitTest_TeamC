@@ -14,7 +14,7 @@ public class Player_HpBar : MonoBehaviour
         hp=GetComponentInChildren<Image>();
         target=GameManager.INSTANCE.PLAYER.GetComponent<IHealth>();
         target.onHealthChange += SetHp_Value;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     /// <summary>
