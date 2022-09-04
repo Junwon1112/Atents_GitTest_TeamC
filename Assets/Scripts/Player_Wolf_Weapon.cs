@@ -8,10 +8,13 @@ public class Player_Wolf_Weapon : MonoBehaviour
 
 
     PlayerWolf weaponOwner;
-
+    public GameObject attackEffect1;
+    public GameObject attackEffect2;
     private void Start()
     {
         weaponOwner = GameManager.INSTANCE.PLAYER.GetComponent<PlayerWolf>();
+        //attackEffect1 = GameObject.Find("HitEffect");
+        //attackEffect2 = GameObject.Find("HitSkillEffect");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,6 +28,10 @@ public class Player_Wolf_Weapon : MonoBehaviour
                 if(weaponOwner.isSkillOn)
                 {
                     StartCoroutine(SkillAttack(other));
+                    Instantiate(attackEffect2, other.transform.position, Quaternion.identity);
+                }else
+                {
+                    Instantiate(attackEffect1, other.transform.position, Quaternion.identity);
                 }
             }
 

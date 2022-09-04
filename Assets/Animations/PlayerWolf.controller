@@ -381,7 +381,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: ComboState
-    m_EventTreshold: 0.6
+    m_EventTreshold: 0.3
   - m_ConditionMode: 4
     m_ConditionEvent: ComboState
     m_EventTreshold: 1
@@ -785,7 +785,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: ComboState
-    m_EventTreshold: 0.62
+    m_EventTreshold: 0.31
   - m_ConditionMode: 4
     m_ConditionEvent: ComboState
     m_EventTreshold: 1

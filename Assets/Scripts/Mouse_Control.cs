@@ -25,6 +25,9 @@ public class Mouse_Control : MonoBehaviour
     CheckTowerPosition[] checkTowerPosition=new CheckTowerPosition[4];
 
     int[] towerPrice=new int[2] {100,200};
+
+
+    CircleLine circleLine;
     private void Awake()
     {
         ChildObejct = new GameObject[transform.childCount];
@@ -40,6 +43,9 @@ public class Mouse_Control : MonoBehaviour
             index++;
         }
 
+        circleLine = transform.Find("Tower_Line").GetComponent<CircleLine>();
+        circleLine.radius = 4.0f*2.0f;
+        circleLine.CirclePoint();
 
     }
 
@@ -158,9 +164,19 @@ public class Mouse_Control : MonoBehaviour
         ChildObejct[number].SetActive(true);
 
 
-        for(int i=ChildObejct.Length-1; i>=ChildObejct.Length-4; i--)
+        for(int i=ChildObejct.Length-1; i>=ChildObejct.Length-5; i--)
         {
             ChildObejct[i].SetActive(true);
+        }
+
+        if(TowerNumber==0)
+        {
+            circleLine.radius = 4.0f*2.0f;
+            circleLine.CirclePoint();
+        }else if(TowerNumber==1)
+        {
+            circleLine.radius = 7.0f*2.0f;
+            circleLine.CirclePoint();
         }
     }
 }

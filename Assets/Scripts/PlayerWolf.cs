@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
@@ -31,6 +32,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
 
     Animator anim = null;
     ParticleSystem SkillAura;
+    ParticleSystem jumpEffect;
     public bool isSkillOn = false;
 
     bool isAttackOn;
@@ -67,7 +69,8 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
     private void Awake()
     {
         actions = new();
-        SkillAura = GetComponentInChildren<ParticleSystem>();
+        SkillAura = transform.Find("SkillAura").GetComponent<ParticleSystem>();
+        jumpEffect = transform.Find("jumpEffect").GetComponent<ParticleSystem>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         PP=FindObjectOfType<PlayerPotion>();
@@ -260,6 +263,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
             {
                 anim.ResetTrigger("isJump");
                 anim.SetTrigger("isJump");
+                jumpEffect.Play();
 
                 rigid.AddForce(transform.up * upJumpPower + transform.forward * forwardJumpPower, ForceMode.Impulse);
                 jumpTime--;
@@ -316,6 +320,14 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
     private void OnUsePotion(InputAction.CallbackContext obj)
     {
         Debug.Log("미구현");
+    }
+
+    IEnumerator GameOverScene()
+    {
+        yield return new WaitForSeconds(2.0f);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("GameOverScene");
     }
 
     //IHealth 인터페이스 구현
@@ -404,6 +416,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
             HP = 0.0f;
             actions.Disable();
             isDead = true;
+            StartCoroutine(GameOverScene());
         }
 
     }

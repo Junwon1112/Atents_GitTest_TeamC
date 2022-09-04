@@ -23,11 +23,15 @@ public class Tower_Archer : MonoBehaviour
     //¹Ì´Ï¸Ê¿ë
     private Vector3 quadPosition;
     Transform quad;
+
+
+    GameObject towerLine;
     
     private void Awake()
     {
         anime = GetComponent<Animator>();
         quad = transform.Find("Tower_Quad");
+        towerLine = transform.Find("Tower_Line").gameObject;
     }
 
     private void Start()
@@ -96,11 +100,13 @@ public class Tower_Archer : MonoBehaviour
         {
             int temp = LayerMask.NameToLayer("Player_Quad");
             quad.gameObject.layer = temp;
+            towerLine.layer = temp;
 
         }else
         {
             int temp = LayerMask.NameToLayer("Tower_Quad");
             quad.gameObject.layer = temp;
+            towerLine.layer = temp;
 
         }
     }
@@ -117,6 +123,7 @@ public class Tower_Archer : MonoBehaviour
             Vector3 dir = (target.transform.position - BulletPoint.transform.position).normalized;
             Rigidbody BulletRigid = b.GetComponent<Rigidbody>();
             BulletRigid.transform.LookAt(target.transform.position);
+            dir.y += 0.1f;
             BulletRigid.velocity = dir * BulletSpeed;
         }
         isAttack = false;

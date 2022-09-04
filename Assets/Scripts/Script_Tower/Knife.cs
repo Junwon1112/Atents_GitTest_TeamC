@@ -6,9 +6,14 @@ public class Knife : MonoBehaviour
 {
     //나이프 오브젝트에 들어가는 스크립트
     float attackPower = 15.0f;
+    //Rigidbody rb;
+    //Collider col;
+    public GameObject ps;
 
     private void Start()
     {
+        //col = GetComponent<Collider>();
+        //rb = GetComponent<Rigidbody>();
         StartCoroutine(Del());
     }
 
@@ -22,6 +27,12 @@ public class Knife : MonoBehaviour
             {
                 battle.TakeDamage(attackPower);
             }
+            //rb.velocity = Vector3.zero;
+            //col.enabled = false;
+            //transform.parent=other.transform;
+            GameObject psObject= Instantiate(ps,transform.position,Quaternion.identity,null);
+            psObject.GetComponent<ParticleSystem>().Play();
+            
             Destroy(this.gameObject);
         }
     }

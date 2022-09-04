@@ -7,9 +7,14 @@ public class Arrow : MonoBehaviour
     //화살 오브젝트에 들어가는 스크립트
 
     float attackPower = 20.0f;
+    //Rigidbody rb;
+    //Collider col;
+    public GameObject ps;
 
     private void Start()
     {
+        //col = GetComponent<Collider>();
+        //rb = GetComponent<Rigidbody>();
         StartCoroutine(Del());
     }
 
@@ -23,9 +28,13 @@ public class Arrow : MonoBehaviour
             {
                 battle.TakeDamage(attackPower);
             }
+            //rb.velocity = Vector3.zero;
+            //col.enabled = false;
+            //transform.parent = other.transform;
+            GameObject psObject = Instantiate(ps, transform.position, Quaternion.identity, null);
+            psObject.GetComponent<ParticleSystem>().Play();
 
-            //other.GetComponent<IBattle>().TakeDamage(attackPower);
-            //Debug.Log("Enemy Hit!!!");
+
             Destroy(this.gameObject);
         }
     }
