@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
                 if (monterLiveCount < 1)
                 {
                     Cursor.lockState = CursorLockMode.None;
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(1); //현재 스테이지가 끝나면 테스트 씬으로 이동 
                 }
             }
             else

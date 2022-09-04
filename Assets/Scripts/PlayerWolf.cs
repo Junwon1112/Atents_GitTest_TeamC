@@ -321,8 +321,11 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
     {
         Debug.Log("미구현");
     }
-
-    IEnumerator GameOverScene()
+    /// <summary>
+    /// 사망했을때 게임오버씬으로 가는 코루틴용 함수
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator GameOverScene() 
     {
         yield return new WaitForSeconds(2.0f);
         Cursor.visible = true;

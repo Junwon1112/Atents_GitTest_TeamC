@@ -41,7 +41,7 @@ public class GameOverScript : MonoBehaviour
 
     void RestartButton()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("LoadingScene");
     }
 
 

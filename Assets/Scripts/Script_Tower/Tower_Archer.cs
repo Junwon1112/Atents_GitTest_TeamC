@@ -26,12 +26,18 @@ public class Tower_Archer : MonoBehaviour
 
 
     GameObject towerLine;
+
+    SphereCollider spherCollider;
+    float towerRange = 0.0f;
     
     private void Awake()
     {
         anime = GetComponent<Animator>();
         quad = transform.Find("Tower_Quad");
         towerLine = transform.Find("Tower_Line").gameObject;
+        spherCollider=GetComponent<SphereCollider>();
+        towerRange = spherCollider.radius * 40;
+       
     }
 
     private void Start()
@@ -71,8 +77,9 @@ public class Tower_Archer : MonoBehaviour
                 LookDir.y = 0;
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(LookDir), Time.fixedDeltaTime * 10.0f);
 
-                if (target.activeInHierarchy == false || (target.transform.position - transform.position).sqrMagnitude > 280)
+                if (target.activeInHierarchy == false || (target.transform.position - transform.position).sqrMagnitude > towerRange)
                 {
+                    //Debug.Log((target.transform.position - transform.position).sqrMagnitude);
                     target = null;
                 }
 
