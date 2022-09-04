@@ -201,7 +201,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
     //플레이어가 마우스 방향을 바라보게하는 함수
     private void OnLook(InputAction.CallbackContext obj)
     {
-        if (isDead == false && !GameManager.INSTANCE.CAMERASWAP)
+        if (isDead == false && !GameManager.INSTANCE.CAMERASWAP && !inventoryUI.inventoryOn)
         {
 
             float mx = obj.ReadValue<Vector2>().x;

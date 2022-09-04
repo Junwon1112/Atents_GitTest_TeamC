@@ -20,6 +20,8 @@ public class InventoryUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
     CanvasGroup canvasGroup;
 
+    public bool inventoryOn;
+
     //Player_Wolf inputActions;
 
     // 아이템 관련
@@ -83,9 +85,12 @@ public class InventoryUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     //}
     void Open()
     {
+        inventoryOn = true;
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         OnInventoryOpen?.Invoke();
     }
     void Close()
@@ -93,6 +98,13 @@ public class InventoryUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+
+        if(!GameManager.INSTANCE.CAMERASWAP)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        Cursor.visible = false;
+        inventoryOn = false;
         OnInventoryClose?.Invoke();
     }
 
