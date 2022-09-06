@@ -18,3 +18,4 @@ MonoBehaviour:
   prefab: {fileID: 100000, guid: 408f6ea2e027af249912013116edb1d4, type: 3}
   value: 0
   maxStackCount: 1
+  trap: {fileID: 8176830263020189931, guid: 7b313d2c4337df548afe423d729ad5c8, type: 3}

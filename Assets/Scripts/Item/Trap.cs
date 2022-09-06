@@ -12,12 +12,13 @@ public class Trap : MonoBehaviour
     private void Start()
     {
         trapIsHere = GetComponentInChildren<ParticleSystem>();
-        //trapEffect.SetActive(false);
+        trapEffect.SetActive(false);
         //monster = GetComponent<Monster>();
         gameObject.transform.parent = null;
         trapIsHere.Play();
         //trapEffect.SetActive(false);
     }
+
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -25,25 +26,26 @@ public class Trap : MonoBehaviour
         {
             //particles[1].;
             trapEffect.gameObject.SetActive(true);
+            trapEffect.gameObject.GetComponent<ParticleSystem>().Play();
             trapIsHere.Stop();
-            DeleteChilds();
-            Destroy(this);
+            //DeleteChilds();
+            Destroy(gameObject, 0.3f);
             collision.GetComponent<Monster>().Die();
         }
-    }
 
-    void DeleteChilds()
-    {
-        Transform[] childList = this.GetComponentsInChildren<Transform>();
-        if(childList != null)
-        {
-            for(int i = 1; i<childList.Length; i++)
-            {
-                if(childList[i] != transform)
-                {
-                    Destroy(childList[i].gameObject);
-                }
-            }
-        }
     }
+    //void DeleteChilds()
+    //{
+    //    Transform[] childList = this.GetComponentsInChildren<Transform>();
+    //    if(childList != null)
+    //    {
+    //        for(int i = 1; i<childList.Length; i++)
+    //        {
+    //            if(childList[i] != transform)
+    //            {
+    //                Destroy(childList[i].gameObject);
+    //            }
+    //        }
+    //    }
+    //}
 }
