@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
     private GameObject BossMasage; //보스등장 경고 메시지를 보여주는 게임오브젝트를 저장하는 변수
 
     InventoryUI inventoryUI;
+
+    GameObject stageClear;
+    Button reStartButton;
+    Button mainMenuButton;
     public InventoryUI InvenUI
     {
         get => inventoryUI;
@@ -89,8 +93,9 @@ public class GameManager : MonoBehaviour
 
                 if (monterLiveCount < 1)
                 {
+                    Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
-                    SceneManager.LoadScene(1); //현재 스테이지가 끝나면 테스트 씬으로 이동 
+                    stageClear.SetActive(true);
                 }
             }
             else
@@ -180,6 +185,12 @@ public class GameManager : MonoBehaviour
         itemData = GetComponent<ItemDataManager>();
         inventoryUI = FindObjectOfType<InventoryUI>();
 
+        stageClear = GameObject.Find("StageClear");
+        reStartButton=stageClear.transform.Find("RestartButton").GetComponent<Button>();
+        mainMenuButton = stageClear.transform.Find("MainMenu").GetComponent<Button>();
+        mainMenuButton.onClick.AddListener(MainMenuButton);
+        reStartButton.onClick.AddListener(RestartButton);
+        stageClear.SetActive(false);
     }
     /// <summary>
     /// 타워설치모드,전투모드를 스왑해주는 함수
@@ -223,6 +234,15 @@ public class GameManager : MonoBehaviour
         BossMasage.SetActive(true);
         yield return new WaitForSeconds(3.0f);
         BossMasage.SetActive(false);
+    }
+    void RestartButton()
+    {
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    void MainMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

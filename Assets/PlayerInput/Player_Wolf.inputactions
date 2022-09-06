@@ -715,6 +715,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "CustomUI",
+            "id": "b151cc98-bbab-4f13-9d30-3898520c56cc",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Value",
+                    "id": "406e2cbf-37b7-4434-a624-b724f3e8531c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "35320ecd-0bfb-4e26-b274-1a2cd573348a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

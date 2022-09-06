@@ -737,6 +737,34 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CustomUI"",
+            ""id"": ""b151cc98-bbab-4f13-9d30-3898520c56cc"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Value"",
+                    ""id"": ""406e2cbf-37b7-4434-a624-b724f3e8531c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""35320ecd-0bfb-4e26-b274-1a2cd573348a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -825,6 +853,9 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // CustomUI
+        m_CustomUI = asset.FindActionMap("CustomUI", throwIfNotFound: true);
+        m_CustomUI_Click = m_CustomUI.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1082,6 +1113,39 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // CustomUI
+    private readonly InputActionMap m_CustomUI;
+    private ICustomUIActions m_CustomUIActionsCallbackInterface;
+    private readonly InputAction m_CustomUI_Click;
+    public struct CustomUIActions
+    {
+        private @Player_Wolf m_Wrapper;
+        public CustomUIActions(@Player_Wolf wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_CustomUI_Click;
+        public InputActionMap Get() { return m_Wrapper.m_CustomUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CustomUIActions set) { return set.Get(); }
+        public void SetCallbacks(ICustomUIActions instance)
+        {
+            if (m_Wrapper.m_CustomUIActionsCallbackInterface != null)
+            {
+                @Click.started -= m_Wrapper.m_CustomUIActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_CustomUIActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_CustomUIActionsCallbackInterface.OnClick;
+            }
+            m_Wrapper.m_CustomUIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+            }
+        }
+    }
+    public CustomUIActions @CustomUI => new CustomUIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1151,5 +1215,9 @@ public partial class @Player_Wolf : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface ICustomUIActions
+    {
+        void OnClick(InputAction.CallbackContext context);
     }
 }
