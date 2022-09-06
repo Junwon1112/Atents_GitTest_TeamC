@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 199998227980983536}
   - component: {fileID: 114324878773532104}
   m_Layer: 0
-  m_Name: CFX3_Fire_Explosion
+  m_Name: TrapEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1134129239631916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4795945811562450}
