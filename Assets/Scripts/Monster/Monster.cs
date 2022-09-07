@@ -279,7 +279,11 @@ public class Monster : MonoBehaviour, IBattle, IHealth
     {
         yield return new WaitForSeconds(1.0f);
         float r = Random.Range(0f, 1.0f);
-        if(r<0.2f)
+        if(r<0.1f)
+        {
+            ItemFactory.MakeItem(ItemIDCode.Trap, new(transform.position.x, 1.0f, transform.position.z), true);
+        }
+        else if(r<0.2f)
         {
             ItemFactory.MakeItem(ItemIDCode.HP_potion, new(transform.position.x, 1.0f, transform.position.z), true);
         }
