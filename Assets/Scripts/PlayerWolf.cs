@@ -163,6 +163,7 @@ public class PlayerWolf : MonoBehaviour , IHealth ,IBattle ,IEquipTarget
 
         inven.AddItem(ItemIDCode.HP_potion);
         inven.AddItem(ItemIDCode.Healing_Artifact);
+        inven.AddItem(ItemIDCode.Trap);
         //SkillAura.Stop();
     }
 
